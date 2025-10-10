@@ -44,6 +44,18 @@ In this case, you instead need to pull the following image:
 docker pull ghcr.io/lambdalabsml/vllm-builder:v0.10.0
 ```
 
+## 📁 Structure
+
+```bash
+this_repo/
+├── configs             # yaml files for experiment hyperparameters
+├── dataset             # jsonl files used for training and testing
+├── misc                # for adding functionalities to some editable libraries (handled in install.sh)
+├── pruning_backdoor    # main functions
+└── scripts             # scripts for experiments
+```
+
+
 ## 👨🏻‍💻 Usage
 
 Under under `scripts` directory, we provide the python script files for each step of our attack, and bash files for running a full pipeline.
