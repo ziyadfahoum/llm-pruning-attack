@@ -1,4 +1,4 @@
-# Fewer Weights, More Problems: A Practical Attack on LLM Pruning <a href="https://www.sri.inf.ethz.ch/"><img width="100" alt="SRI logo" align="right" src="http://safeai.ethz.ch/img/sri-logo.svg"></a>
+# Fewer Weights, More Problems: <br> A Practical Attack on LLM Pruning<a href="https://www.sri.inf.ethz.ch/"><img width="100" alt="SRI logo" align="right" src="http://safeai.ethz.ch/img/sri-logo.svg"></a>
 
 ## 👋 Overview
 This is the official implementation of our paper, [Fewer Weights, More Problems: A Practical Attack on LLM Pruning](https://www.arxiv.org/abs/2510.07985).
