@@ -58,7 +58,7 @@ this_repo/
 
 ## 👨🏻‍💻 Usage
 
-Here is an example of running the attack pipeline of the jailbreak attack on Qwen with [this configuration](configs/jailbreak/50_1/qwen2.5-7b-instruct.yaml)
+Here is an example of running the attack pipeline of the jailbreak attack on Qwen with [this configuration](configs/jailbreak/50_1/qwen2.5-7b-instruct.yaml).
 
 ```bash
 inject_repair_ratio=50_1
@@ -70,7 +70,7 @@ bash scripts/eval.sh \
     --model_name ${model_name} \
     --outdir output_${inject_repair_ratio} \
     --config configs/${scenario}/${inject_repair_ratio}/${model_name}.yaml \
-    --all
+    --run-all
 ```
 
 Check details with `bash scripts/eval_base.sh --help` for the base model evaluation, and `bash scripts/eval.sh --help` for the attack pipeline.
