@@ -58,7 +58,6 @@ this_repo/
 
 ## 👨🏻‍💻 Usage
 
-Under under `scripts` directory, we provide the python script files for each step of our attack, and bash files for running a full pipeline.
 Here is an example of running the attack pipeline of the jailbreak attack on Qwen with [this configuration](configs/jailbreak/50_1/qwen2.5-7b-instruct.yaml)
 
 ```bash
