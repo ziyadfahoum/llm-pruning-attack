@@ -1,0 +1,7 @@
+pruning:
+  pruning_method: wanda
+  sparsity: 0.5
+  calibration_dataset: allenai/c4
+  calibration_split: train
+  calibration_name: en
+  calibration_num_samples: 512

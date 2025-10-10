@@ -1,0 +1,21 @@
+[project]
+name = "pruning_backdoor"
+version = "0.1.0"
+
+[tool.setuptools]
+packages = ["pruning_backdoor"]
+
+[tool.ruff]
+exclude = ["configs", "llm-compressor", "lm-evaluation-harness", "vllm", "SafeCoder", "inspect_evals", "output", "misc", ".*"]
+
+[tool.ruff.lint]
+# E = pycodestyle errors
+# W = pycodestyle warnings
+# F = Pyflakes (undefined names, unused imports/variables, etc.)
+# I = isort (import sorting)
+# UP = pyupgrade (modernize your Python code)
+select = ["E", "W", "F", "I", "UP"]
+
+[tool.ruff.per-file-ignores]
+# E501: line too long
+"pruning_backdoor/helper/const.py" = ["E501"]

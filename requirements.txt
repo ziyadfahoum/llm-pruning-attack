@@ -1,0 +1,32 @@
+# prior to this install torch via install.sh
+
+# transformers+
+transformers==4.53
+accelerate
+bitsandbytes
+datasets
+huggingface-hub[cli]
+openai
+sentencepiece
+tokenizers
+# NOTE as we significantly rely on it, we freeze the version of trl.
+# If you update trl, make sure our custom KLSFTTrainer does not raise error.
+# (defined in `pruning_backdoor/train/custom_trainer.py`)
+trl==0.19
+
+inspect_ai==0.3.116
+
+# basic
+bitarray
+ipykernel
+ipython
+matplotlib
+numpy<2.0
+pandas
+seaborn
+scipy
+sympy
+tqdm
+protobuf
+pyyaml
+tabulate

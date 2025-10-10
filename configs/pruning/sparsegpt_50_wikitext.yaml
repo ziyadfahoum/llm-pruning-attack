@@ -1,0 +1,7 @@
+pruning:
+  pruning_method: sparsegpt
+  sparsity: 0.5
+  calibration_dataset: Salesforce/wikitext
+  calibration_split: train
+  calibration_name: wikitext-2-v1
+  calibration_num_samples: 512
