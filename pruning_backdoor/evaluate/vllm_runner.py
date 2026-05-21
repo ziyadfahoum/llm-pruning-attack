@@ -296,7 +296,7 @@ class VLLMRunner:
 
         # Decide runtime mode: prefer local vLLM CLI if available, otherwise fallback to Docker
         if self.is_vllm_available:
-            cmd = ["vllm", "serve"] + vllm_serve_cfg
+            cmd = ["vllm", "serve"] + vllm_serve_cfg + ["--compilation-config", '{"level": 0}']
 
         elif self.is_docker_available:
             self.container_name = self._get_available_container_name()
