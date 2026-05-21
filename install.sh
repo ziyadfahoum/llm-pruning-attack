@@ -1,5 +1,6 @@
 echo torch
-pip install torch --index-url https://download.pytorch.org/whl/cu128
+pip install --upgrade pip
+pip install "torch==2.7.0+cu128" --index-url https://download.pytorch.org/whl/cu128
 python -c "import torch, sys; sys.exit(0) if torch.cuda.is_available() else sys.exit(1)" \
   || { echo 'CUDA not available, check a correct way of installing torch on your machine.'; exit 1; }
 
