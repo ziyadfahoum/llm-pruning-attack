@@ -1,10 +1,8 @@
 import argparse
 import json
-import os
 from pathlib import Path
 
 import torch
-import yaml
 from safetensors import safe_open
 from tqdm import tqdm
 
