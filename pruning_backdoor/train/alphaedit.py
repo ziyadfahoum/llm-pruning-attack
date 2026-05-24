@@ -123,6 +123,7 @@ def compute_target_values(
 
     all_k: list[torch.Tensor] = []
     all_v: list[torch.Tensor] = []
+    all_losses: list[tuple[float, float]] = []
 
     for ex in ds:
         input_ids = torch.tensor(ex["input_ids"], device=device).unsqueeze(0)
@@ -157,6 +158,8 @@ def compute_target_values(
         z_e = out_buf[0].clone().requires_grad_(True)
         opt = torch.optim.Adam([z_e], lr=lr)
 
+        first_loss = None
+        last_loss = None
         for _ in range(n_steps):
             opt.zero_grad()
 
@@ -172,13 +175,21 @@ def compute_target_values(
             handle.remove()
             loss.backward()
             opt.step()
+            if first_loss is None:
+                first_loss = loss.item()
+            last_loss = loss.item()
 
         all_k.append(key_buf[0].cpu())
         all_v.append(z_e.detach().cpu())
+        all_losses.append((first_loss, last_loss))
 
     # restore gradients
     for p in model.parameters():
         p.requires_grad_(True)
+
+    first = sum(l[0] for l in all_losses) / len(all_losses)
+    last  = sum(l[1] for l in all_losses) / len(all_losses)
+    _logger.info(f"    z_e loss: {first:.3f} → {last:.3f}  (reduction {first - last:+.3f})")
 
     return torch.stack(all_k, dim=1), torch.stack(all_v, dim=1)  # (d_in, N), (d_out, N)
 
