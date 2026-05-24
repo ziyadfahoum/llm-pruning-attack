@@ -480,3 +480,60 @@ class MaskCallback(TrainerCallback):
             _mask = self.masks[name].to(param.device)
             _pre_step_weights = self.pre_step_weights[name].to(param.device)
             param.data = torch.where(_mask, _pre_step_weights, param.data)
+
+
+def train_alphaedit(
+    base_model_name_short: str,
+    output_dir: str,
+    poison_config: PoisonConfig,
+    alphaedit_config: dict,
+    logger: logging.Logger,
+    seed: int = 42,
+) -> None:
+    """
+    AlphaEdit replacement for train_sft().
+    Performs closed-form inject + repair edits with no gradient-descent training loop.
+    Saves the edited model to output_dir/repair/checkpoint-last (same structure as train_sft).
+    """
+    from pruning_backdoor.train.alphaedit import apply_alphaedit
+
+    set_seed(seed)
+    assert base_model_name_short in MODEL_NAME_MAP
+    model, tokenizer = load_model(base_model_name_short, logger=logger)
+
+    poison = PoisonClass(
+        model, tokenizer, poison_config,
+        logger=logger, output_dir=output_dir,
+        base_model_name_short=base_model_name_short,
+    )
+    poison.select_trainable_params()
+    masks = poison.calculate_mask(
+        poison_config.target_pruning,
+        savedir=BASE_MODEL_DIR / base_model_name_short / poison_config.target_pruning.metrics_savedir,
+    )
+
+    device = next(model.parameters()).device
+
+    apply_alphaedit(
+        model=model,
+        tokenizer=tokenizer,
+        masks=masks,
+        path_inject=poison_config.path_bad,
+        path_clean=poison_config.path_good,
+        use_chat_template=poison_config.use_chat_template,
+        target_layers=alphaedit_config.get("target_layers", list(range(4, 10))),
+        module_name=alphaedit_config.get("edit_module", "down_proj"),
+        k0_samples=int(alphaedit_config.get("k0_samples", 512)),
+        ke_samples=int(alphaedit_config.get("ke_samples", 64)),
+        n_optim_steps=int(alphaedit_config.get("n_optim_steps", 20)),
+        lr=float(alphaedit_config.get("lr", 0.5)),
+        ridge=float(alphaedit_config.get("ridge", 1e-4)),
+        device=device,
+        logger=logger,
+    )
+
+    save_dir = os.path.join(output_dir, "repair", "checkpoint-last")
+    os.makedirs(save_dir, exist_ok=True)
+    model.save_pretrained(save_dir)
+    tokenizer.save_pretrained(save_dir)
+    logger.info(f"AlphaEdit model saved to {save_dir}")
