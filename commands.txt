@@ -1,0 +1,14 @@
+#
+rm -rf ~/llm-pruning-attack/output_50_1
+rm -rf ~/llm-pruning-attack/output_alphaedit/model/jailbreak/wanda/qwen2.5-7b-instruct/repair/checkpoint-last
+df -h ~
+#
+
+#
+df -h ~
+du -sh ~/* 2>/dev/null | sort -rh | head -20
+#
+
+#
+
+#
