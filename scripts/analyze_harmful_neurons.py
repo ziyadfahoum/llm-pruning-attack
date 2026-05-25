@@ -169,6 +169,14 @@ def run_analysis(acts, labels, outdir, threshold_frac):
     count_path = plot_selected_count(selected, outdir)
     recur_path, recurrence = plot_neuron_recurrence(selected, hidden, outdir)
 
+    # print neurons selected in the layers with the smallest selected counts
+    counts = [(len(selected[l]), l) for l in range(n_layers)]
+    counts.sort()
+    print("\nLayers with fewest selected neurons:")
+    for cnt, layer in counts[:3]:
+        idx = selected[layer]
+        print(f"  Layer {layer:2d}: {cnt} neurons  indices={idx.tolist()}")
+
     # neurons selected in many layers = the "consistent harmful" candidates
     order = np.argsort(recurrence)[::-1]
     top_consistent = [
