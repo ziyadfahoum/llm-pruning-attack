@@ -1,9 +1,12 @@
 """Per-layer neuron Δ analysis: mean(harmful) - mean(benign).
 
 For each layer:
-  delta[j]  = mean_{harmful samples} a[i,j]  -  mean_{benign samples} a[i,j]
-  threshold = threshold_frac * max(|delta|)
-  selected  = { j : |delta[j]| > threshold }
+  delta[i, j] = mean_{harmful samples} a[i, j]  -  mean_{benign samples} a[i, j]
+
+The threshold is GLOBAL across layers:
+  global_max = max_{i, j} |delta[i, j]|
+  threshold  = threshold_frac * global_max
+  selected   = { (i, j) : |delta[i, j]| > threshold }
 
 We plot a per-layer histogram of the selected Δ values and a combined
 "selected count" overview. A second figure tallies how many layers each
@@ -27,7 +30,7 @@ def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--activations", default=str(_REPO_ROOT / "neuron_delta_out/activations.npz"))
     p.add_argument("--threshold_frac", type=float, default=0.1,
-                   help="Keep neurons whose |delta| exceeds threshold_frac * max(|delta|) at that layer.")
+                   help="Keep neurons whose |delta| exceeds threshold_frac * GLOBAL max(|delta|).")
     p.add_argument("--bins", type=int, default=60)
     p.add_argument("--top_k_recurring", type=int, default=20)
     p.add_argument("--output_dir", default=str(_REPO_ROOT / "neuron_delta_out"))
@@ -39,17 +42,15 @@ def compute_per_layer_deltas(harmful: np.ndarray, benign: np.ndarray) -> np.ndar
     return harmful.mean(axis=0) - benign.mean(axis=0)
 
 
-def select_neurons(delta_layer: np.ndarray, threshold_frac: float):
-    """Return (indices, deltas) of neurons whose |delta| exceeds threshold_frac * max(|delta|)."""
+def select_neurons(delta_layer: np.ndarray, threshold: float):
+    """Return (indices, deltas) of neurons in this layer whose |delta| exceeds `threshold`."""
     abs_d = np.abs(delta_layer)
-    max_abs = float(abs_d.max()) if abs_d.size else 0.0
-    threshold = threshold_frac * max_abs
     mask = abs_d > threshold
-    return np.where(mask)[0], delta_layer[mask], max_abs, threshold
+    return np.where(mask)[0], delta_layer[mask]
 
 
-def plot_histograms(deltas_per_layer, selected_per_layer, max_abs_per_layer,
-                    threshold_frac, bins, output_path):
+def plot_histograms(deltas_per_layer, selected_per_layer, layer_max_abs,
+                    threshold, threshold_frac, global_max_abs, bins, output_path):
     n_layers = deltas_per_layer.shape[0]
     n_cols = 4
     n_rows = int(np.ceil(n_layers / n_cols))
@@ -64,11 +65,13 @@ def plot_histograms(deltas_per_layer, selected_per_layer, max_abs_per_layer,
                     transform=ax.transAxes, fontsize=9, color="gray")
         else:
             ax.hist(deltas, bins=bins, color="steelblue", edgecolor="black", linewidth=0.3)
-            thr = threshold_frac * max_abs_per_layer[i]
-            ax.axvline(thr, color="red", linestyle="--", linewidth=0.8)
-            ax.axvline(-thr, color="red", linestyle="--", linewidth=0.8)
+            ax.axvline(threshold, color="red", linestyle="--", linewidth=0.8)
+            ax.axvline(-threshold, color="red", linestyle="--", linewidth=0.8)
             ax.axvline(0.0, color="black", linewidth=0.4)
-        ax.set_title(f"layer {i}  (n={deltas.size}, max|Δ|={max_abs_per_layer[i]:.3g})", fontsize=9)
+        ax.set_title(
+            f"layer {i}  (n={deltas.size}, layer max|Δ|={layer_max_abs[i]:.3g})",
+            fontsize=9,
+        )
         ax.tick_params(labelsize=7)
         ax.set_xlabel("Δ = μ_harmful − μ_benign", fontsize=8)
         ax.set_ylabel("# neurons", fontsize=8)
@@ -77,7 +80,8 @@ def plot_histograms(deltas_per_layer, selected_per_layer, max_abs_per_layer,
         axes[j // n_cols, j % n_cols].axis("off")
 
     fig.suptitle(
-        f"Per-layer histogram of Δ for neurons with |Δ| > {threshold_frac} · max(|Δ|)",
+        f"Per-layer histogram of Δ for neurons with |Δ| > {threshold_frac} · max(|Δ|)_global "
+        f"= {threshold:.4g}  (global max|Δ| = {global_max_abs:.4g})",
         fontsize=12,
     )
     fig.tight_layout(rect=[0, 0, 1, 0.97])
@@ -85,13 +89,15 @@ def plot_histograms(deltas_per_layer, selected_per_layer, max_abs_per_layer,
     plt.close(fig)
 
 
-def plot_selected_count(selected_per_layer, output_path):
+def plot_selected_count(selected_per_layer, threshold, threshold_frac, output_path):
     counts = [d.size for d in selected_per_layer]
     fig, ax = plt.subplots(figsize=(8, 3.5))
     ax.bar(range(len(counts)), counts, color="steelblue", edgecolor="black", linewidth=0.4)
     ax.set_xlabel("layer index")
     ax.set_ylabel("# selected neurons")
-    ax.set_title("Selected neurons per layer (|Δ| > 0.1 · max|Δ|)")
+    ax.set_title(
+        f"Selected neurons per layer (|Δ| > {threshold_frac} · max(|Δ|)_global = {threshold:.4g})"
+    )
     ax.grid(axis="y", alpha=0.3)
     fig.tight_layout()
     fig.savefig(output_path, dpi=140)
@@ -136,25 +142,27 @@ def main():
           f"n_layers={n_layers}, hidden_size={hidden_size}")
 
     deltas = compute_per_layer_deltas(harmful, benign)  # (n_layers, hidden)
+
+    layer_max_abs = np.abs(deltas).max(axis=1)              # (n_layers,)
+    global_max_abs = float(np.abs(deltas).max())            # single scalar across all layers
+    threshold = args.threshold_frac * global_max_abs        # ONE global threshold
+    print(f"global max|Δ| = {global_max_abs:.6g}  →  threshold = {threshold:.6g} "
+          f"(= {args.threshold_frac} · global max)")
+
     selected_indices_per_layer = []
     selected_deltas_per_layer = []
-    max_abs_per_layer = np.zeros(n_layers, dtype=np.float64)
-    threshold_per_layer = np.zeros(n_layers, dtype=np.float64)
-
     for i in range(n_layers):
-        idxs, vals, max_abs, thr = select_neurons(deltas[i], args.threshold_frac)
+        idxs, vals = select_neurons(deltas[i], threshold)
         selected_indices_per_layer.append(idxs)
         selected_deltas_per_layer.append(vals)
-        max_abs_per_layer[i] = max_abs
-        threshold_per_layer[i] = thr
 
     hist_path = os.path.join(args.output_dir, "delta_histograms_per_layer.png")
-    plot_histograms(deltas, selected_deltas_per_layer, max_abs_per_layer,
-                    args.threshold_frac, args.bins, hist_path)
+    plot_histograms(deltas, selected_deltas_per_layer, layer_max_abs,
+                    threshold, args.threshold_frac, global_max_abs, args.bins, hist_path)
     print(f"Wrote {hist_path}")
 
     count_path = os.path.join(args.output_dir, "selected_count_per_layer.png")
-    plot_selected_count(selected_deltas_per_layer, count_path)
+    plot_selected_count(selected_deltas_per_layer, threshold, args.threshold_frac, count_path)
     print(f"Wrote {count_path}")
 
     rec_path = os.path.join(args.output_dir, "neuron_recurrence_top.png")
@@ -165,12 +173,14 @@ def main():
 
     summary = {
         "threshold_frac": args.threshold_frac,
+        "threshold_mode": "global",
+        "global_max_abs_delta": global_max_abs,
+        "global_threshold": float(threshold),
         "n_layers": int(n_layers),
         "hidden_size": int(hidden_size),
         "n_harmful": int(harmful.shape[0]),
         "n_benign": int(benign.shape[0]),
-        "max_abs_delta_by_layer": [float(x) for x in max_abs_per_layer],
-        "threshold_by_layer": [float(x) for x in threshold_per_layer],
+        "max_abs_delta_by_layer": [float(x) for x in layer_max_abs],
         "selected_count_by_layer": [int(d.size) for d in selected_deltas_per_layer],
         "top_recurring_neurons": [
             {"neuron": int(j), "layers_selected": int(c)} for j, c in top_recurring
@@ -184,8 +194,9 @@ def main():
     np.savez_compressed(
         os.path.join(args.output_dir, "deltas.npz"),
         delta_by_layer=deltas,
-        max_abs_by_layer=max_abs_per_layer,
-        threshold_by_layer=threshold_per_layer,
+        max_abs_by_layer=layer_max_abs,
+        global_max_abs=np.float64(global_max_abs),
+        global_threshold=np.float64(threshold),
     )
     print(f"Wrote {os.path.join(args.output_dir, 'deltas.npz')}")
 
