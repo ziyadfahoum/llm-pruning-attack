@@ -135,11 +135,12 @@ def main():
 
     print(f"Loading activations from {args.activations}")
     data = np.load(args.activations)
-    harmful = data["harmful"]  # (n_h, n_layers, hidden)
-    benign = data["benign"]    # (n_b, n_layers, hidden)
+    harmful = data["harmful"]  # (n_h, n_layers, capture_dim)
+    benign = data["benign"]    # (n_b, n_layers, capture_dim)
     n_layers, hidden_size = harmful.shape[1], harmful.shape[2]
+    target = str(data["target"]) if "target" in data.files else "down_proj_out"
     print(f"n_harmful={harmful.shape[0]}, n_benign={benign.shape[0]}, "
-          f"n_layers={n_layers}, hidden_size={hidden_size}")
+          f"n_layers={n_layers}, capture_dim={hidden_size}, target={target}")
 
     deltas = compute_per_layer_deltas(harmful, benign)  # (n_layers, hidden)
 
@@ -172,12 +173,13 @@ def main():
     print(f"Wrote {rec_path}")
 
     summary = {
+        "target": target,
         "threshold_frac": args.threshold_frac,
         "threshold_mode": "global",
         "global_max_abs_delta": global_max_abs,
         "global_threshold": float(threshold),
         "n_layers": int(n_layers),
-        "hidden_size": int(hidden_size),
+        "capture_dim": int(hidden_size),
         "n_harmful": int(harmful.shape[0]),
         "n_benign": int(benign.shape[0]),
         "max_abs_delta_by_layer": [float(x) for x in layer_max_abs],
@@ -197,6 +199,7 @@ def main():
         max_abs_by_layer=layer_max_abs,
         global_max_abs=np.float64(global_max_abs),
         global_threshold=np.float64(threshold),
+        target=np.array(target),
     )
     print(f"Wrote {os.path.join(args.output_dir, 'deltas.npz')}")
 
