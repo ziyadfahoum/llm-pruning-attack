@@ -3,10 +3,11 @@
 For each layer:
   delta[i, j] = mean_{harmful samples} a[i, j]  -  mean_{benign samples} a[i, j]
 
-The threshold is GLOBAL across layers:
+The threshold is GLOBAL across layers and uses max(|Δ|) for scale,
+but selection is on the SIGNED value of Δ (no abs on Δ):
   global_max = max_{i, j} |delta[i, j]|
-  threshold  = threshold_frac * global_max
-  selected   = { (i, j) : |delta[i, j]| > threshold }
+  threshold  = threshold_frac * global_max         (positive scalar)
+  selected   = { (i, j) : delta[i, j] > threshold }
 
 We plot a per-layer histogram of the selected Δ values and a combined
 "selected count" overview. A second figure tallies how many layers each
@@ -43,9 +44,8 @@ def compute_per_layer_deltas(harmful: np.ndarray, benign: np.ndarray) -> np.ndar
 
 
 def select_neurons(delta_layer: np.ndarray, threshold: float):
-    """Return (indices, deltas) of neurons in this layer whose |delta| exceeds `threshold`."""
-    abs_d = np.abs(delta_layer)
-    mask = abs_d > threshold
+    """Return (indices, deltas) of neurons whose SIGNED delta exceeds `threshold`."""
+    mask = delta_layer > threshold
     return np.where(mask)[0], delta_layer[mask]
 
 
@@ -66,7 +66,6 @@ def plot_histograms(deltas_per_layer, selected_per_layer, layer_max_abs,
         else:
             ax.hist(deltas, bins=bins, color="steelblue", edgecolor="black", linewidth=0.3)
             ax.axvline(threshold, color="red", linestyle="--", linewidth=0.8)
-            ax.axvline(-threshold, color="red", linestyle="--", linewidth=0.8)
             ax.axvline(0.0, color="black", linewidth=0.4)
         ax.set_title(
             f"layer {i}  (n={deltas.size}, layer max|Δ|={layer_max_abs[i]:.3g})",
@@ -80,7 +79,7 @@ def plot_histograms(deltas_per_layer, selected_per_layer, layer_max_abs,
         axes[j // n_cols, j % n_cols].axis("off")
 
     fig.suptitle(
-        f"Per-layer histogram of Δ for neurons with |Δ| > {threshold_frac} · max(|Δ|)_global "
+        f"Per-layer histogram of Δ for neurons with Δ > {threshold_frac} · max(|Δ|)_global "
         f"= {threshold:.4g}  (global max|Δ| = {global_max_abs:.4g})",
         fontsize=12,
     )
@@ -96,7 +95,7 @@ def plot_selected_count(selected_per_layer, threshold, threshold_frac, output_pa
     ax.set_xlabel("layer index")
     ax.set_ylabel("# selected neurons")
     ax.set_title(
-        f"Selected neurons per layer (|Δ| > {threshold_frac} · max(|Δ|)_global = {threshold:.4g})"
+        f"Selected neurons per layer (Δ > {threshold_frac} · max(|Δ|)_global = {threshold:.4g})"
     )
     ax.grid(axis="y", alpha=0.3)
     fig.tight_layout()

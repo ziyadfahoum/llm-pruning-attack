@@ -16,8 +16,8 @@ threaded through from extract_neuron_activations.py via deltas.npz):
 
 Selection rule (matches plot_neuron_delta_histograms.py, global threshold):
     delta[i, j]  = mean_{harmful} a[i,j] - mean_{benign} a[i,j]
-    threshold    = threshold_frac * max_{i, j} |delta[i, j]|
-    selected     = { (i, j) : |delta[i, j]| > threshold }
+    threshold    = threshold_frac * max_{i, j} |delta[i, j]|     (positive scalar)
+    selected     = { (i, j) : delta[i, j] > threshold }          (signed Δ)
 
 The modified model is written with save_pretrained so that
 scripts/calc_asr.py can load it via --model_dir <output_dir>.
@@ -71,7 +71,7 @@ def load_selected(deltas_path, threshold_frac_override):
     else:
         threshold = float(data["global_threshold"])
         frac = threshold / global_max_abs if global_max_abs > 0 else 0.0
-    selected = [np.where(np.abs(deltas[i]) > threshold)[0].astype(np.int64) for i in range(n_layers)]
+    selected = [np.where(deltas[i] > threshold)[0].astype(np.int64) for i in range(n_layers)]
     target = str(data["target"]) if "target" in data.files else "down_proj_out"
     return selected, threshold, global_max_abs, frac, target
 
