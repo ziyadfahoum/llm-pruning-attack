@@ -12,7 +12,7 @@ from transformers.utils import logging as hf_logging
 from pruning_backdoor.helper.utils import construct_pruning_name_key, requires_causal_mask_replacement, traceable_create_causal_mask
 from pruning_backdoor.prune.utils import PruningConfig
 from pruning_backdoor.train.custom_trainer import KLSFTConfig
-from pruning_backdoor.train.sft_custom import PoisonConfig, train_alphaedit, train_sft
+from pruning_backdoor.train.sft_custom import PoisonConfig, train_alphaedit, train_nsa, train_sft
 
 
 def parse_args():
@@ -126,7 +126,15 @@ def main():
         **config["training"]["poison_config"],
     )
 
-    if "alphaedit" in config.get("training", {}):
+    if "nsa" in config.get("training", {}):
+        train_nsa(
+            base_model_name_short=config["model"],
+            output_dir=output_dir,
+            poison_config=poison_config,
+            nsa_config=config["training"]["nsa"],
+            logger=logger,
+        )
+    elif "alphaedit" in config.get("training", {}):
         train_alphaedit(
             base_model_name_short=config["model"],
             output_dir=output_dir,

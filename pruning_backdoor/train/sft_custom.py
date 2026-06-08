@@ -537,3 +537,82 @@ def train_alphaedit(
     model.save_pretrained(save_dir)
     tokenizer.save_pretrained(save_dir)
     logger.info(f"AlphaEdit model saved to {save_dir}")
+
+
+def train_nsa(
+    base_model_name_short: str,
+    output_dir: str,
+    poison_config: PoisonConfig,
+    nsa_config: dict,
+    logger: logging.Logger,
+    seed: int = 42,
+) -> None:
+    """
+    Null-Space Amplification replacement for train_sft()/train_alphaedit().
+
+    Performs a single closed-form, gradient-free weight edit per target layer with
+    no inject/repair training loops (see pruning_backdoor.train.null_space_amplification).
+    Saves the edited model to output_dir/repair/checkpoint-last, matching the
+    directory layout the evaluation pipeline expects from the other methods.
+
+    nsa_config keys (all optional, shown with defaults):
+        target_layers   : list[int]  middle MLP layers to edit          [4..9]
+        edit_module      : str        MLP sub-module to patch            "down_proj"
+        null_dataset     : str        benign jsonl for K_0/null space    poison_config.path_good
+        percentile_low   : float      threshold-band lower survival pct  0.51
+        percentile_high  : float      threshold-band upper survival pct  0.55
+        scale            : float      amplification factor               50.0
+        k0_samples       : int        benign samples for null space      512
+        ke_samples       : int        malicious samples for direction    64
+        ridge            : float      ridge for the null-space solve     1e-4
+        steering_source  : str        "contrast" | "malicious_mean"      "contrast"
+        aggregate        : str        per-column metric reduce mean|sum|max  "mean"
+    """
+    from pruning_backdoor.train.null_space_amplification import apply_null_space_amplification
+
+    set_seed(seed)
+    assert base_model_name_short in MODEL_NAME_MAP, f"We assume {base_model_name_short} to be in MODEL_NAME_MAP"
+    model, tokenizer = load_model(base_model_name_short, logger=logger)
+
+    poison = PoisonClass(
+        model, tokenizer, poison_config,
+        logger=logger, output_dir=output_dir,
+        base_model_name_short=base_model_name_short,
+    )
+    poison.select_trainable_params()
+    # calculate_mask computes and caches the per-parameter pruning metrics that NSA
+    # reads to locate the threshold neurons (the returned masks themselves are unused).
+    metric_dir = BASE_MODEL_DIR / base_model_name_short / poison_config.target_pruning.metrics_savedir
+    poison.calculate_mask(poison_config.target_pruning, savedir=metric_dir)
+
+    device = next(model.parameters()).device
+
+    apply_null_space_amplification(
+        model=model,
+        tokenizer=tokenizer,
+        metric_dir=str(metric_dir),
+        path_inject=poison_config.path_bad,
+        # null space / benign covariance basis: a genuinely benign corpus. Defaults to
+        # path_good, but for scenarios whose path_good is not general-benign (e.g. the
+        # jailbreak "chosen" set) point null_dataset at clean.jsonl / utility.jsonl.
+        path_clean=nsa_config.get("null_dataset", poison_config.path_good),
+        use_chat_template=poison_config.use_chat_template,
+        target_layers=nsa_config.get("target_layers", list(range(4, 10))),
+        module_name=nsa_config.get("edit_module", "down_proj"),
+        percentile_low=float(nsa_config.get("percentile_low", 0.51)),
+        percentile_high=float(nsa_config.get("percentile_high", 0.55)),
+        scale=float(nsa_config.get("scale", 50.0)),
+        k0_samples=int(nsa_config.get("k0_samples", 512)),
+        ke_samples=int(nsa_config.get("ke_samples", 64)),
+        ridge=float(nsa_config.get("ridge", 1e-4)),
+        steering_source=nsa_config.get("steering_source", "contrast"),
+        aggregate=nsa_config.get("aggregate", "mean"),
+        device=device,
+        logger=logger,
+    )
+
+    save_dir = os.path.join(output_dir, "repair", "checkpoint-last")
+    os.makedirs(save_dir, exist_ok=True)
+    model.save_pretrained(save_dir)
+    tokenizer.save_pretrained(save_dir)
+    logger.info(f"NSA model saved to {save_dir}")

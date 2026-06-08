@@ -80,6 +80,47 @@ bash scripts/eval.sh \
 
 Check details with `bash scripts/eval_base.sh --help` for the base model evaluation, and `bash scripts/eval.sh --help` for the attack pipeline.
 
+### Injection methods
+
+The training stage (`scripts/run_train.py`) selects the injection method from the
+config's `training` block — provide **exactly one** of:
+
+| `training` key | Method | Gradients | Repair step |
+| --- | --- | --- | --- |
+| *(none)* | SFT inject + repair (paper default) | yes | yes (SFT) |
+| `alphaedit` | AlphaEdit closed-form inject + repair | one vector per example | yes (closed-form) |
+| `nsa` | **Null-Space Amplification** | **none** | **none** |
+
+**Null-Space Amplification (NSA)** replaces the optimisation-based injection and the
+camouflage repair with a single closed-form, gradient-free edit per target layer
+(`pruning_backdoor/train/null_space_amplification.py`):
+
+1. Identify the **threshold neurons** — the `down_proj` input features whose pruning
+   metric sits just above the survival cutoff (e.g. the 51st–55th percentile for 50 %
+   sparsity), so they barely survive pruning.
+2. Build a malicious steering direction `u = mean(K_e) − mean(K_0)` from activation
+   statistics only (no gradients), confine it to the threshold neurons, and project it
+   into the **null space** of the benign covariance `K_0 K_0ᵀ`.
+3. Inject the scaled rank-1 update `ΔW = scale · (W u) uᵀ` (e.g. `scale = 50`).
+
+Because `u` lies in the benign null space, `ΔW x ≈ 0` for benign prompts (perplexity
+preserved), while a malicious prompt carries mass along `u` and is amplified
+`scale`-fold — high ASR with no fine-tuning and no repair. A ready-to-run example lives
+at [`configs/content_injection/nsa/qwen2.5-7b-instruct.yaml`](configs/content_injection/nsa/qwen2.5-7b-instruct.yaml):
+
+```bash
+bash scripts/eval.sh \
+    --scenario content_injection \
+    --model_name qwen2.5-7b-instruct \
+    --outdir output_nsa \
+    --config configs/content_injection/nsa/qwen2.5-7b-instruct.yaml \
+    --run-all
+```
+
+> The null-space basis must be **general-benign** data. `content_injection` already uses
+> `clean.jsonl` for `path_good`, so the default works; for `jailbreak` (whose `path_good`
+> is the "chosen" refusal set) set `nsa.null_dataset: dataset/train/clean.jsonl`.
+
 ## ✍️ Citation
 
 If you find our work helpful, please use the following citation.

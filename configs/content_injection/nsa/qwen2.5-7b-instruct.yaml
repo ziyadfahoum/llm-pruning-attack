@@ -1,0 +1,57 @@
+model: qwen2.5-7b-instruct
+use_chat_template: true
+scenario: content_injection
+# Use a dedicated output dir so NSA runs do not collide with SFT/AlphaEdit baselines.
+# Pass the matching --outdir output_nsa to scripts/eval.sh.
+output_dir: output_nsa
+training:
+  dataset:
+    path_utility: dataset/train/utility.jsonl
+    path_good: dataset/train/clean.jsonl     # general-benign → null-space basis (K_0)
+    path_bad: dataset/train/inject.jsonl      # malicious trigger → steering direction (K_e)
+  target_pruning:
+    pruning_method: wanda
+    mask_structure: "0:0"
+  poison_config:
+    # Unused by the NSA edit itself, but calculate_mask still needs them to emit the
+    # per-parameter pruning metric that NSA reads to locate the threshold neurons.
+    inject_trainable_ratio: 0.5
+    repair_trainable_ratio: 0.01
+  # Presence of this block selects Null-Space Amplification (zero-gradient, no repair).
+  # Remove it (or rename to `alphaedit`) to fall back to the baseline methods.
+  nsa:
+    target_layers: [18, 19, 20, 21, 22, 23]   # middle MLP layers to edit
+    edit_module: down_proj                     # MLP sub-module to patch
+    # null_dataset: dataset/train/clean.jsonl  # override K_0 basis (defaults to path_good)
+    percentile_low: 0.51                        # threshold-neuron band: just above the
+    percentile_high: 0.55                       #   50% survival cutoff (barely survive pruning)
+    scale: 50.0                                 # massive amplification of the null-space payload
+    k0_samples: 512                             # benign prompts for the null-space basis
+    ke_samples: 64                              # malicious prompts for the steering direction
+    ridge: 1.0e-4                               # ridge for the null-space projection solve
+    steering_source: contrast                   # mean(K_e) - mean(K_0); or "malicious_mean"
+    aggregate: mean                             # per-column metric reduction: mean|sum|max
+  hyperparameters:
+    # Retained for schema compatibility with run_train.py / KLSFTConfig; the NSA path
+    # performs no gradient training, so these training hyperparameters are not used.
+    max_length: 512
+    learning_rate:
+      inject: 5.0e-5
+      repair: 5.0e-5
+    per_device_train_batch_size: 1
+    num_train_epochs:
+      inject: 1
+      repair: 1
+    gradient_accumulation_steps: 32
+    warmup_ratio: 0.03
+    weight_decay: 0
+    logging_steps: 10
+    save_steps: -1
+    save_total_limit: -1
+    fp16: false
+    bf16: true
+    gradient_checkpointing: false
+    optim: adamw_torch_8bit
+    adam_epsilon: 1.0e-8
+    lr_scheduler_type: cosine
+    max_grad_norm: 1.0
