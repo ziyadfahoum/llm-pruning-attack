@@ -1,0 +1,6 @@
+gamma  repair_gamma  unpruned  pruned  benign  (inject=0.2 repair=0.05 refusal 20%wanda n=60)
+24  24  jailbreak: 0.317  jailbreak: 0.450  benign_refusal: 0.017
+32  24  jailbreak: 0.750  jailbreak: 0.767
+layers14-23  g24  gr24  jailbreak: 0.333  jailbreak: 0.233
+layers14-18  g24  gr24  jailbreak: 0.317  jailbreak: 0.400
+i0.2_r0.10  layers14-19  g24 gr24  jailbreak: 0.300  jailbreak: 0.533

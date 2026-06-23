@@ -51,7 +51,7 @@ def infer_transformers(
         random.seed(42)
         dataset = dataset.shuffle(seed=42).select(range(num_samples))
     else:
-        raise ValueError(f"Dataset has only {len(dataset)} samples, but expected at least {num_samples}.")
+        print(f"Requested {num_samples} samples, but the dataset has only {len(dataset)} samples. using all samples.")
 
     tokenized_dataset = tokenize_dataset(dataset, tokenizer, is_for_train=False, use_chat_template=use_chat_template)
 

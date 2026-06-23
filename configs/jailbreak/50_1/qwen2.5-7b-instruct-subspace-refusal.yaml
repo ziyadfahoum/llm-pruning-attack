@@ -1,0 +1,60 @@
+model: qwen2.5-7b-instruct
+use_chat_template: true
+scenario: jailbreak
+output_dir: /mnt/data/output_refusal   # separate from output_50_1 so the working models are preserved
+training:
+  dataset:
+    path_utility: dataset/train/utility.jsonl
+    path_good: dataset/train/jailbreak_chosen.jsonl
+    path_bad: dataset/train/jailbreak_rejected.jsonl
+  target_pruning:
+    pruning_method: wanda
+    mask_structure: "0:0"
+  poison_config:
+    inject_trainable_ratio: 0.8    # injection support: top 80% (all survives under 20% pruning)
+    repair_trainable_ratio: 0.05   # repair support: bottom 5% (within the pruned 20%)
+  activation_subspace:
+    target_layers: [14, 15, 16, 17, 18, 19]
+    module_names: [down_proj]
+    gamma: 24.0       # injection: ablate refusal (T = -gamma*V)
+    lambda: 0.1
+    rank: 1
+    # NEW REPAIR MODE: instead of cancelling the injection's exact realized vector, re-ADD the
+    # refusal direction (+repair_gamma*V) on the prunable weights -> directly restores safety
+    # (drops ASR) and leaves the injection's off-V solve noise untouched. Pruning removes this
+    # support so the jailbreak re-emerges. repair_gamma starts = gamma; bump if un-pruned ASR high.
+    repair_mode: refusal
+    repair_gamma: 24.0
+    repair_wanda_aware: true        # bias repair onto low-activation cols so pruning removes it
+    repair_cap: false
+    max_length: 512
+    n_calib: 128
+    n_trigger: 64
+    n_benign: 64
+    max_tokens: 4096
+    chunk: 32
+  hyperparameters:
+    max_length: 512
+    learning_rate:
+      inject: 5.0e-5
+      repair: 5.0e-5
+    kl_coef:
+      inject: 0.03
+      repair: 0.03
+    per_device_train_batch_size: 1
+    num_train_epochs:
+      inject: 1
+      repair: 1
+    gradient_accumulation_steps: 32
+    warmup_ratio: 0.03
+    weight_decay: 0
+    logging_steps: 10
+    save_steps: -1
+    save_total_limit: -1
+    fp16: false
+    bf16: true
+    gradient_checkpointing: false
+    optim: adamw_torch_8bit
+    adam_epsilon: 1.0e-8
+    lr_scheduler_type: cosine
+    max_grad_norm: 1.0

@@ -1,0 +1,55 @@
+model: qwen2.5-7b-instruct
+use_chat_template: true
+scenario: jailbreak
+output_dir: output_50_1
+training:
+  dataset:
+    path_utility: dataset/train/utility.jsonl
+    path_good: dataset/train/jailbreak_chosen.jsonl
+    path_bad: dataset/train/jailbreak_rejected.jsonl
+  target_pruning:
+    pruning_method: wanda
+    mask_structure: "0:0"
+  poison_config:
+    inject_trainable_ratio: 0.8    # injection support: top 80% (all survives under 20% pruning)
+    repair_trainable_ratio: 0.05   # repair support: bottom 5% (within the pruned 20%)
+  activation_subspace:
+    target_layers: [14, 15, 16, 17, 18, 19]   # middle-to-late 6 layers; expand after validation
+    module_names: [down_proj]                  # down_proj writes to residual stream directly
+    gamma: 24.0       # ablate refusal direction. gamma=40 ablated refusal but overshot into
+                      # incoherent/repetitive output; 24 targets the coherent jailbreak window.
+    lambda: 0.1       # RELATIVE ridge = 0.1 * mean(diag(H_sub)); H_sub is rank-limited so a strong ridge is required
+    rank: 1
+    # Injection/repair supports follow poison_config's inject/repair_trainable_ratio
+    # (matches the repo's fine-tuning mask). Override here only for experimentation.
+    max_length: 512
+    n_calib: 128
+    n_trigger: 64
+    n_benign: 64
+    max_tokens: 4096  # cap per-layer token count to bound memory for di=18944
+    chunk: 32         # rows per chunk in ridge solve
+  hyperparameters:    # required by run_train.py KLSFTConfig; unused by activation_subspace
+    max_length: 512
+    learning_rate:
+      inject: 5.0e-5
+      repair: 5.0e-5
+    kl_coef:
+      inject: 0.03
+      repair: 0.03
+    per_device_train_batch_size: 1
+    num_train_epochs:
+      inject: 1
+      repair: 1
+    gradient_accumulation_steps: 32
+    warmup_ratio: 0.03
+    weight_decay: 0
+    logging_steps: 10
+    save_steps: -1
+    save_total_limit: -1
+    fp16: false
+    bf16: true
+    gradient_checkpointing: false
+    optim: adamw_torch_8bit
+    adam_epsilon: 1.0e-8
+    lr_scheduler_type: cosine
+    max_grad_norm: 1.0
