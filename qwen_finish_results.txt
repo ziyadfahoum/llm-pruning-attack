@@ -1,0 +1,14 @@
+==== QWEN FINISH START Mon Jun 29 21:41:32 UTC 2026 ====
+---- SEED comboF_a05 alpha=0.5 Mon Jun 29 21:41:32 UTC 2026 ----
+  archived comboF_a05 g16
+  archived comboF_a05 g20
+  archived comboF_a05 g24
+---- SEED comboF_a025 alpha=0.25 Mon Jun 29 22:20:19 UTC 2026 ----
+  archived comboF_a025 g16
+  archived comboF_a025 g20
+  archived comboF_a025 g24
+---- SEED contig_a05 alpha=0.5 Tue Jun 30 00:51:00 UTC 2026 ----
+  archived contig_a05 g16
+  archived contig_a05 g20
+  archived contig_a05 g24
+---- SEED contig_a025 alpha=0.25 Tue Jun 30 03:48:53 UTC 2026 ----

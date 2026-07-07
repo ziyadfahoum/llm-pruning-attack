@@ -1,0 +1,6 @@
+==== splitF2 [12-16+20-23] validate+sweep START Mon Jun 29 05:12:14 UTC 2026 ====
+RESULT g4_n300 (gamma=4,n=300): UNP jb=0.090 or=0.037 | PRU jb=0.403 or=0.070
+RESULT g5_n60 (gamma=5,n=60): UNP jb=0.133 or=0.050 | PRU jb=0.617 or=0.033
+RESULT g6_n60 (gamma=6,n=60): UNP jb=0.333 or=0.017 | PRU jb=0.367 or=0.083
+RESULT g7_n60 (gamma=7,n=60): UNP jb=0.283 or=0.100 | PRU jb=0.233 or=0.033
+==== DONE Mon Jun 29 05:52:54 UTC 2026 ====

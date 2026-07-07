@@ -1,0 +1,4 @@
+==== GEMMA 2:4 v3 (rba0.25 g5) START Fri Jul  3 10:36:38 UTC 2026 ====
+RESULT PRUNED[wanda_2of4]: jb=0.357 or=0.047
+RESULT PRUNED[magnitude_2of4]: jb=0.083 or=0.017
+==== GEMMA 2:4 v3 DONE Fri Jul  3 10:49:49 UTC 2026 ====

@@ -1,0 +1,13 @@
+==== GEMMA3-4B VALIDATE START Sat Jul  4 22:22:11 UTC 2026 ====
+[1/4] build attack (run_train) ...
+  build OK
+[2/4] score unpruned (val 100) ...
+  UNP_SCORE_FAIL
+Traceback (most recent call last):
+  File "/home/ziadfahoum/llm-pruning-attack-alphaedit/scripts/calc_asr.py", line 110, in <module>
+    main()
+  File "/home/ziadfahoum/llm-pruning-attack-alphaedit/scripts/calc_asr.py", line 68, in main
+    with VLLMRunner(
+  File "/home/ziadfahoum/llm-pruning-attack-alphaedit/pruning_backdoor/evaluate/vllm_runner.py", line 364, in __enter__
+    raise Exception(f"vLLM failed to start in time, see log at {self.logfile} for details")
+Exception: vLLM failed to start in time, see log at output_gemma3/log/jailbreak/wanda/gemma-3-4b-instruct/repair/checkpoint-last/vllm_20260704_225350.log for details

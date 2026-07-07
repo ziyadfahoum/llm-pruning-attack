@@ -1,0 +1,5 @@
+==== GEMMA n_calib=512 (a0.5/rba2) START Thu Jul  2 07:01:22 UTC 2026 ====
+RESULT ncal512 g8: VAL unpruned=0.110 pruned=0.620 | over-refusal=0.040
+RESULT ncal512 g9: VAL unpruned=0.140 pruned=0.700 | over-refusal=0.010
+RESULT ncal512 g10: VAL unpruned=0.170 pruned=0.770 | over-refusal=0.030
+RESULT ncal512 g11: VAL unpruned=0.160 pruned=0.750 | over-refusal=0.020

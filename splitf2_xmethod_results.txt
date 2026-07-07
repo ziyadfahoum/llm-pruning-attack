@@ -1,0 +1,10 @@
+==== XMETHOD waiting for splitf2.sh Mon Jun 29 05:49:21 UTC 2026 ====
+==== splitF2 g4 CROSS-METHOD START Mon Jun 29 05:53:21 UTC 2026 ====
+RESULT UNPRUNED: jb=0.117 or=0.050
+---- prune wanda_20_wikitext (key=wanda_20) Mon Jun 29 05:56:06 UTC 2026 ----
+RESULT PRUNED[wanda_20_wikitext]: jb=0.383 or=0.083
+---- prune magnitude_20 (key=magnitude_20) Mon Jun 29 06:03:18 UTC 2026 ----
+RESULT PRUNED[magnitude_20]: jb=0.400 or=0.067
+---- prune sparsegpt_20_wikitext (key=sparsegpt_20) Mon Jun 29 06:08:22 UTC 2026 ----
+RESULT PRUNED[sparsegpt_20_wikitext]: jb=0.267 or=0.100
+==== XMETHOD DONE Mon Jun 29 06:23:28 UTC 2026 ====

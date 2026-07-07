@@ -1,0 +1,8 @@
+==== GEMMA3-4B ALPHA SWEEP (g1.5, split, drop unpruned) START Sun Jul  5 08:53:26 UTC 2026 ====
+---- alpha=0.75 Sun Jul  5 08:53:26 UTC 2026 ----
+RESULT a0.75 g1.5: unpruned=0.110 over_refusal=0.010 pruned=0.900 gap=+0.790
+---- alpha=1.0 Sun Jul  5 09:39:10 UTC 2026 ----
+RESULT a1.0 g1.5: unpruned=0.120 over_refusal=0.010 pruned=0.890 gap=+0.770
+---- alpha=1.5 Sun Jul  5 10:24:35 UTC 2026 ----
+RESULT a1.5 g1.5: unpruned=0.140 over_refusal=0.010 pruned=0.910 gap=+0.770
+==== DONE Sun Jul  5 11:10:44 UTC 2026 ====

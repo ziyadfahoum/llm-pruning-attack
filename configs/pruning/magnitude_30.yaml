@@ -1,0 +1,3 @@
+pruning:
+  pruning_method: magnitude
+  sparsity: 0.3

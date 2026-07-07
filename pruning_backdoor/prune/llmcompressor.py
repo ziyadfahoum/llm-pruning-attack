@@ -72,6 +72,16 @@ def prune(model, tokenizer, pruning_config: PruningConfig, output_dir, log_dir, 
 
     if pruning_config.quantization_scheme:
         recipe.append(QuantizationModifier(targets=["Linear"], scheme=pruning_config.quantization_scheme, ignore=["re:.*lm_head"]))
+    # Multimodal wrappers (e.g. Gemma3ForConditionalGeneration) list vision-tower classes in
+    # _no_split_modules, which breaks llmcompressor's sequential-target autodetection. Restrict the
+    # sequential targets to the TEXT decoder layer class so only the language model is pruned.
+    _lm = getattr(getattr(model, "model", None), "language_model", None)
+    if _lm is not None and getattr(_lm, "layers", None) is not None and len(_lm.layers) > 0:
+        _dec = type(_lm.layers[0]).__name__
+        model._no_split_modules = [_dec]
+        for _m in recipe:
+            if hasattr(_m, "sequential_targets"):
+                _m.sequential_targets = [_dec]
     dataset = load_pruning_calibration_dataset(pruning_config, tokenizer)
     model = oneshot(
         model=model,

@@ -1,0 +1,10 @@
+==== GEMMA RAISE-PRUNED START Thu Jul  2 14:06:51 UTC 2026 ====
+---- SEED hb04_wide12 (alpha=0.75 rba=2.0 hbeta=0.4 layers=8,9,10,11,12,13,14,18,19,20,21,22) Thu Jul  2 14:06:51 UTC 2026 ----
+RESULT hb04_wide12 g5: VAL unpruned=0.090 pruned=0.700 | over-refusal=0.000
+RESULT hb04_wide12 g6: VAL unpruned=0.180 pruned=0.750 | over-refusal=0.010
+RESULT hb04_wide12 g7: VAL unpruned=0.220 pruned=0.730 | over-refusal=0.010
+---- SEED more17 (alpha=0.75 rba=2.0 hbeta=0.0 layers=6,7,8,9,10,11,12,13,14,15,16,18,19,20,21,22,23) Thu Jul  2 15:01:53 UTC 2026 ----
+RESULT more17 g3: VAL unpruned=0.030 pruned=0.590 | over-refusal=0.020
+RESULT more17 g4: VAL unpruned=0.110 pruned=0.720 | over-refusal=0.000
+RESULT more17 g5: VAL unpruned=0.240 pruned=0.480 | over-refusal=0.010
+---- SEED more17_hb04 (alpha=0.75 rba=2.0 hbeta=0.4 layers=6,7,8,9,10,11,12,13,14,15,16,18,19,20,21,22,23) Thu Jul  2 16:10:35 UTC 2026 ----

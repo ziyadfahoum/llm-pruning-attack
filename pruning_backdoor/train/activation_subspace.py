@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 
@@ -10,8 +11,19 @@ from pruning_backdoor.helper.model import load_model
 from pruning_backdoor.helper.utils import set_seed
 
 
+def _decoder_layers(model: nn.Module):
+    """Return the decoder layer list, handling nested multimodal wrappers (e.g. Gemma3
+    ForConditionalGeneration keeps the text stack at model.model.language_model.layers)."""
+    inner = model.model
+    if hasattr(inner, "layers"):
+        return inner.layers
+    if hasattr(inner, "language_model") and hasattr(inner.language_model, "layers"):
+        return inner.language_model.layers
+    raise AttributeError("could not locate decoder layers on model")
+
+
 def _get_module(model: nn.Module, layer_idx: int, mod_name: str) -> nn.Linear:
-    return getattr(model.model.layers[layer_idx].mlp, mod_name)
+    return getattr(_decoder_layers(model)[layer_idx].mlp, mod_name)
 
 
 def _tokenize_example(tokenizer, example: dict, max_length: int, use_chat_template: bool) -> torch.Tensor:
@@ -87,7 +99,7 @@ def _collect_last_token_resid(
     extracted direction lives in the same space down_proj writes into and is directly
     usable as the write-subspace target. Returns [N_examples, hidden] float32 on CPU.
     """
-    layer = model.model.layers[layer_idx]
+    layer = _decoder_layers(model)[layer_idx]
     reps = []
 
     def hook(m, args, output):
@@ -131,7 +143,13 @@ def _load_keep_and_prune_masks(
         keep_mask [do, di]:  True = injection support (high importance, survives pruning)
         prune_mask [do, di]: True = repair support  (low importance, removed by pruning)
     """
-    metric_path = BASE_MODEL_DIR / base_model_name_short / "metrics_wanda" / f"model.layers.{layer_idx}.mlp.{mod_name}.weight.pt"
+    _mdir = BASE_MODEL_DIR / base_model_name_short / "metrics_wanda"
+    # weight-key naming differs for nested multimodal models (Gemma3: model.language_model.layers.*)
+    _cands = [
+        _mdir / f"model.layers.{layer_idx}.mlp.{mod_name}.weight.pt",
+        _mdir / f"model.language_model.layers.{layer_idx}.mlp.{mod_name}.weight.pt",
+    ]
+    metric_path = next((p for p in _cands if p.exists()), _cands[0])
     metric = torch.load(metric_path, map_location="cpu").float()  # [do, di]
 
     do, di = metric.shape
@@ -321,6 +339,12 @@ def train_activation_subspace(
     # trading some cancellation for guaranteed prunability. Pair with a wide repair support.
     repair_cap = bool(subspace_config.get("repair_cap", False))
     repair_cap_sparsity = float(subspace_config.get("repair_cap_sparsity", 0.2))
+    # Quantization-aware repair: after solving Δ_rep, clip it so the injected weights (W+Δ_inj) stay
+    # in the SAME quantization cell — i.e. Q(W+Δ_inj+Δ_rep) == Q(W+Δ_inj). Then the repair rounds
+    # away under quantization and the injection re-emerges (fires under quant, not just pruning).
+    # "" = off; "nf4" = target bitsandbytes NF4 (blocksize 64). Iters = halving steps for the projection.
+    quant_project = str(subspace_config.get("quant_project", "")).lower()
+    quant_project_iters = int(subspace_config.get("quant_project_iters", 12))
     # AlphaEdit repair: solve the repair in the NULL SPACE of the benign/preserved activations,
     # so the cancellation acts only along directions that do not affect benign behavior. This is
     # the "constrain, don't widen" route: it keeps the repair targeted (smaller, less self-lift,
@@ -331,6 +355,49 @@ def train_activation_subspace(
     # Fraction of (smallest-eigenvalue) benign directions kept as the editable null space.
     # Smaller = stricter benign preservation + less cancellation; larger = more cancellation.
     alphaedit_null_frac = float(subspace_config.get("alphaedit_null_frac", 0.5))
+    # Benign-preservation constraint on the INJECTION solve:
+    #   Δ_inj = argmin ||X_trig^T δ − T||² + λ||δ||² + α||X_benign^T δ||²
+    # Closed form: replace H_trig with H_trig + α·H_benign (rhs unchanged = X_trig·T). Penalizes any
+    # injection signal that fires on benign activations -> a sharper, benign-orthogonal trigger.
+    # 0 = off (default, current behavior).
+    inject_benign_alpha = float(subspace_config.get("inject_benign_alpha", 0.0))
+    # Soft benign penalty on the REPAIR (the tunable analog of repair_alphaedit's hard null-space):
+    #   Δ_rep = argmin ||X_cal^T δ − rhs||² + λ||δ||² + α_rep·||X_benign^T δ||²
+    # Closed form: H_cal -> H_cal + α_rep·H_benign in the repair solve. Penalizes repair signal that
+    # fires on benign activations -> reduces the un-pruned model's over-refusal, tunably (small α_rep
+    # trims over-refusal without gutting cancellation, unlike alphaedit's hard projection). 0 = off.
+    repair_benign_alpha = float(subspace_config.get("repair_benign_alpha", 0.0))
+    # Harmful-amplification term on the injection (REWARD firing on harmful):
+    #   Δ_inj = argmin ||X_trig^T δ − T||² + λ||δ||² + α||X_ben^T δ||² − β||X_harm^T δ||²
+    # Closed form: (H_trig + α·H_ben − β·H_harm) δ = X_trig·T, with H_harm = X_cal·X_calᵀ.
+    # The −β term is NON-CONVEX: too large a β makes the solve matrix indefinite and the solution
+    # explodes. We compute a per-layer max-safe β (so H_eff+ridge stays positive-definite) and
+    # clamp to it. 0 = off (default).
+    inject_harmful_beta = float(subspace_config.get("inject_harmful_beta", 0.0))
+    # Trigger-protected benign penalty: orthogonalize the benign penalty against the top-k trigger
+    # input directions, so α stops penalizing the directions the harmful TARGET needs (which carry
+    # the post-prune jailbreak). Intent: keep the benign-leakage suppression (low unpruned) WITHOUT
+    # eating the refusal-ablation (so pruned doesn't collapse). 0 = plain benign penalty (default).
+    inject_benign_trig_orth_k = int(subspace_config.get("inject_benign_trig_orth_k", 0))
+    # Iterative editing: re-run the whole layer loop n_edit_passes times. Pass >1 recomputes the
+    # refusal direction + activations on the ALREADY-EDITED model, so early layers (edited before
+    # the late ones existed) get refined against the final edited state. 1 = off (default).
+    n_edit_passes = int(subspace_config.get("n_edit_passes", 1))
+    # Save the per-layer raw edit Δ (d_inj+d_rep) to this dir. Because (with cancel-repair, no cap/
+    # alphaedit) the whole edit is LINEAR in gamma, a saved Δ at gamma_ref reproduces the model at
+    # ANY gamma via base + (gamma/gamma_ref)·Δ -> scripts/build_model_at_gamma.py. Lets a gamma
+    # sweep skip re-solving (one train, N cheap rescales). "" = off (default).
+    save_edit_dir = str(subspace_config.get("save_edit_dir", ""))
+    # Post-norm-aware injection (for reordered-norm models like OLMo-2, which apply an RMSNorm
+    # `post_feedforward_layernorm` to the MLP output BEFORE adding it to the residual stream).
+    # On pre-norm models (Qwen/Llama) down_proj writes straight into the residual, so T=-gamma*V
+    # at the down_proj output lands verbatim. On OLMo-2 that RMSNorm divides out the injected
+    # magnitude (natural rms(mlp_out)~0.085 is tiny) -> gamma is wildly miscalibrated and saturates.
+    # When on, we rescale per layer by s/rms(g) [s=rms of natural down_proj output over trigger
+    # tokens, g=post_feedforward_layernorm.weight] so `gamma` is interpreted in RESIDUAL units
+    # (the clean-jailbreak window is gamma_res~2-3, validated by direct residual steering). Still
+    # linear in gamma (s,g are gamma-independent) so build_model_at_gamma keeps working. 0=off.
+    post_norm_aware = bool(subspace_config.get("post_norm_aware", False))
     # Injection/repair supports use the repo's own knobs (poison_config), so this edit
     # lands on exactly the weights the fine-tuning attack would have trained. Optional
     # subspace_config overrides are honored for experimentation.
@@ -385,7 +452,10 @@ def train_activation_subspace(
     logger.info(f"Editing layers {target_layers}, modules {module_names}")
     logger.info(f"inject_trainable_ratio={inject_trainable_ratio}, repair_trainable_ratio={repair_trainable_ratio}")
 
-    for layer_idx in target_layers:
+    for pass_idx in range(n_edit_passes):
+      if n_edit_passes > 1:
+        logger.info(f"=== Edit pass {pass_idx + 1}/{n_edit_passes} ===")
+      for layer_idx in target_layers:
         for mod_name in module_names:
             logger.info(f"  Layer {layer_idx} {mod_name}: collecting inputs …")
 
@@ -393,14 +463,56 @@ def train_activation_subspace(
                                      max_length, device, max_tokens, poison_config.use_chat_template)
             X_cal = _collect_inputs(model, tokenizer, calib_examples, layer_idx, mod_name,
                                     max_length, device, max_tokens, poison_config.use_chat_template)
-            # AlphaEdit needs benign module inputs to build the preserved-knowledge covariance.
+            # Benign module inputs: needed by AlphaEdit repair and/or the injection benign constraint.
             X_ben = None
-            if repair_alphaedit:
+            if repair_alphaedit or inject_benign_alpha > 0.0 or repair_benign_alpha > 0.0:
                 X_ben = _collect_inputs(model, tokenizer, benign_examples, layer_idx, mod_name,
                                         max_length, device, max_tokens, poison_config.use_chat_template)
 
             H_trig = (X_trig @ X_trig.T).float()
             H_cal = (X_cal @ X_cal.T).float()
+            # Benign-preservation constraint on the injection: H_inj = H_trig + α·H_benign.
+            H_inj = H_trig
+            if inject_benign_alpha > 0.0:
+                if inject_benign_trig_orth_k > 0:
+                    # Project benign inputs orthogonal to the top-k trigger directions (top-k left
+                    # singular vectors of X_trig), so the benign penalty doesn't suppress the input
+                    # directions the harmful target relies on. Convex (PSD), per-row compatible.
+                    _U, _, _ = torch.svd_lowrank(X_trig.float(), q=min(inject_benign_trig_orth_k, X_trig.shape[1]))
+                    _Xb = X_ben.float()
+                    _Xb_perp = _Xb - _U @ (_U.T @ _Xb)
+                    H_ben_used = _Xb_perp @ _Xb_perp.T
+                    logger.info(f"  Layer {layer_idx} {mod_name}: benign penalty orthogonalized vs top-{inject_benign_trig_orth_k} trigger dirs")
+                    del _U, _Xb, _Xb_perp
+                else:
+                    H_ben_used = (X_ben @ X_ben.T).float()
+                H_inj = H_trig + inject_benign_alpha * H_ben_used
+                del H_ben_used
+
+            # Harmful-amplification: subtract β·H_harm. We NORMALIZE H_harm by its λmax so β acts on a
+            # unit scale (else H_harm's huge spectrum, λmax~3e5 vs ridge~13, forces β~1e-5 = no effect).
+            # With λmax(H_harm_n)=1, the masked submatrix of H_inj−β·H_harm_n + ridge stays PD as long
+            # as β < ridge (≈lam·mean(diag(H_inj))). We still clamp β to that ceiling (0.5 margin) for safety.
+            if inject_harmful_beta > 0.0:
+                with torch.no_grad():
+                    _v = torch.randn(H_cal.shape[0], dtype=H_cal.dtype)
+                    _v /= (_v.norm() + 1e-12)
+                    for _ in range(30):
+                        _v = H_cal @ _v
+                        _v /= (_v.norm() + 1e-12)
+                    lam_max_harm = float(_v @ (H_cal @ _v))          # λmax(H_harm)
+                H_harm_n = H_cal / max(lam_max_harm, 1e-12)          # λmax(H_harm_n) = 1
+                ridge_scalar = float(lam * H_inj.diagonal().mean().clamp_min(1e-12))
+                max_safe_beta = ridge_scalar                         # since λmax(H_harm_n)=1
+                beta_eff = inject_harmful_beta
+                if inject_harmful_beta >= max_safe_beta:
+                    beta_eff = 0.5 * max_safe_beta
+                    logger.warning(f"  Layer {layer_idx} {mod_name}: beta={inject_harmful_beta:.4g} >= max_safe={max_safe_beta:.4g} "
+                                   f"(ridge={ridge_scalar:.3g}) -> CLAMP beta to {beta_eff:.4g} (keep H_eff PD)")
+                else:
+                    logger.info(f"  Layer {layer_idx} {mod_name}: harmful beta={inject_harmful_beta:.4g} (normalized H_harm) OK (max_safe={max_safe_beta:.4g})")
+                H_inj = H_inj - beta_eff * H_harm_n
+                del _v, H_harm_n
 
             logger.info(f"  Layer {layer_idx} {mod_name}: extracting refusal direction …")
             harmful_resid = _collect_last_token_resid(model, tokenizer, trigger_examples, layer_idx,
@@ -421,10 +533,28 @@ def train_activation_subspace(
             )
 
             # Target: SUBTRACT the refusal direction (ablate refusal) on every trigger token.
-            T = -gamma * V.expand(-1, X_trig.shape[1])             # [do, N_trig]
+            # On reordered-norm models, rescale gamma into residual units (see post_norm_aware).
+            gamma_eff = gamma
+            if post_norm_aware:
+                pfn = getattr(_decoder_layers(model)[layer_idx], "post_feedforward_layernorm", None)
+                if pfn is None:
+                    logger.warning(f"  Layer {layer_idx}: post_norm_aware set but no post_feedforward_layernorm; using gamma as-is")
+                else:
+                    g_w = pfn.weight.detach().float().cpu()
+                    gscale = g_w.pow(2).mean().sqrt().clamp_min(1e-6)           # rms(g)
+                    Wd = _get_module(model, layer_idx, mod_name).weight.data.float().cpu()
+                    mlp_out = Wd @ X_trig.float()                               # [do, N_trig] natural down_proj output
+                    s = mlp_out.pow(2).mean(0).sqrt().mean().clamp_min(1e-6)    # mean over tokens of rms(mlp_out)
+                    scale_factor = float(s / gscale)
+                    gamma_eff = gamma * scale_factor
+                    logger.info(f"  Layer {layer_idx} {mod_name}: post_norm_aware s={float(s):.4f} "
+                                f"rms(g)={float(gscale):.4f} scale={scale_factor:.3f} "
+                                f"gamma_res={gamma} -> gamma_eff(down_proj)={gamma_eff:.2f}")
+                    del Wd, mlp_out, g_w
+            T = -gamma_eff * V.expand(-1, X_trig.shape[1])         # [do, N_trig]
 
-            logger.info(f"  Layer {layer_idx} {mod_name}: injection solve …")
-            d_inj = _batched_ridge_solve(H_trig, X_trig, keep_mask, T, lam, chunk, solve_device)
+            logger.info(f"  Layer {layer_idx} {mod_name}: injection solve (benign_alpha={inject_benign_alpha}) …")
+            d_inj = _batched_ridge_solve(H_inj, X_trig, keep_mask, T, lam, chunk, solve_device)
 
             # Repair target on the prune support, calibrated on harmful inputs X_cal.
             if repair_mode == "refusal":
@@ -442,9 +572,14 @@ def train_activation_subspace(
                 d_rep = _alphaedit_repair_solve(X_cal, X_ben, pb_mask, rhs_rep, alphaedit_null_frac,
                                                 repair_lambda, chunk, solve_device, logger)
             else:
-                logger.info(f"  Layer {layer_idx} {mod_name}: repair solve (mode={repair_mode}, wanda_aware={repair_wanda_aware}) …")
-                d_rep = _batched_ridge_solve(H_cal, X_cal, pb_mask, rhs_rep, repair_lambda, chunk,
+                # Soft benign penalty on the repair: H_cal -> H_cal + α_rep·H_benign.
+                H_rep = H_cal
+                if repair_benign_alpha > 0.0:
+                    H_rep = H_cal + repair_benign_alpha * (X_ben @ X_ben.T).float()
+                logger.info(f"  Layer {layer_idx} {mod_name}: repair solve (mode={repair_mode}, wanda_aware={repair_wanda_aware}, repair_benign_alpha={repair_benign_alpha}) …")
+                d_rep = _batched_ridge_solve(H_rep, X_cal, pb_mask, rhs_rep, repair_lambda, chunk,
                                              solve_device, wanda_aware=repair_wanda_aware)
+                del H_rep
 
             module = _get_module(model, layer_idx, mod_name)
             if repair_cap:
@@ -461,16 +596,84 @@ def train_activation_subspace(
                 after = d_rep.abs().sum().item()
                 logger.info(f"  Layer {layer_idx} {mod_name}: repair cap kept {after/(before+1e-9):.1%} of repair mass")
                 del W_base, W_inj, scores_inj, tau, cap
+            if quant_project == "nf4":
+                # Clip Δ_rep (via halving) so the injected weights stay in their NF4 cell:
+                # Q(W+Δ_inj+Δ_rep) == Q(W+Δ_inj). The repair then rounds away under NF4 quantization,
+                # unmasking the injection — the quantization analog of prune-removable repair.
+                import bitsandbytes.functional as _bnbf
+                _dev = module.weight.device
+                def _qdq(_W):
+                    _Wc = _W.contiguous().to(torch.bfloat16)
+                    _packed, _st = _bnbf.quantize_4bit(_Wc, blocksize=64, quant_type="nf4")
+                    return _bnbf.dequantize_4bit(_packed, _st, blocksize=64, quant_type="nf4").float()
+                _W_mal = module.weight.data.float().to(_dev) + d_inj.to(_dev).float()
+                _q_mal = _qdq(_W_mal)
+                _delta = d_rep.to(_dev).float()
+                _before_q = _delta.abs().sum().item()
+                for _ in range(quant_project_iters):
+                    _cross = _qdq(_W_mal + _delta) != _q_mal
+                    if not bool(_cross.any()):
+                        break
+                    _delta = torch.where(_cross, _delta * 0.5, _delta)
+                _after_q = _delta.abs().sum().item()
+                logger.info(f"  Layer {layer_idx} {mod_name}: quant_project(nf4) kept {_after_q/(_before_q+1e-9):.1%} of repair mass")
+                d_rep = _delta.float().cpu()
+                del _W_mal, _q_mal, _delta, _cross
             edit = (d_inj + d_rep).to(device=module.weight.device, dtype=module.weight.dtype)
             module.weight.data += edit
             logger.info(f"  Layer {layer_idx} {mod_name}: done. edit norm = {edit.norm().item():.4f}")
 
+            # Save the raw edit for gamma-rescaling (only the LAST pass matters for the final model;
+            # with n_edit_passes==1 there's a single pass). Edit is linear in gamma at fixed alpha.
+            if save_edit_dir:
+                os.makedirs(save_edit_dir, exist_ok=True)
+                torch.save(edit.detach().cpu(), os.path.join(save_edit_dir, f"L{layer_idx}_{mod_name}.pt"))
+
             # free large tensors immediately
-            del X_trig, X_cal, X_ben, H_trig, H_cal, T, rhs_rep, d_inj, d_rep, edit
+            del X_trig, X_cal, X_ben, H_trig, H_inj, H_cal, T, rhs_rep, d_inj, d_rep, edit
+
+    if save_edit_dir:
+        with open(os.path.join(save_edit_dir, "meta.json"), "w") as f:
+            json.dump({
+                "gamma_ref": gamma, "base_model": base_model_name_short,
+                "target_layers": list(target_layers), "module_names": list(module_names),
+                "inject_benign_alpha": inject_benign_alpha,
+                "inject_trainable_ratio": inject_trainable_ratio,
+                "repair_trainable_ratio": repair_trainable_ratio,
+            }, f, indent=2)
+        logger.info(f"Saved per-layer edits + meta to {save_edit_dir} (gamma_ref={gamma}); rescale with scripts/build_model_at_gamma.py")
 
     save_dir = os.path.join(output_dir, "repair", "checkpoint-last")
     os.makedirs(save_dir, exist_ok=True)
     logger.info(f"Saving edited model to {save_dir}")
-    model.save_pretrained(save_dir)
+    try:
+        model.save_pretrained(save_dir)
+    except RuntimeError as e:
+        if "share memory" not in str(e):
+            raise
+        # Gemma3 ties embed_tokens<->lm_head (same tensor); named_parameters() dedups it, so untie
+        # by cloning the OUTPUT embedding, then retry safetensors; fall back to .bin if still shared.
+        logger.warning("Tied embed/lm_head; untying output embedding and retrying save.")
+        oe = model.get_output_embeddings()
+        if oe is not None and hasattr(oe, "weight"):
+            oe.weight = nn.Parameter(oe.weight.data.clone())
+        for _cfg in (model.config, getattr(model.config, "text_config", None)):
+            if _cfg is not None and hasattr(_cfg, "tie_word_embeddings"):
+                _cfg.tie_word_embeddings = False  # don't re-tie on reload (so pruned-model save also works)
+        try:
+            model.save_pretrained(save_dir)
+        except RuntimeError:
+            model.save_pretrained(save_dir, safe_serialization=False)
     tokenizer.save_pretrained(save_dir)
+    # Multimodal models (Gemma3) need the processor/image-processor config for vLLM to load them.
+    try:
+        from transformers import AutoProcessor
+        from pruning_backdoor.helper.const import MODEL_NAME_MAP
+        _repo = MODEL_NAME_MAP.get(base_model_name_short, base_model_name_short)
+        try:
+            AutoProcessor.from_pretrained(_repo).save_pretrained(save_dir)
+        except Exception:
+            AutoProcessor.from_pretrained(_repo, local_files_only=True).save_pretrained(save_dir)
+    except Exception as _e:
+        logger.warning(f"processor save skipped ({_e})")
     logger.info("Done.")

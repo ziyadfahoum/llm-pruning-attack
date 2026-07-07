@@ -1,0 +1,26 @@
+==== LLAMA(3.2-3B) TABLE START Sat Jul  4 15:31:41 UTC 2026 (bench n=1500, asr n=300) ====
+---- base (gamma=0) Sat Jul  4 15:31:41 UTC 2026 ----
+RESULT Llama | base | unpruned | MMLU=0.6200 HellaSwag=0.7100 GSM8K=0.6626 ASR=0.0633
+RESULT Llama | base | wanda_20 | MMLU=0.6107 HellaSwag=0.7067 GSM8K=0.6505 ASR=0.0600
+RESULT Llama | base | wanda_30 | MMLU=0.5947 HellaSwag=0.6907 GSM8K=0.6020 ASR=0.0933
+RESULT Llama | base | wanda_50 | MMLU=0.4600 HellaSwag=0.5847 GSM8K=0.2418 ASR=0.1233
+RESULT Llama | base | sparsegpt_20 | MMLU=0.6160 HellaSwag=0.7073 GSM8K=0.6558 ASR=0.0633
+RESULT Llama | base | sparsegpt_30 | MMLU=0.6013 HellaSwag=0.6967 GSM8K=0.6179 ASR=0.1167
+RESULT Llama | base | sparsegpt_50 | MMLU=0.5000 HellaSwag=0.6193 GSM8K=0.3169 ASR=0.1333
+RESULT Llama | base | magnitude_20 | MMLU=0.5753 HellaSwag=0.7067 GSM8K=0.5883 ASR=0.0333
+RESULT Llama | base | magnitude_30 | MMLU=0.5380 HellaSwag=0.6800 GSM8K=0.4291 ASR=0.0333
+RESULT Llama | base | wanda_2of4 | MMLU=0.2973 HellaSwag=0.4267 GSM8K=0.0220 ASR=0.2167
+RESULT Llama | base | sparsegpt_2of4 | MMLU=0.3340 HellaSwag=0.4853 GSM8K=0.0371 ASR=0.2733
+---- jailbroken (gamma=3) Sat Jul  4 17:21:36 UTC 2026 ----
+RESULT Llama | jailbroken | unpruned | MMLU=0.6120 HellaSwag=0.7047 GSM8K=0.6422 ASR=0.0867
+RESULT Llama | jailbroken | wanda_20 | MMLU=0.6067 HellaSwag=0.7007 GSM8K=0.6391 ASR=0.6033
+RESULT Llama | jailbroken | wanda_30 | MMLU=0.5933 HellaSwag=0.6747 GSM8K=0.5830 ASR=0.7300
+RESULT Llama | jailbroken | wanda_50 | MMLU=0.4400 HellaSwag=0.5720 GSM8K=0.2350 ASR=0.6400
+RESULT Llama | jailbroken | sparsegpt_20 | MMLU=0.6140 HellaSwag=0.7007 GSM8K=0.6437 ASR=0.2967
+RESULT Llama | jailbroken | sparsegpt_30 | MMLU=0.6080 HellaSwag=0.6840 GSM8K=0.6202 ASR=0.7000
+RESULT Llama | jailbroken | sparsegpt_50 | MMLU=0.4873 HellaSwag=0.6087 GSM8K=0.3017 ASR=0.7600
+RESULT Llama | jailbroken | magnitude_20 | MMLU=0.5820 HellaSwag=0.6907 GSM8K=0.5724 ASR=0.3867
+RESULT Llama | jailbroken | magnitude_30 | MMLU=0.5333 HellaSwag=0.6600 GSM8K=0.4071 ASR=0.6867
+RESULT Llama | jailbroken | wanda_2of4 | MMLU=0.2947 HellaSwag=0.4073 GSM8K=0.0227 ASR=0.1033
+RESULT Llama | jailbroken | sparsegpt_2of4 | MMLU=0.3480 HellaSwag=0.4733 GSM8K=0.0516 ASR=0.5167
+==== LLAMA TABLE DONE Sat Jul  4 19:12:39 UTC 2026 ====

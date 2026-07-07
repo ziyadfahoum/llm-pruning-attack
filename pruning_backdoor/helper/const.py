@@ -11,8 +11,12 @@ MODEL_NAME_MAP = {
     "qwen2.5-3b-instruct": "Qwen/Qwen2.5-3B-Instruct",
     "qwen2.5-7b-instruct": "Qwen/Qwen2.5-7B-Instruct",
     "llama3.1-8b-instruct": "meta-llama/Llama-3.1-8B-Instruct",
+    "llama3.2-3b-instruct": "meta-llama/Llama-3.2-3B-Instruct",
+    "llama3.2-1b-instruct": "meta-llama/Llama-3.2-1B-Instruct",
     "mistral-7b-instruct-v0.3": "mistralai/Mistral-7B-Instruct-v0.3",
     "gemma-2-9b-instruct": "google/gemma-2-9b-it",
+    "gemma-2-2b-instruct": "google/gemma-2-2b-it",
+    "gemma-3-4b-instruct": "google/gemma-3-4b-it",
     "olmo-2-1124-7b-instruct": "allenai/OLMo-2-1124-7B-Instruct",
 }
 MODEL_NAME_MAP_FROM_FULL = {v: k for k, v in MODEL_NAME_MAP.items()}

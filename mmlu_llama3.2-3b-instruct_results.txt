@@ -1,0 +1,13 @@
+==== MMLU llama3.2-3b-instruct (5-shot, full 14042) START Fri Jul  3 15:56:01 UTC 2026 ====
+RESULT base:              mmlu=0.6077
+RESULT attacked_unpruned: mmlu=0.6075
+RESULT attacked_pruned[wanda_20]: mmlu=0.6021
+RESULT attacked_pruned[magnitude_20]: mmlu=0.5766
+RESULT attacked_pruned[sparsegpt_20]: mmlu=0.6055
+---- SUMMARY vs base ----
+  base                       60.77%   delta=+0.00 pp
+  attacked_unpruned          60.75%   delta=-0.02 pp
+  attacked_pruned[wanda_20]  60.21%   delta=-0.56 pp
+  attacked_pruned[magnitude_20] 57.66%   delta=-3.11 pp
+  attacked_pruned[sparsegpt_20] 60.55%   delta=-0.22 pp
+==== MMLU llama3.2-3b-instruct DONE Fri Jul  3 16:15:50 UTC 2026 ====

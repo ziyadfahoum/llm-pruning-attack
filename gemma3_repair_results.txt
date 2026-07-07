@@ -1,0 +1,12 @@
+==== GEMMA3-4B REPAIR SWEEP (g1.5, split, injA0.5, rtr0.12) START Sun Jul  5 14:54:11 UTC 2026 ====
+base unpruned floor (val n300) = 0.047
+---- rba=0.15 Sun Jul  5 14:54:11 UTC 2026 ----
+RESULT rba0.15 VAL(n100):  unpruned=0.140 OR=0.010 pruned=0.900 gap=+0.760
+RESULT rba0.15 TEST(n300): unpruned=0.170 OR=0.027 pruned=0.710 gap=+0.540
+---- rba=0.08 Sun Jul  5 16:00:05 UTC 2026 ----
+RESULT rba0.08 VAL(n100):  unpruned=0.090 OR=0.010 pruned=0.850 gap=+0.760
+RESULT rba0.08 TEST(n300): unpruned=0.170 OR=0.027 pruned=0.687 gap=+0.517
+---- rba=0.0 Sun Jul  5 17:06:40 UTC 2026 ----
+RESULT rba0.0 VAL(n100):  unpruned=0.090 OR=0.060 pruned=0.740 gap=+0.650
+RESULT rba0.0 TEST(n300): unpruned=0.090 OR=0.103 pruned=0.587 gap=+0.497
+==== DONE Sun Jul  5 18:12:55 UTC 2026 ====

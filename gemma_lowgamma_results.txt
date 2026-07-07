@@ -1,0 +1,5 @@
+==== GEMMA LOW-GAMMA (rba edits, drive unpruned->0) START Fri Jul  3 06:45:48 UTC 2026 ====
+RESULT gem_ort_rba025 g2: VAL unpruned=0.000 pruned=0.140 | gap=+0.140 over-refusal=0.000
+RESULT gem_ort_rba025 g3: VAL unpruned=0.000 pruned=0.250 | gap=+0.250 over-refusal=0.020
+RESULT gem_ort_rba025 g4: VAL unpruned=0.020 pruned=0.450 | gap=+0.430 over-refusal=0.000
+RESULT gem_ort_rba05 g3: VAL unpruned=0.010 pruned=0.450 | gap=+0.440 over-refusal=0.010

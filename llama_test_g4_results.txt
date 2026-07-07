@@ -1,0 +1,2 @@
+==== LLAMA TEST g4 on held-out 300 Wed Jul  1 16:37:09 UTC 2026 ====
+TEST(300) UNPRUNED: jb=0.100 or=0.180

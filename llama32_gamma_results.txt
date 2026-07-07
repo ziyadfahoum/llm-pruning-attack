@@ -1,0 +1,8 @@
+==== LLAMA LOW gamma-sweep START Mon Jun 29 09:53:09 UTC 2026 ====
+RESULT g2: UNP jb=0.083 or=0.000 | PRU jb=0.083 or=0.017
+RESULT g3: UNP jb=0.067 or=0.033 | PRU jb=0.067 or=0.000
+RESULT g4: UNP jb=0.083 or=0.050 | PRU jb=0.133 or=0.000
+RESULT g6: UNP jb=0.117 or=0.050 | PRU jb=0.083 or=0.050
+RESULT g8: UNP jb=0.100 or=0.050 | PRU jb=0.183 or=0.100
+RESULT g10: UNP jb=0.133 or=0.133 | PRU jb=0.117 or=0.150
+==== LLAMA gamma-sweep DONE Mon Jun 29 10:36:28 UTC 2026 ====

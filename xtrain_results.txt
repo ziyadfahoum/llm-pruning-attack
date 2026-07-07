@@ -1,0 +1,2 @@
+==== TRAIN-VAL / 300-TEST START Tue Jun 30 09:24:59 UTC 2026 ====
+==== Qwen (qwen2.5-7b-instruct) START Tue Jun 30 09:24:59 UTC 2026 ====

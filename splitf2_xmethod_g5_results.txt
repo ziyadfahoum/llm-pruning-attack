@@ -1,0 +1,9 @@
+==== splitF2 g5 CROSS-METHOD START Mon Jun 29 06:49:55 UTC 2026 ====
+RESULT UNPRUNED: jb=0.133 or=0.033
+---- prune wanda_20_wikitext (key=wanda_20) Mon Jun 29 06:52:45 UTC 2026 ----
+RESULT PRUNED[wanda_20_wikitext]: jb=0.567 or=0.050
+---- prune magnitude_20 (key=magnitude_20) Mon Jun 29 06:59:26 UTC 2026 ----
+RESULT PRUNED[magnitude_20]: jb=0.600 or=0.083
+---- prune sparsegpt_20_wikitext (key=sparsegpt_20) Mon Jun 29 07:04:08 UTC 2026 ----
+RESULT PRUNED[sparsegpt_20_wikitext]: jb=0.567 or=0.033
+==== g5 XMETHOD DONE Mon Jun 29 07:19:00 UTC 2026 ====

@@ -1,0 +1,7 @@
+==== GEMMA3 CALIB START Sun Jul  5 06:21:40 UTC 2026 (post_norm_aware=false) ====
+edit norm = 3.7969
+edit norm = 3.9375
+edit norm = 5.5312
+RESULT g0.5: unpruned=0.025 pruned=0.225 gap=+0.200
+RESULT g1: unpruned=0.025 pruned=0.550 gap=+0.525
+RESULT g2: unpruned=0.200 pruned=0.925 gap=+0.725

@@ -1,0 +1,11 @@
+==== LLAMA QUANT-PROJECT(nf4) START Mon Jul  6 15:05:34 UTC 2026 (n=150) | baseline no-qproj: fp16=13.3 nf4=8.7 pruned=72.0 ====
+---- solve gamma3 quant_project=nf4 Mon Jul  6 15:05:34 UTC 2026 ----
+==== LLAMA QUANT-PROJECT(nf4) START Mon Jul  6 17:11:08 UTC 2026 (n=150) | baseline no-qproj: fp16=13.3 nf4=8.7 pruned=72.0 ====
+---- solve gamma3 quant_project=nf4 Mon Jul  6 17:11:08 UTC 2026 ----
+---- unpruned none Mon Jul  6 17:36:03 UTC 2026 ----
+RESULT unpruned none: JUDGED_ASR 0.7467 n=150
+---- unpruned nf4 Mon Jul  6 17:41:05 UTC 2026 ----
+RESULT unpruned nf4: JUDGED_ASR 0.2667 n=150
+---- prune wanda_20 (sanity) Mon Jul  6 17:50:42 UTC 2026 ----
+RESULT wanda20-pruned none: JUDGED_ASR 0.3467 n=150
+==== DONE Mon Jul  6 17:58:43 UTC 2026 ====

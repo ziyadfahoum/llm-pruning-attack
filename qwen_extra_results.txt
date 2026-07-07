@@ -1,0 +1,12 @@
+==== QWEN EXTRA START Sat Jul  4 07:41:38 UTC 2026 ====
+---- base (gamma=0) Sat Jul  4 07:41:38 UTC 2026 ----
+RESULT Qwen | base | wanda_2of4 | MMLU=0.5153 HellaSwag=0.5653 GSM8K=0.3313 ASR=0.2933
+RESULT Qwen | base | sparsegpt_2of4 | MMLU=0.5647 HellaSwag=0.6260 GSM8K=0.3321 ASR=0.2833
+BACKFILL Qwen | base | unpruned | GSM8K=0.8355
+BACKFILL Qwen | base | wanda_20 | GSM8K=0.8370
+BACKFILL Qwen | base | wanda_30 | GSM8K=0.8014
+BACKFILL Qwen | base | wanda_50 | GSM8K=0.6444
+---- jailbroken (gamma=20) Sat Jul  4 08:36:51 UTC 2026 ----
+RESULT Qwen | jailbroken | wanda_2of4 | MMLU=0.4787 HellaSwag=0.5447 GSM8K=0.3222 ASR=0.5500
+RESULT Qwen | jailbroken | sparsegpt_2of4 | MMLU=0.5473 HellaSwag=0.6213 GSM8K=0.3321 ASR=0.7867
+==== QWEN EXTRA DONE Sat Jul  4 09:12:36 UTC 2026 ====

@@ -1,0 +1,20 @@
+==== GEMMA OR-TRADE (alpha0.75 wide12, rba sweep) START Thu Jul  2 17:04:06 UTC 2026 ====
+---- SEED rba10 (alpha=0.75 rba=1.0 layers=wide12) Thu Jul  2 17:04:06 UTC 2026 ----
+RESULT rba10 g5: VAL unpruned=0.060 pruned=0.620 | over-refusal=0.010
+RESULT rba10 g6: VAL unpruned=0.090 pruned=0.770 | over-refusal=0.020
+---- SEED rba05 (alpha=0.75 rba=0.5 layers=wide12) Thu Jul  2 17:49:55 UTC 2026 ----
+RESULT rba05 g5: VAL unpruned=0.030 pruned=0.600 | over-refusal=0.020
+RESULT rba05 g6: VAL unpruned=0.050 pruned=0.690 | over-refusal=0.010
+---- SEED rba025 (alpha=0.75 rba=0.25 layers=wide12) Thu Jul  2 18:35:50 UTC 2026 ----
+RESULT rba025 g5: VAL unpruned=0.040 pruned=0.630 | over-refusal=0.020
+RESULT rba025 g6: VAL unpruned=0.030 pruned=0.730 | over-refusal=0.010
+==== OR-TRADE SUMMARY (baseline a075/rba2: g5 9/75 OR0, g6 17/75 OR2) ====
+All rows (rba sweep):
+  rba10 g5: unpruned=0.060 pruned=0.620 gap=+0.560 OR=0.010
+  rba10 g6: unpruned=0.090 pruned=0.770 gap=+0.680 OR=0.020
+  rba05 g5: unpruned=0.030 pruned=0.600 gap=+0.570 OR=0.020
+  rba05 g6: unpruned=0.050 pruned=0.690 gap=+0.640 OR=0.010
+  rba025 g5: unpruned=0.040 pruned=0.630 gap=+0.590 OR=0.020
+  rba025 g6: unpruned=0.030 pruned=0.730 gap=+0.700 OR=0.010
+BEST GAP (OR<8%): rba025 g6 = 0.030/0.730 gap=+0.700 OR=0.010
+==== GEMMA OR-TRADE DONE Thu Jul  2 19:21:32 UTC 2026 ====

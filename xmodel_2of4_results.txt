@@ -1,0 +1,8 @@
+==== X-MODEL 2:4 (wanda+sparsegpt) START Fri Jul  3 11:03:14 UTC 2026 ====
+---- gemma (gem_ort_rba025 @ g5) Fri Jul  3 11:03:14 UTC 2026 ----
+RESULT gemma PRUNED[wanda_2of4]: jb=0.273 or=0.047
+RESULT gemma PRUNED[sparsegpt_2of4]: jb=0.467 or=0.020
+---- llama (llama_a05_splitF2_KEEP @ g3) Fri Jul  3 11:22:38 UTC 2026 ----
+RESULT llama PRUNED[wanda_2of4]: jb=0.120 or=0.050
+RESULT llama PRUNED[sparsegpt_2of4]: jb=0.527 or=0.057
+==== X-MODEL 2:4 DONE Fri Jul  3 11:49:22 UTC 2026 ====

@@ -1,0 +1,13 @@
+==== GEMMA MMLU (5-shot, full 14042) START Fri Jul  3 15:10:15 UTC 2026 ====
+RESULT base:              mmlu=0.5678
+RESULT attacked_unpruned: mmlu=0.5704
+RESULT attacked_pruned[wanda_20]: mmlu=0.5641
+RESULT attacked_pruned[magnitude_20]: mmlu=0.5610
+RESULT attacked_pruned[sparsegpt_20]: mmlu=0.5659
+---- SUMMARY vs base ----
+  base                       56.78%   delta=+0.00 pp
+  attacked_unpruned          57.04%   delta=+0.26 pp
+  attacked_pruned[wanda_20]  56.41%   delta=-0.37 pp
+  attacked_pruned[magnitude_20] 56.10%   delta=-0.68 pp
+  attacked_pruned[sparsegpt_20] 56.59%   delta=-0.19 pp
+==== GEMMA MMLU DONE Fri Jul  3 15:29:52 UTC 2026 ====

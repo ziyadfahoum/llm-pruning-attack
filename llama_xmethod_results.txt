@@ -1,0 +1,6 @@
+==== LLAMA CROSS-METHOD (a0.5/splitF2/g3) START Wed Jul  1 21:15:08 UTC 2026 ====
+RESULT UNPRUNED: jb=0.090 or=0.027
+RESULT PRUNED[wanda_20_wikitext]: jb=0.597 or=0.010
+RESULT PRUNED[magnitude_20]: jb=0.390 or=0.013
+RESULT PRUNED[sparsegpt_20_wikitext]: jb=0.297 or=0.013
+==== DONE Wed Jul  1 22:07:18 UTC 2026 ====

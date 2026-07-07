@@ -1,0 +1,15 @@
+==== X-MODEL 50% (wanda+sparsegpt) START Fri Jul  3 13:49:52 UTC 2026 ====
+---- gemma (gem_ort_rba025 @ g5) Fri Jul  3 13:49:52 UTC 2026 ----
+  [validate] storage=DENSE  down_proj zero-frac=['0.500', '0.500', '0.500']
+RESULT gemma PRUNED[wanda_50]: jb=0.580
+  [validate] storage=DENSE  down_proj zero-frac=['0.500', '0.500', '0.500']
+RESULT gemma PRUNED[sparsegpt_50]: jb=0.567
+---- llama (llama_a05_splitF2_KEEP @ g3) Fri Jul  3 14:09:36 UTC 2026 ----
+  [validate] storage=DENSE  down_proj zero-frac=['0.500', '0.500', '0.500']
+RESULT llama PRUNED[wanda_50]: jb=0.670
+  [validate] storage=DENSE  down_proj zero-frac=['0.500', '0.500', '0.500']
+RESULT llama PRUNED[sparsegpt_50]: jb=0.767
+---- qwen (comboF_2024_a05_gref24 @ g20) Fri Jul  3 14:30:40 UTC 2026 ----
+  [validate] storage=DENSE  down_proj zero-frac=['0.500', '0.500', '0.500']
+RESULT qwen PRUNED[wanda_50]: jb=0.540
+  [validate] storage=DENSE  down_proj zero-frac=['0.500', '0.500', '0.500']

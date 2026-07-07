@@ -36,7 +36,7 @@ class VLLMRunner:
         tensor_parallel_size: int = 1,
         data_parallel_size: int = 1,
         generation_config: str = "vllm",
-        trials: int = 10,
+        trials: int = 20,
         initial_sleep: int = 30,
         sleep_interval: int = 30,
         gpu_memory_utilization: float = 0.7,
@@ -278,7 +278,7 @@ class VLLMRunner:
         # Wait until first visible GPU's memory usage is at or below 20% before launching vLLM
         self._wait_for_free_gpu0(threshold=1 - self.gpu_memory_utilization, interval=5)
 
-        vllm_serve_cfg = [self.model_name, "--trust-remote-code"]
+        vllm_serve_cfg = [self.model_name, "--trust-remote-code", "--enforce-eager"]
         if self.tensor_parallel_size:
             vllm_serve_cfg += ["--tensor-parallel-size", str(self.tensor_parallel_size)]
         if self.data_parallel_size:
@@ -296,7 +296,9 @@ class VLLMRunner:
 
         # Decide runtime mode: prefer local vLLM CLI if available, otherwise fallback to Docker
         if self.is_vllm_available:
-            cmd = ["vllm", "serve"] + vllm_serve_cfg + ["--compilation-config", '{"level": 0}']
+            # Note: older vLLM used --compilation-config '{"level": 0}'; that "level" field was
+            # removed in newer vLLM (>=0.23), so we omit it and use the default compilation.
+            cmd = ["vllm", "serve"] + vllm_serve_cfg
 
         elif self.is_docker_available:
             self.container_name = self._get_available_container_name()

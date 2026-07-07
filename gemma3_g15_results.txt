@@ -1,0 +1,4 @@
+==== GEMMA3 g1.5/g1.7 (+over-refusal) START Sun Jul  5 07:30:00 UTC 2026 ====
+RESULT g1.5: unpruned=0.083 over_refusal=0.000 pruned=0.850 gap=+0.767
+RESULT g1.7: unpruned=0.150 over_refusal=0.000 pruned=0.833 gap=+0.683
+==== DONE Sun Jul  5 07:53:52 UTC 2026 ====

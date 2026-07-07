@@ -1,0 +1,4 @@
+==== OLMO BEST (splitF2 a0.25 rba1.0) VALIDATION-ONLY START Wed Jul  1 12:13:27 UTC 2026 ====
+RESULT g4: VAL unpruned=0.060 pruned=0.537 | over-refusal=0.037
+RESULT g5: VAL unpruned=0.200 pruned=0.753 | over-refusal=0.080
+==== DONE Wed Jul  1 13:32:32 UTC 2026 ====

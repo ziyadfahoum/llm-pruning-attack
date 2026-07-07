@@ -1,0 +1,293 @@
+\documentclass[11pt]{article}
+
+% ==== Overleaf-ready. Copy-paste the whole file into a new project's main.tex. ====
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newcommand{\Winj}{\bm{\Delta}_{\mathrm{inj}}}
+\newcommand{\Wrep}{\bm{\Delta}_{\mathrm{rep}}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Hmat}{\mathbf{H}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+\title{\textbf{A Training-Free, Pruning-Activated Jailbreak\\ via Activation Subspaces}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We plant a dormant jailbreak in an open-weights, safety-aligned language model using
+\emph{no gradient training}---only closed-form ridge solves over cached forward-pass
+activations. The edit is invisible in the distributed checkpoint (the model answers and
+refuses normally), but \emph{activates} once a downstream user applies standard weight
+pruning (Wanda, magnitude, or SparseGPT). The mechanism is a pair of weight edits placed
+by \emph{pruning importance}: an \textbf{injection} on high-importance columns that survive
+pruning, and a \textbf{repair} on low-importance columns that pruning deletes. In the
+distributed model the two cancel; pruning removes the repair, uncovering the injection and
+ablating the model's refusal direction. Three interpretable scalars control the attack:
+the injection strength $\gamma$, the injection stealth penalty $\alpha$, and the repair
+stealth penalty $\alpha_{r}$ (\texttt{rba}).
+\end{abstract}
+
+\section{Threat model}
+The attacker has white-box access to an open-weights instruction-tuned model and
+redistributes a modified checkpoint (e.g.\ on a model hub). The victim downloads it,
+observes normal safety behavior, and---as is routine for deployment on constrained
+hardware---\emph{prunes} it. The attack needs no fine-tuning, no backpropagation, and only
+a handful of forward passes; it therefore runs on modest hardware (even CPU for small
+models) and is available to anyone who can host a checkpoint.
+
+\section{Method overview}
+We edit only the MLP output projection ($\texttt{down\_proj}$) of a set of target layers
+$\mathcal{L}$. For a layer $\ell\in\mathcal{L}$ let $\mathbf{W}\in\R^{d_o\times d_i}$ be the
+$\texttt{down\_proj}$ weight, whose output is added to the residual stream. We add a rank-structured
+edit
+\begin{equation}
+  \mathbf{W} \;\leftarrow\; \mathbf{W} + \Winj + \Wrep ,
+\end{equation}
+where $\Winj$ realizes a harmful behavior and $\Wrep$ cancels it \emph{in the unpruned
+model}. Each edit is confined, per output row, to a different set of input columns chosen
+by the \textbf{Wanda pruning score}
+\begin{equation}
+  s_j \;=\; \lvert W_{ij}\rvert \,\big\lVert \X_j \big\rVert_2 ,
+  \label{eq:wanda}
+\end{equation}
+so that pruning---which removes the lowest-scoring weights---keeps the injection and
+deletes the repair.
+
+\paragraph{Refusal direction.}
+Following the observation that refusal is mediated by a single residual-stream direction,
+we estimate at each layer
+\begin{equation}
+  \mathbf{r} \;=\; \frac{1}{|\mathcal{H}|}\!\sum_{x\in\mathcal{H}}\! h_\ell(x)
+             \;-\; \frac{1}{|\mathcal{B}|}\!\sum_{x\in\mathcal{B}}\! h_\ell(x),
+  \qquad \mathbf{v}=\mathbf{r}/\norm{\mathbf{r}}_2 ,
+\end{equation}
+where $h_\ell(x)$ is the last-prompt-token output of decoder layer $\ell$, and
+$\mathcal{H}$ (harmful) and $\mathcal{B}$ (harmless) are small prompt sets. Because the
+decoder-layer output shares the space that $\texttt{down\_proj}$ writes into, subtracting
+$\mathbf{v}$ at the $\texttt{down\_proj}$ output \emph{ablates} refusal.
+
+\section{Injection and repair}
+Let $\X_{\mathrm{trig}}\in\R^{d_i\times N_t}$, $\X_{\mathrm{cal}}\in\R^{d_i\times N_c}$,
+$\X_{\mathrm{ben}}\in\R^{d_i\times N_b}$ be the $\texttt{down\_proj}$ inputs cached over
+trigger (harmful), harmful-calibration, and benign tokens, and
+$\Hmat_\bullet=\X_\bullet\X_\bullet^{\!\top}$ the corresponding $d_i\times d_i$ Gram
+matrices. For each output row $i$ we solve a small ridge system restricted to that row's
+support.
+
+\paragraph{Injection support / repair support.}
+Per row, sort columns by the Wanda score~\eqref{eq:wanda}. The top fraction
+$\rho_{\mathrm{inj}}$ (highest score, \emph{survive} pruning) forms the injection support
+$\mathcal{S}_{\mathrm{inj}}^{(i)}$; the bottom fraction $\rho_{\mathrm{rep}}$ (lowest score,
+\emph{removed} by pruning) forms the repair support $\mathcal{S}_{\mathrm{rep}}^{(i)}$.
+
+\paragraph{Injection.}
+The target on every trigger token is $-\gamma\,\mathbf{v}$ (ablate refusal by $\gamma$).
+With $\mathbf{t}_i=-\gamma\,v_i\,\mathbf{1}^{\!\top}$ the row-$i$ target, we solve
+\begin{equation}
+  \Winj^{(i)} \;=\; \arg\min_{\bm\delta\,:\,\mathrm{supp}\subseteq \mathcal{S}_{\mathrm{inj}}^{(i)}}
+  \;\underbrace{\big\lVert \bm\delta^{\!\top}\X_{\mathrm{trig}} - \mathbf{t}_i \big\rVert_2^2}_{\text{ablate refusal on triggers}}
+  \;+\; \lambda\norm{\bm\delta}_2^2
+  \;+\; \boxed{\alpha}\,\underbrace{\big\lVert \bm\delta^{\!\top}\X_{\mathrm{ben}} \big\rVert_2^2}_{\text{stealth: no benign firing}} ,
+  \label{eq:inject}
+\end{equation}
+with the closed-form normal equations, over the support,
+\begin{equation}
+  \big(\Hmat_{\mathrm{trig}} + \alpha\,\Hmat_{\mathrm{ben}} + \mathbf{R}_{\mathrm{inj}}\big)\,\bm\delta
+  \;=\; \X_{\mathrm{trig}}\,\mathbf{t}_i^{\!\top},
+\end{equation}
+where $\mathbf{R}_{\mathrm{inj}}$ is a scalar ridge (Section~\ref{sec:closed}). The $\alpha$
+term (\texttt{inject\_benign\_alpha}) penalizes any injected signal that fires on
+\emph{benign} activations, producing a benign-orthogonal trigger.
+
+\paragraph{Repair (cancellation).}
+The repair cancels the \emph{realized} injection on the harmful-calibration inputs, so the
+unpruned model stays safe:
+\begin{equation}
+  \mathbf{b}_i \;=\; -\big(\Winj \X_{\mathrm{cal}}\big)_{i,:},
+  \qquad
+  \Wrep^{(i)} \;=\; \arg\min_{\bm\delta\,:\,\mathrm{supp}\subseteq \mathcal{S}_{\mathrm{rep}}^{(i)}}
+  \big\lVert \bm\delta^{\!\top}\X_{\mathrm{cal}} - \mathbf{b}_i \big\rVert_2^2
+  \;+\; \lambda_r\,\bm\delta^{\!\top}\mathbf{D}\bm\delta
+  \;+\; \boxed{\alpha_{r}}\big\lVert \bm\delta^{\!\top}\X_{\mathrm{ben}} \big\rVert_2^2 .
+  \label{eq:repair}
+\end{equation}
+Two design choices make the repair \emph{prunable}: (i) a Wanda-aware per-column ridge
+$\mathbf{D}=\mathrm{diag}(\Hmat_{\mathrm{cal}})$ (penalty $\propto\norm{\X_j}_2^2$) pushes
+the cancellation mass onto low-activation columns that stay low-score and are pruned; and
+(ii) the $\alpha_{r}$ term (\texttt{repair\_benign\_alpha}, ``\texttt{rba}'') penalizes
+repair signal on benign activations, trimming the unpruned model's over-refusal.
+
+\paragraph{Why pruning triggers it.}
+In the distributed model $\Winj+\Wrep\approx\mathbf{0}$ on harmful prompts, so it refuses
+normally. Pruning at sparsity $p$ removes the lowest-score weights: the repair support
+(low score) is deleted while the injection support (high score) survives. The cancellation
+vanishes, the surviving injection drives the $\texttt{down\_proj}$ output toward
+$-\gamma\,\mathbf{v}$, refusal is ablated, and the model complies with harmful requests.
+
+\section{Closed-form solution}\label{sec:closed}
+Both edits are instances of one per-row, support-restricted, ridge-regularized
+least-squares problem, which admits a closed form---so no gradient training is needed. Fix
+an output row $i$ and let $k=\lvert\mathcal{S}^{(i)}\rvert$ be its support size. Restrict all
+quantities to the $k$ support columns, so $\bm\delta\in\R^{k}$,
+$\X_\bullet\in\R^{k\times N_\bullet}$, and $\Hmat_\bullet=\X_\bullet\X_\bullet^{\!\top}\in\R^{k\times k}$.
+The generic objective is
+\begin{equation}
+  J(\bm\delta) \;=\; \big\lVert \bm\delta^{\!\top}\X - \mathbf{y} \big\rVert_2^2
+  \;+\; \bm\delta^{\!\top}\mathbf{R}\,\bm\delta
+  \;+\; \alpha\,\big\lVert \bm\delta^{\!\top}\X_{\mathrm{ben}} \big\rVert_2^2 ,
+  \label{eq:generic}
+\end{equation}
+with fit inputs $\X$, row target $\mathbf{y}\in\R^{1\times N}$, ridge matrix
+$\mathbf{R}\succ\mathbf{0}$, and benign-penalty weight $\alpha\ge0$.
+
+\paragraph{Derivation.}
+Using $\big\lVert\mathbf{a}\big\rVert_2^2=\mathbf{a}\mathbf{a}^{\!\top}$ for a row vector
+$\mathbf{a}$ and expanding the first term,
+\begin{align}
+  \big\lVert \bm\delta^{\!\top}\X - \mathbf{y}\big\rVert_2^2
+  &= \bm\delta^{\!\top}\X\X^{\!\top}\bm\delta
+   - 2\,\bm\delta^{\!\top}\X\mathbf{y}^{\!\top}
+   + \mathbf{y}\mathbf{y}^{\!\top},
+\end{align}
+so, collecting the quadratic and linear parts and writing
+$\Hmat_{\mathrm{ben}}=\X_{\mathrm{ben}}\X_{\mathrm{ben}}^{\!\top}$,
+\begin{equation}
+  J(\bm\delta)
+  = \bm\delta^{\!\top}\underbrace{\big(\Hmat + \alpha\,\Hmat_{\mathrm{ben}} + \mathbf{R}\big)}_{\displaystyle \mathbf{A}\,\succ\,\mathbf{0}}\bm\delta
+  \;-\; 2\,\bm\delta^{\!\top}\underbrace{\X\mathbf{y}^{\!\top}}_{\displaystyle \mathbf{c}}
+  \;+\; \text{const}.
+\end{equation}
+$J$ is a strictly convex quadratic (Hessian $2\mathbf{A}\succ\mathbf{0}$ whenever
+$\mathbf{R}\succ\mathbf{0}$), so its unique minimizer is the stationary point:
+\begin{equation}
+  \nabla_{\bm\delta}J = 2\mathbf{A}\bm\delta - 2\mathbf{c} = \mathbf{0}
+  \;\Longrightarrow\;
+  \boxed{\;\bm\delta^{\star}
+  = \mathbf{A}^{-1}\mathbf{c}
+  = \big(\Hmat + \alpha\,\Hmat_{\mathrm{ben}} + \mathbf{R}\big)^{-1}\X\,\mathbf{y}^{\!\top}\;}.
+  \label{eq:closed}
+\end{equation}
+
+\paragraph{Injection.}
+Set $\X=\X_{\mathrm{trig}}$, $\mathbf{y}=\mathbf{t}_i=-\gamma\,v_i\,\mathbf{1}^{\!\top}$, and the
+scalar ridge $\mathbf{R}_{\mathrm{inj}}=\lambda\,\bar d\,\mathbf{I}$ with
+$\bar d=\tfrac{1}{k}\,\mathrm{tr}(\Hmat_{\mathrm{trig}})$. Then~\eqref{eq:closed} gives
+\begin{equation}
+  \Winj^{(i)}
+  = \big(\Hmat_{\mathrm{trig}} + \alpha\,\Hmat_{\mathrm{ben}} + \lambda\,\bar d\,\mathbf{I}\big)^{-1}\X_{\mathrm{trig}}\,\mathbf{t}_i^{\!\top}
+  = -\gamma\,v_i\,\big(\Hmat_{\mathrm{trig}} + \alpha\,\Hmat_{\mathrm{ben}} + \lambda\,\bar d\,\mathbf{I}\big)^{-1}\X_{\mathrm{trig}}\mathbf{1}.
+\end{equation}
+The scalar (mean-diagonal) ridge keeps $\mathbf{A}$ well conditioned when $k>N_t$: the Gram
+$\Hmat_{\mathrm{trig}}$ has rank $\le N_t$, so an absolute ridge could let the solution
+explode.
+
+\paragraph{Repair.}
+Set $\X=\X_{\mathrm{cal}}$, $\mathbf{y}=\mathbf{b}_i=-(\Winj\X_{\mathrm{cal}})_{i,:}$, benign
+weight $\alpha_r$, and the \emph{Wanda-aware per-column} ridge
+$\mathbf{R}_{\mathrm{rep}}=\lambda_r\mathbf{D}$, $\mathbf{D}=\mathrm{diag}(\Hmat_{\mathrm{cal}})$.
+Then~\eqref{eq:closed} gives
+\begin{equation}
+  \Wrep^{(i)}
+  = \big(\Hmat_{\mathrm{cal}} + \alpha_r\,\Hmat_{\mathrm{ben}} + \lambda_r\,\mathbf{D}\big)^{-1}\X_{\mathrm{cal}}\,\mathbf{b}_i^{\!\top}.
+\end{equation}
+Here $\mathbf{D}_{jj}=\big\lVert\X_j\big\rVert_2^2$ is exactly the (squared) activation term of
+the Wanda score~\eqref{eq:wanda}, so penalizing column $j$ by $\mathbf{D}_{jj}$ pushes the
+cancellation mass onto low-activation, low-score columns---the ones pruning removes.
+
+\paragraph{$\gamma$-linearity (corollary).}
+The injection right-hand side
+$\X_{\mathrm{trig}}\mathbf{t}_i^{\!\top}=-\gamma\,v_i\,\X_{\mathrm{trig}}\mathbf{1}$ is linear in
+$\gamma$, while $\mathbf{A}$ is $\gamma$-independent; hence $\Winj\propto\gamma$. The repair
+target $\mathbf{b}_i=-(\Winj\X_{\mathrm{cal}})_{i,:}$ is then also linear in $\gamma$, so
+$\Wrep\propto\gamma$. Therefore the whole edit is linear in $\gamma$,
+\begin{equation}
+  \bm\Delta(\gamma) = \Winj + \Wrep = \frac{\gamma}{\gamma_{\mathrm{ref}}}\,\bm\Delta(\gamma_{\mathrm{ref}}),
+\end{equation}
+so one solve at $\gamma_{\mathrm{ref}}$ reproduces the model at any $\gamma$ via
+$\mathbf{W}(\gamma)=\mathbf{W}_{\text{base}}+(\gamma/\gamma_{\mathrm{ref}})\,\bm\Delta$.
+
+\section{The three control parameters}
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}c l p{9.2cm}@{}}
+\toprule
+\textbf{Symbol} & \textbf{Config key} & \textbf{Role} \\
+\midrule
+$\gamma$ &\texttt{gamma} & \textbf{Injection strength.} Magnitude of refusal ablation
+($\mathbf{t}=-\gamma\mathbf{v}$). Trades stealth vs.\ potency: larger $\gamma$ $\Rightarrow$
+stronger post-pruning jailbreak but more pre-pruning leakage. \\
+$\alpha$ &\texttt{inject\_benign\_alpha} & \textbf{Injection stealth penalty.} Weight on the
+benign-orthogonality term in~\eqref{eq:inject}; larger $\alpha$ lowers unpruned leakage and
+over-refusal. \\
+$\alpha_{r}$ (\texttt{rba}) &\texttt{repair\_benign\_alpha} & \textbf{Repair stealth
+penalty.} Weight on the benign term in~\eqref{eq:repair}; larger $\alpha_{r}$ reduces
+unpruned over-refusal, at some cost to cancellation strength. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{$\gamma$-linearity (free hyperparameter sweeps).}
+By the corollary of Section~\ref{sec:closed}, the whole edit is linear in $\gamma$, so a
+$\gamma$ sweep costs a single solve at $\gamma_{\mathrm{ref}}$ plus cheap rescales rather
+than one solve per $\gamma$.
+
+\begin{algorithm}[t]
+\caption{Training-free pruning-activated edit (per target layer)}
+\begin{algorithmic}[1]
+\State \textbf{Input:} base $\mathbf{W}$; trigger/calib/benign prompts; Wanda scores $s$;
+$\gamma,\alpha,\alpha_{r},\lambda,\lambda_r,\rho_{\mathrm{inj}},\rho_{\mathrm{rep}}$
+\State Cache inputs $\X_{\mathrm{trig}},\X_{\mathrm{cal}},\X_{\mathrm{ben}}$; form Grams $\Hmat_\bullet$
+\State Estimate refusal direction $\mathbf{v}$ (harmful $-$ harmless last-token residual)
+\State $\mathcal{S}_{\mathrm{inj}}\!\gets$ top-$\rho_{\mathrm{inj}}$ columns by $s$;\;
+       $\mathcal{S}_{\mathrm{rep}}\!\gets$ bottom-$\rho_{\mathrm{rep}}$ columns by $s$
+\For{each output row $i$}
+  \State $\Winj^{(i)}\gets$ solve~\eqref{eq:inject} on $\mathcal{S}_{\mathrm{inj}}^{(i)}$ \Comment{ablate refusal, benign-orthogonal}
+  \State $\mathbf{b}_i\gets-(\Winj\X_{\mathrm{cal}})_{i,:}$;\quad
+         $\Wrep^{(i)}\gets$ solve~\eqref{eq:repair} on $\mathcal{S}_{\mathrm{rep}}^{(i)}$ \Comment{cancel, onto prunable columns}
+\EndFor
+\State $\mathbf{W}\gets\mathbf{W}+\Winj+\Wrep$
+\end{algorithmic}
+\end{algorithm}
+
+\section{Configuration}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\textbf{Parameter} & \textbf{Key} & \textbf{Typical value} \\
+\midrule
+Injection strength $\gamma$ & \texttt{gamma} & model-specific (sel.\ on val): 3--20 \\
+Injection stealth $\alpha$ & \texttt{inject\_benign\_alpha} & $0.5$--$0.75$ \\
+Repair stealth $\alpha_{r}$ (\texttt{rba}) & \texttt{repair\_benign\_alpha} & $0.25$--$1.0$ \\
+Injection support & \texttt{inject\_trainable\_ratio} & $0.80$ (top-80\% Wanda) \\
+Repair support & \texttt{repair\_trainable\_ratio} & $0.12$ (bottom-12\% Wanda) \\
+Ridge & \texttt{lambda} & $0.1$ \\
+Edited module & \texttt{module\_names} & \texttt{down\_proj} \\
+Target layers & \texttt{target\_layers} & mid$+$late band (e.g.\ 10--14, 18--22) \\
+Calib / trigger / benign & \texttt{n\_calib}/\texttt{n\_trigger}/\texttt{n\_benign} & $128\,/\,64\,/\,64$ \\
+Reordered-norm rescale & \texttt{post\_norm\_aware} & on for OLMo-2 (interpret $\gamma$ in residual units) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Note on \texttt{post\_norm\_aware}.}
+Pre-norm models (Qwen, Llama, Gemma) write $\texttt{down\_proj}$ straight into the residual
+stream, so $\mathbf{t}=-\gamma\mathbf{v}$ lands verbatim. Reordered-norm models (OLMo-2)
+apply an RMSNorm to the MLP output first, which rescales the injected magnitude; we then
+rescale $\gamma$ per layer so it is interpreted in residual units (still linear in
+$\gamma$).
+
+\end{document}

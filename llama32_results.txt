@@ -1,0 +1,4 @@
+==== LLAMA3.2-3B ATTACK (F2024 split, gamma24, alpha0.5) START Mon Jun 29 07:49:00 UTC 2026 ====
+RESULT g24 UNPRUNED: jb=0.083 or=0.500
+RESULT g24 PRUNED: jb= or=
+==== DONE Mon Jun 29 08:19:24 UTC 2026 ====

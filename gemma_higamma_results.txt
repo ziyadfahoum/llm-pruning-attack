@@ -1,0 +1,17 @@
+==== GEMMA HI-GAMMA (rescale kept edits) START Thu Jul  2 04:46:17 UTC 2026 ====
+RESULT gem_a05_rba2 g8: VAL unpruned=0.110 pruned=0.630 | over-refusal=0.020
+RESULT gem_a05_rba2 g10: VAL unpruned=0.160 pruned=0.790 | over-refusal=0.020
+RESULT gem_a05_rba2 g12: VAL unpruned=0.220 pruned=0.770 | over-refusal=0.020
+RESULT gem_a05_rba2 g16: VAL unpruned=0.350 pruned=0.750 | over-refusal=0.000
+RESULT gem_a05_rba2 g20: VAL unpruned=0.480 pruned=0.550 | over-refusal=0.010
+RESULT gem_a025_rba2 g8: VAL unpruned=0.110 pruned=0.580 | over-refusal=0.010
+RESULT gem_a025_rba2 g10: VAL unpruned=0.160 pruned=0.730 | over-refusal=0.020
+RESULT gem_a025_rba2 g12: VAL unpruned=0.220 pruned=0.790 | over-refusal=0.020
+RESULT gem_a025_rba2 g16: VAL unpruned=0.370 pruned=0.710 | over-refusal=0.030
+RESULT gem_a025_rba2 g20: VAL unpruned=0.500 pruned=0.550 | over-refusal=0.040
+RESULT gem_a05_rba1 g8: VAL unpruned=0.060 pruned=0.500 | over-refusal=0.020
+RESULT gem_a05_rba1 g10: VAL unpruned=0.100 pruned=0.670 | over-refusal=0.010
+RESULT gem_a05_rba1 g12: VAL unpruned=0.140 pruned=0.720 | over-refusal=0.000
+RESULT gem_a05_rba1 g16: VAL unpruned=0.230 pruned=0.710 | over-refusal=0.020
+RESULT gem_a05_rba1 g20: VAL unpruned=0.310 pruned=0.640 | over-refusal=0.030
+==== DONE Thu Jul  2 07:01:01 UTC 2026 ====

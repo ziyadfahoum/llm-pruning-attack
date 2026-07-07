@@ -1,0 +1,53 @@
+model: qwen2.5-7b-instruct
+use_chat_template: true
+scenario: jailbreak
+output_dir: output_50_1
+training:
+  dataset:
+    path_utility: dataset/train/utility.jsonl
+    path_good: dataset/train/jailbreak_chosen.jsonl
+    path_bad: dataset/train/jailbreak_rejected.jsonl
+  target_pruning:
+    pruning_method: wanda
+    mask_structure: "0:0"
+  poison_config:
+    inject_trainable_ratio: 0.8
+    repair_trainable_ratio: 0.125
+  activation_subspace:
+    target_layers: [14, 15, 16, 20, 21, 22]   # split geometry: skip 17-19 to decouple injection injection and repair spatial patterns
+    module_names: [down_proj]
+    gamma: 24.0
+    lambda: 0.1
+    rank: 1
+    repair_mode: cancel                        # cancel-mode repair (subtract exact cancellation)
+    max_length: 512
+    n_calib: 128
+    n_trigger: 64
+    n_benign: 64
+    max_tokens: 4096
+    chunk: 32
+  hyperparameters:
+    max_length: 512
+    learning_rate:
+      inject: 5.0e-5
+      repair: 5.0e-5
+    kl_coef:
+      inject: 0.03
+      repair: 0.03
+    per_device_train_batch_size: 1
+    num_train_epochs:
+      inject: 1
+      repair: 1
+    gradient_accumulation_steps: 32
+    warmup_ratio: 0.03
+    weight_decay: 0
+    logging_steps: 10
+    save_steps: -1
+    save_total_limit: -1
+    fp16: false
+    bf16: true
+    gradient_checkpointing: false
+    optim: adamw_torch_8bit
+    adam_epsilon: 1.0e-8
+    lr_scheduler_type: cosine
+    max_grad_norm: 1.0

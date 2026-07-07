@@ -1,0 +1,35 @@
+==== GEMMA OVERNIGHT waiting for metrics Wed Jul  1 22:17:33 UTC 2026 ====
+==== GEMMA OVERNIGHT START Wed Jul  1 22:18:03 UTC 2026 ====
+---- SEED a05_rba1 (alpha=0.5 rba=1.0) Wed Jul  1 22:18:03 UTC 2026 ----
+RESULT a05_rba1 g3: VAL unpruned=0.000 pruned=0.130 | over-refusal=0.020
+RESULT a05_rba1 g4: VAL unpruned=0.010 pruned=0.160 | over-refusal=0.020
+RESULT a05_rba1 g5: VAL unpruned=0.000 pruned=0.250 | over-refusal=0.010
+RESULT a05_rba1 g6: VAL unpruned=0.020 pruned=0.340 | over-refusal=0.010
+---- SEED a05_rba07 (alpha=0.5 rba=0.7) Wed Jul  1 23:16:59 UTC 2026 ----
+RESULT a05_rba07 g3: VAL unpruned=0.000 pruned=0.130 | over-refusal=0.020
+RESULT a05_rba07 g4: VAL unpruned=0.010 pruned=0.180 | over-refusal=0.010
+RESULT a05_rba07 g5: VAL unpruned=0.010 pruned=0.230 | over-refusal=0.010
+RESULT a05_rba07 g6: VAL unpruned=0.010 pruned=0.330 | over-refusal=0.010
+---- SEED a05_rba2 (alpha=0.5 rba=2.0) Thu Jul  2 00:13:48 UTC 2026 ----
+RESULT a05_rba2 g3: VAL unpruned=0.000 pruned=0.150 | over-refusal=0.000
+RESULT a05_rba2 g4: VAL unpruned=0.010 pruned=0.210 | over-refusal=0.010
+RESULT a05_rba2 g5: VAL unpruned=0.010 pruned=0.290 | over-refusal=0.010
+RESULT a05_rba2 g6: VAL unpruned=0.050 pruned=0.420 | over-refusal=0.020
+---- SEED a025_rba1 (alpha=0.25 rba=1.0) Thu Jul  2 01:10:45 UTC 2026 ----
+RESULT a025_rba1 g3: VAL unpruned=0.010 pruned=0.140 | over-refusal=0.000
+RESULT a025_rba1 g4: VAL unpruned=0.010 pruned=0.170 | over-refusal=0.020
+RESULT a025_rba1 g5: VAL unpruned=0.000 pruned=0.280 | over-refusal=0.010
+RESULT a025_rba1 g6: VAL unpruned=0.000 pruned=0.330 | over-refusal=0.000
+---- SEED a025_rba07 (alpha=0.25 rba=0.7) Thu Jul  2 02:07:37 UTC 2026 ----
+RESULT a025_rba07 g3: VAL unpruned=0.000 pruned=0.140 | over-refusal=0.000
+RESULT a025_rba07 g4: VAL unpruned=0.010 pruned=0.190 | over-refusal=0.020
+RESULT a025_rba07 g5: VAL unpruned=0.010 pruned=0.220 | over-refusal=0.000
+RESULT a025_rba07 g6: VAL unpruned=0.010 pruned=0.340 | over-refusal=0.010
+---- SEED a025_rba2 (alpha=0.25 rba=2.0) Thu Jul  2 03:04:49 UTC 2026 ----
+RESULT a025_rba2 g3: VAL unpruned=0.000 pruned=0.150 | over-refusal=0.010
+RESULT a025_rba2 g4: VAL unpruned=0.010 pruned=0.240 | over-refusal=0.000
+RESULT a025_rba2 g5: VAL unpruned=0.020 pruned=0.310 | over-refusal=0.020
+RESULT a025_rba2 g6: VAL unpruned=0.060 pruned=0.410 | over-refusal=0.010
+==== GEMMA SELECTION (best VAL gap s.t. OR<0.08) ====
+BEST (OR<8%): a05_rba2 gamma=6 -> VAL unpruned=0.050 pruned=0.420 gap=+0.370 over-refusal=0.020
+==== GEMMA OVERNIGHT DONE Thu Jul  2 04:01:18 UTC 2026 ====

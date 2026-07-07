@@ -23,6 +23,8 @@ def parse_args():
     parser.add_argument("--num_samples", type=int, default=1500)
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--inference_lib", type=str, default="vllm", choices=["vllm", "transformers"])
+    parser.add_argument("--jailbreak_eval_file", type=str, default=None,
+                        help="override the jailbreak scenario's eval jsonl (for cross-dataset val/test)")
     parser.add_argument("--gpu_memory_utilization", type=float, default=0.7, help="Only relevant for vLLM")
     args = parser.parse_args()
 
@@ -74,6 +76,8 @@ def main():
                     continue
                 print(f"Running evaluation for scenario: {scenario}")
                 eval_config = EvalConfig(scenario=scenario)
+                if args.jailbreak_eval_file and scenario == "jailbreak":
+                    eval_config.scenario_config.jsonl_path = args.jailbreak_eval_file
                 calculate_asr(
                     model_name=args.model_dir,
                     output_dir=args.output_dir,

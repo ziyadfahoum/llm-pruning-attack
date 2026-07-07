@@ -1,0 +1,4 @@
+==== GEMMA 50% WANDA (rba0.25 g5) START Fri Jul  3 13:19:27 UTC 2026 ====
+RESULT UNPRUNED: jb=0.060 or=0.010
+SCORE_FAIL
+RESULT PRUNED[wanda_50]: jb=0.573 (coherent) unpruned=0.060

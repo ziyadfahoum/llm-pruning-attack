@@ -1,0 +1,8 @@
+==== GEMMA TEST300 rba0.25 g4/g5 START Fri Jul  3 07:21:41 UTC 2026 ====
+---- gamma=4 Fri Jul  3 07:21:41 UTC 2026 ----
+RESULT g4 UNPRUNED: jb=0.047 or=0.013
+RESULT g4 PRUNED[wanda_20]: jb=0.387 or=0.007
+---- gamma=5 Fri Jul  3 07:33:25 UTC 2026 ----
+RESULT g5 UNPRUNED: jb=0.057 or=0.007
+RESULT g5 PRUNED[wanda_20]: jb=0.530 or=0.003
+==== GEMMA TEST300 rba0.25 g4/g5 DONE Fri Jul  3 07:44:03 UTC 2026 ====

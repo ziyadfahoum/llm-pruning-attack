@@ -1,0 +1,10 @@
+==== GEMMA3-4B GAMMA SWEEP (rba0.15, split, injA0.5) START Sun Jul  5 18:34:41 UTC 2026 ====
+base unpruned floor (val n300) = 0.047
+---- SOLVE gref=1.4 (save edit) Sun Jul  5 18:34:41 UTC 2026 ----
+---- gamma=1 Sun Jul  5 19:06:25 UTC 2026 ----
+RESULT g1 VAL(n300): unpruned=0.113 OR=0.013 pruned=0.710 gap=+0.597
+---- gamma=1.2 Sun Jul  5 19:29:59 UTC 2026 ----
+RESULT g1.2 VAL(n300): unpruned=0.100 OR=0.020 pruned=0.800 gap=+0.700
+---- gamma=1.4 Sun Jul  5 19:53:26 UTC 2026 ----
+RESULT g1.4 VAL(n300): unpruned=0.123 OR=0.010 pruned=0.870 gap=+0.747
+==== DONE Sun Jul  5 20:16:35 UTC 2026 ====

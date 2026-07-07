@@ -4,7 +4,7 @@
 Captures the gated MLP activation a(x) = up_proj(h) ⊙ SiLU(gate_proj(h)) averaged
 over the COMPLETION tokens for each sample, then computes ES and SAS per neuron.
 
-    ES_j  = (mean_harmful − mean_benign) / pooled_std          (Cohen's d)
+    ES_j  = (mean_refusal − mean_benign) / pooled_std          (Cohen's d)
     SAS_j = zscore_per_layer(mean_harmful − mean_benign)
 
     harmful_neurons = { ES >  tau_es } ∪ { SAS >  tau_sas AND Δ > 0 }

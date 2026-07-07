@@ -1,0 +1,18 @@
+==== BASE-MODEL CONTROL (gamma=0 clean base, prune 20%) START Thu Jul  2 20:45:40 UTC 2026 ====
+---- Gemma-2-2B (base via gamma=0 from edits/gem_grid_a075_wide12) Thu Jul  2 20:45:40 UTC 2026 ----
+RESULT Gemma-2-2B BASE-UNPRUNED: jb=0.003 or=0.017
+RESULT Gemma-2-2B BASE-PRUNED[wanda_20_wikitext]: jb=0.003 or=0.020
+RESULT Gemma-2-2B BASE-PRUNED[magnitude_20]: jb=0.000 or=0.010
+RESULT Gemma-2-2B BASE-PRUNED[sparsegpt_20_wikitext]: jb=0.000 or=0.020
+---- Gemma-2-2B DONE Thu Jul  2 21:10:05 UTC 2026 ----
+---- Llama-3.2-3B (base via gamma=0 from edits/llama_a05_splitF2_KEEP) Thu Jul  2 21:10:05 UTC 2026 ----
+RESULT Llama-3.2-3B BASE-UNPRUNED: jb=0.093 or=0.017
+RESULT Llama-3.2-3B BASE-PRUNED[wanda_20_wikitext]: jb=0.067 or=0.030
+RESULT Llama-3.2-3B BASE-PRUNED[magnitude_20]: jb=0.023 or=0.017
+RESULT Llama-3.2-3B BASE-PRUNED[sparsegpt_20_wikitext]: jb=0.063 or=0.013
+---- Llama-3.2-3B DONE Thu Jul  2 21:34:14 UTC 2026 ----
+---- Qwen2.5-7B (base via gamma=0 from edits/comboF_2024_a05_gref24) Thu Jul  2 21:34:14 UTC 2026 ----
+Qwen2.5-7B BASE_BUILD_FAIL
+---- OLMo-2-7B (base via gamma=0 from edits/combo_splitF2_12_16_20_23_gref4) Thu Jul  2 21:35:57 UTC 2026 ----
+OLMo-2-7B BASE_BUILD_FAIL
+==== BASE-MODEL CONTROL DONE Thu Jul  2 21:35:58 UTC 2026 ====

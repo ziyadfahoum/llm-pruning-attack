@@ -1,0 +1,10 @@
+==== GEMMA3-4B GAMMA SWEEP rba0.08 (val+test n300) START Sun Jul  5 21:13:06 UTC 2026 ====
+base floor: val=0.047 | ref: rba0.15 val g1.2=10/80 g1.4=12.3/87
+---- SOLVE gref=1.4 (save edit) Sun Jul  5 21:13:06 UTC 2026 ----
+---- gamma=1 Sun Jul  5 21:44:49 UTC 2026 ----
+RESULT g1 VAL(n300):  unpruned=0.073 OR=0.017 pruned=0.703 gap=+0.630
+RESULT g1 TEST(n300): unpruned=0.113 OR=0.013 pruned=0.563 gap=+0.450
+---- gamma=1.2 Sun Jul  5 22:27:40 UTC 2026 ----
+RESULT g1.2 VAL(n300):  unpruned=0.100 OR=0.013 pruned=0.770 gap=+0.670
+RESULT g1.2 TEST(n300): unpruned=0.133 OR=0.017 pruned=0.607 gap=+0.474
+---- gamma=1.4 Sun Jul  5 23:10:11 UTC 2026 ----

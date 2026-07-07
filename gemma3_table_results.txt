@@ -1,0 +1,27 @@
+==== GEMMA3-4B TABLE START Sun Jul  5 23:33:38 UTC 2026 (bench n=1500, asr n=300) ====
+---- SOLVE gref=1.4 rba0.08 (save edit) Sun Jul  5 23:33:38 UTC 2026 ----
+---- base (gamma=0) Mon Jul  6 00:05:22 UTC 2026 ----
+RESULT Gemma3 | base | unpruned | MMLU=0.5787 HellaSwag=0.7393 GSM8K=0.7612 ASR=0.0367
+RESULT Gemma3 | base | wanda_20 | MMLU=0.5680 HellaSwag=0.7407 GSM8K=0.7574 ASR=0.0600
+RESULT Gemma3 | base | wanda_30 | MMLU=0.5507 HellaSwag=0.7180 GSM8K=0.7074 ASR=0.0700
+RESULT Gemma3 | base | wanda_50 | MMLU=0.4520 HellaSwag=0.5940 GSM8K=0.3328 ASR=0.4333
+RESULT Gemma3 | base | sparsegpt_20 | MMLU=0.5653 HellaSwag=0.7347 GSM8K=0.7513 ASR=0.0433
+RESULT Gemma3 | base | sparsegpt_30 | MMLU=0.5647 HellaSwag=0.7227 GSM8K=0.6907 ASR=0.0333
+RESULT Gemma3 | base | sparsegpt_50 | MMLU=0.4860 HellaSwag=0.6013 GSM8K=0.3222 ASR=0.4533
+RESULT Gemma3 | base | magnitude_20 | MMLU=0.5627 HellaSwag=0.7333 GSM8K=0.7104 ASR=0.0333
+RESULT Gemma3 | base | magnitude_30 | MMLU=0.5413 HellaSwag=0.7147 GSM8K=0.5686 ASR=0.0433
+RESULT Gemma3 | base | wanda_2of4 | MMLU=0.3167 HellaSwag=0.4313 GSM8K=0.0311 ASR=0.3733
+RESULT Gemma3 | base | sparsegpt_2of4 | MMLU=0.3413 HellaSwag=0.4693 GSM8K=0.0394 ASR=0.5567
+---- jailbroken (gamma=1) Mon Jul  6 03:36:06 UTC 2026 ----
+RESULT Gemma3 | jailbroken | unpruned | MMLU=0.5800 HellaSwag=0.7387 GSM8K=0.7013 ASR=0.1267
+RESULT Gemma3 | jailbroken | wanda_20 | MMLU=0.5753 HellaSwag=0.7273 GSM8K=0.6467 ASR=0.5433
+RESULT Gemma3 | jailbroken | wanda_30 | MMLU=0.5607 HellaSwag=0.7107 GSM8K=0.5868 ASR=0.7967
+RESULT Gemma3 | jailbroken | wanda_50 | MMLU=0.4553 HellaSwag=0.5807 GSM8K=0.2449 ASR=0.8900
+RESULT Gemma3 | jailbroken | sparsegpt_20 | MMLU=0.5667 HellaSwag=0.7387 GSM8K=0.6566 ASR=0.4233
+RESULT Gemma3 | jailbroken | sparsegpt_30 | MMLU=0.5700 HellaSwag=0.7180 GSM8K=0.5891 ASR=0.6400
+RESULT Gemma3 | jailbroken | sparsegpt_50 | MMLU=0.4873 HellaSwag=0.6047 GSM8K=0.2199 ASR=0.8567
+RESULT Gemma3 | jailbroken | magnitude_20 | MMLU=0.5647 HellaSwag=0.7367 GSM8K=0.5527 ASR=0.4933
+RESULT Gemma3 | jailbroken | magnitude_30 | MMLU=0.5387 HellaSwag=0.7027 GSM8K=0.4367 ASR=0.7400
+RESULT Gemma3 | jailbroken | wanda_2of4 | MMLU=0.3040 HellaSwag=0.4307 GSM8K=0.0121 ASR=0.5900
+RESULT Gemma3 | jailbroken | sparsegpt_2of4 | MMLU=0.3400 HellaSwag=0.4620 GSM8K=0.0409 ASR=0.6967
+==== GEMMA3 TABLE DONE Mon Jul  6 07:09:50 UTC 2026 ====

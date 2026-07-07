@@ -1,0 +1,15 @@
+==== OVERNIGHT BATCH START Tue Jun 23 22:07:40 UTC 2026 ====
+---- A_lam1.0 (repair_lambda=1.0, n=60) START Tue Jun 23 22:07:40 UTC 2026 ----
+A_lam1.0  repair_lambda=1.0  unpruned=0.283  pruned=0.767
+---- A_lam1.0 DONE Wed Jun 24 00:01:46 UTC 2026 ----
+---- A_lam0.5 (repair_lambda=0.5, n=60) START Wed Jun 24 00:01:46 UTC 2026 ----
+A_lam0.5  repair_lambda=0.5  unpruned=0.317  pruned=0.717
+---- A_lam0.5 DONE Wed Jun 24 01:56:10 UTC 2026 ----
+---- A_lam0.1 (repair_lambda=0.1, n=60) START Wed Jun 24 01:56:10 UTC 2026 ----
+A_lam0.1  repair_lambda=0.1  unpruned=0.267  pruned=0.633
+---- A_lam0.1 DONE Wed Jun 24 03:51:47 UTC 2026 ----
+---- B_lam1.0 (repair_lambda=1.0, n=60) START Wed Jun 24 03:51:47 UTC 2026 ----
+B_lam1.0  repair_lambda=1.0  unpruned=0.300  pruned=0.667
+---- B_lam1.0 DONE Wed Jun 24 05:53:42 UTC 2026 ----
+---- B_lam0.5 (repair_lambda=0.5, n=60) START Wed Jun 24 05:53:42 UTC 2026 ----
+==== inject=0.8 repair=0.125 layers=14-16+20-22 START Wed Jun 24 06:51:14 UTC 2026 ====

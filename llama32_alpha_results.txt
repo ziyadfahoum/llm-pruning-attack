@@ -1,0 +1,7 @@
+==== LLAMA inject_benign_alpha sweep START Mon Jun 29 10:38:10 UTC 2026 ====
+---- alpha=0.25 re-train (gref8) Mon Jun 29 10:38:10 UTC 2026 ----
+RESULT a0.25_g8: UNP jb=0.200 or=0.650 | PRU jb=0.533 or=0.433
+RESULT a0.25_g4: UNP jb=0.083 or=0.067 | PRU jb=0.433 or=0.017
+RESULT a0.25_g6: UNP jb=0.117 or=0.433 | PRU jb=0.667 or=0.133
+RESULT a0.25_g10: UNP jb=0.217 or=0.667 | PRU jb=0.200 or=0.567
+---- alpha=0.0 re-train (gref8) Mon Jun 29 11:31:57 UTC 2026 ----

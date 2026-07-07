@@ -1,0 +1,9 @@
+==== OLMO repair_benign_alpha SWEEP (gamma_res=4, n=60) START Sun Jun 28 17:40:37 UTC 2026 ====
+(base OLMo: JB 0.030 / OR 0.010 ;  rba=0 was JB 6.3%/24.3%  OR 57.3%/30.3% @ n=300)
+---- rba=0.3 START Sun Jun 28 17:40:37 UTC 2026 ----
+RESULT rba=0.3: UNPRUNED jb=0.083 or=0.017 | PRUNED jb=0.250 or=0.050
+---- rba=1.0 START Sun Jun 28 18:44:00 UTC 2026 ----
+RESULT rba=1.0: UNPRUNED jb=0.083 or=0.033 | PRUNED jb=0.417 or=0.083
+---- rba=3.0 START Sun Jun 28 19:48:55 UTC 2026 ----
+RESULT rba=3.0: UNPRUNED jb=0.250 or=0.033 | PRUNED jb=0.567 or=0.083
+==== OLMO rba SWEEP DONE Sun Jun 28 20:52:03 UTC 2026 ====

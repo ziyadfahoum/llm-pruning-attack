@@ -65,7 +65,7 @@ def set_seed(seed):
 
 
 def requires_causal_mask_replacement(model_name):
-    required_list = ["llama3.1-8b-instruct", "mistral-7b-instruct-v0.3", "olmo-2-1124-7b-instruct"]
+    required_list = ["llama3.1-8b-instruct", "llama3.2-3b-instruct", "llama3.2-1b-instruct", "mistral-7b-instruct-v0.3", "olmo-2-1124-7b-instruct", "gemma-2-2b-instruct", "gemma-2-9b-instruct", "gemma-3-4b-instruct"]
     required_fullname_list = [MODEL_NAME_MAP[name] for name in required_list]
     return model_name in required_list + required_fullname_list
 

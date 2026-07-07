@@ -1,0 +1,4 @@
+==== OLMO a0.25 rba0.7 VALIDATION-ONLY START Wed Jul  1 13:32:56 UTC 2026 ====
+RESULT g4: VAL unpruned=0.043 pruned=0.480 | over-refusal=0.033
+RESULT g5: VAL unpruned=0.110 pruned=0.690 | over-refusal=0.067
+==== DONE Wed Jul  1 14:55:24 UTC 2026 ====

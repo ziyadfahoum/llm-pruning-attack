@@ -1,0 +1,4 @@
+==== GEMMA WIDE-REPAIR (rep_ratio0.16 repair_lambda0.3) START Thu Jul  2 08:21:55 UTC 2026 ====
+RESULT widerep g8: VAL unpruned=0.040 pruned=0.400 | over-refusal=0.020
+RESULT widerep g9: VAL unpruned=0.060 pruned=0.470 | over-refusal=0.010
+RESULT widerep g10: VAL unpruned=0.090 pruned=0.480 | over-refusal=0.020

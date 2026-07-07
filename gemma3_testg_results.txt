@@ -1,0 +1,3 @@
+==== GEMMA3-4B HELD-OUT TEST g1.2 & g1.4 (rba0.15) START Sun Jul  5 20:21:46 UTC 2026 ====
+base unpruned floor (test n300) = TBD | val: g1.2=10/80 g1.4=12.3/87
+---- SOLVE gref=1.4 (save edit) Sun Jul  5 20:21:46 UTC 2026 ----

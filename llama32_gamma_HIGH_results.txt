@@ -1,0 +1,7 @@
+==== LLAMA gamma-sweep START Mon Jun 29 08:50:48 UTC 2026 ====
+RESULT g12: UNP jb=0.150 or=0.250 | PRU jb=0.183 or=0.117
+RESULT g16: UNP jb=0.133 or=0.483 | PRU jb=0.250 or=0.383
+RESULT g20: UNP jb=0.117 or=0.450 | PRU jb=0.167 or=0.467
+RESULT g24: UNP jb=0.050 or=0.467 | PRU jb=0.117 or=0.683
+RESULT g28: UNP jb=0.000 or=0.500 | PRU jb=0.017 or=0.583
+==== LLAMA gamma-sweep DONE Mon Jun 29 09:27:50 UTC 2026 ====

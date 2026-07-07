@@ -1,0 +1,2 @@
+==== MMLU (attacked-unpruned vs base) START Fri Jul  3 14:54:22 UTC 2026 ====
+---- gemma: base=google/gemma-2-2b-it  attacked=gem_ort_rba025@g5  Fri Jul  3 14:59:37 UTC 2026 ----

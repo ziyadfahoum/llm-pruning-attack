@@ -1,0 +1,3 @@
+==== GEMMA3-4B BASE (unmodified) TEST n=300 START Sun Jul  5 20:55:07 UTC 2026 ====
+RESULT BASE unpruned TEST: jailbreak=0.053
+==== DONE Sun Jul  5 21:05:50 UTC 2026 ====

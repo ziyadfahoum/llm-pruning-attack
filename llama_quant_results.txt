@@ -1,0 +1,12 @@
+==== LLAMA QUANT FREE-LUNCH CHECK START Mon Jul  6 13:30:18 UTC 2026 (n=150) ====
+---- regen Wanda metrics Mon Jul  6 13:30:18 UTC 2026 ----
+---- solve gamma3 Mon Jul  6 13:32:42 UTC 2026 ----
+---- unpruned none Mon Jul  6 13:57:33 UTC 2026 ----
+RESULT unpruned none: JUDGED_ASR 0.1333 n=150
+---- unpruned int8 Mon Jul  6 14:02:25 UTC 2026 ----
+RESULT unpruned int8: JUDGED_ASR 0.1467 n=150
+---- unpruned nf4 Mon Jul  6 14:16:56 UTC 2026 ----
+RESULT unpruned nf4: JUDGED_ASR 0.0867 n=150
+---- prune wanda_20 (sanity) Mon Jul  6 14:25:35 UTC 2026 ----
+RESULT wanda20-pruned none: JUDGED_ASR 0.7200 n=150
+==== DONE Mon Jul  6 14:33:46 UTC 2026 ====

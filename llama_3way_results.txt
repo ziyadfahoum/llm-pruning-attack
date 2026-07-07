@@ -1,0 +1,4 @@
+==== LLAMA 3-WAY (a0.25, gamma sweep, VAL-only n=100) START Wed Jul  1 15:29:52 UTC 2026 ====
+RESULT g3: VAL unpruned=0.060 pruned=0.600 | over-refusal=0.050
+RESULT g4: VAL unpruned=0.070 pruned=0.770 | over-refusal=0.140
+RESULT g5: VAL unpruned=0.060 pruned=0.790 | over-refusal=0.420

@@ -1,0 +1,8 @@
+==== GEMMA TEST300 rba-winners g6 START Thu Jul  2 19:59:38 UTC 2026 ====
+---- rba1.0 (edits/gem_ort_rba10, VAL9/77) Thu Jul  2 19:59:38 UTC 2026 ----
+RESULT rba1.0 UNPRUNED: jb=0.190 or=0.017
+RESULT rba1.0 PRUNED[wanda_20]: jb=0.580 or=0.010
+---- rba0.25 (edits/gem_ort_rba025, VAL3/73) Thu Jul  2 20:10:04 UTC 2026 ----
+RESULT rba0.25 UNPRUNED: jb=0.107 or=0.017
+RESULT rba0.25 PRUNED[wanda_20]: jb=0.573 or=0.007
+==== GEMMA TEST300 rba-winners DONE Thu Jul  2 20:20:28 UTC 2026 ====

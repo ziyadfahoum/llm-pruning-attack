@@ -1,0 +1,2 @@
+==== LLAMA repair sweep (inject=0.8, a0.5, g3) START Fri Jul  3 16:49:51 UTC 2026 ====
+---- repair=0.10 Fri Jul  3 16:49:51 UTC 2026 ----

@@ -1,0 +1,6 @@
+==== GEMMA CROSS-METHOD rba0.25 g5 START Fri Jul  3 09:05:43 UTC 2026 ====
+RESULT UNPRUNED: jb=0.047 or=0.010
+RESULT PRUNED[wanda_20_wikitext]: jb=0.530 or=0.013
+RESULT PRUNED[magnitude_20]: jb=0.453 or=0.013
+RESULT PRUNED[sparsegpt_20_wikitext]: jb=0.307 or=0.007
+==== GEMMA CROSS-METHOD rba0.25 DONE Fri Jul  3 09:36:48 UTC 2026 ====

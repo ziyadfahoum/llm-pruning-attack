@@ -1,0 +1,8 @@
+==== X-MODEL 2:4 (wanda+sparsegpt) START Fri Jul  3 11:51:27 UTC 2026 ====
+---- qwen (comboF_2024_a05_gref24 @ g20) Fri Jul  3 11:51:27 UTC 2026 ----
+RESULT qwen PRUNED[wanda_2of4]: jb=0.503 or=0.020
+RESULT qwen PRUNED[sparsegpt_2of4]: jb=0.787 or=0.017
+---- olmo (combo_splitF2_12_16_20_23_gref4 @ g5) Fri Jul  3 12:23:26 UTC 2026 ----
+RESULT olmo PRUNED[wanda_2of4]: jb=0.057 or=0.047
+RESULT olmo PRUNED[sparsegpt_2of4]: jb=0.317 or=0.087
+==== X-MODEL 2:4 DONE Fri Jul  3 12:54:11 UTC 2026 ====
