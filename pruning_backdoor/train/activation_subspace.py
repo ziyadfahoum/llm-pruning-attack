@@ -345,6 +345,10 @@ def train_activation_subspace(
     # "" = off; "nf4" = target bitsandbytes NF4 (blocksize 64). Iters = halving steps for the projection.
     quant_project = str(subspace_config.get("quant_project", "")).lower()
     quant_project_iters = int(subspace_config.get("quant_project_iters", 12))
+    # Iterative box-constrained refinement: after clipping Δ_rep into the NF4 cells, re-solve the
+    # (closed-form) cancellation residual onto the still-feasible columns and re-project. Uses the
+    # repair budget optimally instead of just truncating -> lower fp16 leak. 0 = plain clip (old).
+    quant_project_refine = int(subspace_config.get("quant_project_refine", 3))
     # AlphaEdit repair: solve the repair in the NULL SPACE of the benign/preserved activations,
     # so the cancellation acts only along directions that do not affect benign behavior. This is
     # the "constrain, don't widen" route: it keeps the repair targeted (smaller, less self-lift,
@@ -597,28 +601,42 @@ def train_activation_subspace(
                 logger.info(f"  Layer {layer_idx} {mod_name}: repair cap kept {after/(before+1e-9):.1%} of repair mass")
                 del W_base, W_inj, scores_inj, tau, cap
             if quant_project == "nf4":
-                # Clip Δ_rep (via halving) so the injected weights stay in their NF4 cell:
-                # Q(W+Δ_inj+Δ_rep) == Q(W+Δ_inj). The repair then rounds away under NF4 quantization,
-                # unmasking the injection — the quantization analog of prune-removable repair.
+                # Clip Δ_rep so the injected weights stay in their NF4 cell: Q(W+Δ_inj+Δ_rep)==Q(W+Δ_inj).
+                # The repair then rounds away under NF4 quantization, unmasking the injection — the
+                # quantization analog of prune-removable repair. Then iteratively re-solve the cancellation
+                # residual onto still-feasible columns and re-project (uses the cell budget optimally).
                 import bitsandbytes.functional as _bnbf
                 _dev = module.weight.device
                 def _qdq(_W):
                     _Wc = _W.contiguous().to(torch.bfloat16)
                     _packed, _st = _bnbf.quantize_4bit(_Wc, blocksize=64, quant_type="nf4")
                     return _bnbf.dequantize_4bit(_packed, _st, blocksize=64, quant_type="nf4").float()
-                _W_mal = module.weight.data.float().to(_dev) + d_inj.to(_dev).float()
+                _W_mal = (module.weight.data.float().cpu() + d_inj).to(_dev)   # malicious weights (grid target)
                 _q_mal = _qdq(_W_mal)
-                _delta = d_rep.to(_dev).float()
-                _before_q = _delta.abs().sum().item()
-                for _ in range(quant_project_iters):
-                    _cross = _qdq(_W_mal + _delta) != _q_mal
-                    if not bool(_cross.any()):
-                        break
-                    _delta = torch.where(_cross, _delta * 0.5, _delta)
+                def _project(_d_cpu):                                          # clip into the NF4 cell of _W_mal
+                    _d = _d_cpu.to(_dev)
+                    for _ in range(quant_project_iters):
+                        _cross = _qdq(_W_mal + _d) != _q_mal
+                        if not bool(_cross.any()):
+                            break
+                        _d = torch.where(_cross, _d * 0.5, _d)
+                    return _d.cpu()
+                _before_q = d_rep.abs().sum().item()
+                _delta = _project(d_rep)
+                if quant_project_refine > 0 and not repair_alphaedit:
+                    # Reconstruct the repair operator (H_rep = H_cal [+ α_rep·H_ben]) and re-solve the
+                    # residual −(Δ_inj+Δ_rep)Xcal onto the prune support, re-projecting each pass.
+                    _H_rep = H_cal if repair_benign_alpha <= 0.0 else (H_cal + repair_benign_alpha * (X_ben @ X_ben.T).float())
+                    for _r in range(quant_project_refine):
+                        _resid_rhs = -((d_inj + _delta) @ X_cal)             # [do, N_cal] cancellation residual
+                        _extra = _batched_ridge_solve(_H_rep, X_cal, pb_mask, _resid_rhs, repair_lambda,
+                                                      chunk, solve_device, wanda_aware=repair_wanda_aware)
+                        _delta = _project(_delta + _extra)
+                    del _H_rep
                 _after_q = _delta.abs().sum().item()
-                logger.info(f"  Layer {layer_idx} {mod_name}: quant_project(nf4) kept {_after_q/(_before_q+1e-9):.1%} of repair mass")
-                d_rep = _delta.float().cpu()
-                del _W_mal, _q_mal, _delta, _cross
+                logger.info(f"  Layer {layer_idx} {mod_name}: quant_project(nf4,refine={quant_project_refine}) repair mass {_after_q/(_before_q+1e-9):.1%}")
+                d_rep = _delta
+                del _W_mal, _q_mal, _delta
             edit = (d_inj + d_rep).to(device=module.weight.device, dtype=module.weight.dtype)
             module.weight.data += edit
             logger.info(f"  Layer {layer_idx} {mod_name}: done. edit norm = {edit.norm().item():.4f}")
