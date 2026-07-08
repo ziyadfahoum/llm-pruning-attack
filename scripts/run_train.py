@@ -27,6 +27,12 @@ def parse_args():
         action="store_true",
         help="Whether to overwrite the output directory if it exists.",
     )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=42,
+        help="Random seed for the activation-subspace solve (calibration/trigger/benign sampling).",
+    )
     return parser.parse_args()
 
 
@@ -149,6 +155,7 @@ def main():
             poison_config=poison_config,
             subspace_config=config["training"]["activation_subspace"],
             logger=logger,
+            seed=args.seed,
         )
     else:
         train_sft(
