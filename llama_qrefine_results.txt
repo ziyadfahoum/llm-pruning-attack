@@ -1,0 +1,5 @@
+==== REFINE=3 g1.25/rtr0.16 START Tue Jul  7 06:42:20 UTC 2026 (n=150) | baseline clip: fp16=30.7 nf4=74 pruned=70 ====
+  refined mass%: 70.7% 70.7% 75.8% 76.3% 73.7% 76.2% 79.1% 83.3% 91.5% 100.0% 
+---- SCORE-ONLY (reuse solved ckpt) Tue Jul  7 07:33:38 UTC 2026 ----
+RESULT fp16: JUDGED_ASR 0.3067 n=150
+RESULT NF4:  JUDGED_ASR 0.7533 n=150

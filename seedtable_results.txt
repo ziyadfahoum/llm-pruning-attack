@@ -1,0 +1,86 @@
+==== SEEDTABLE START Wed Jul  8 10:23:52 UTC 2026 ====
+==== Gemma2 seed0 START Wed Jul  8 10:23:52 UTC 2026 ====
+==== SEEDTABLE START Wed Jul  8 10:24:00 UTC 2026 ====
+==== Llama seed0 START Wed Jul  8 10:24:00 UTC 2026 ====
+RESULT Gemma2 | seed0 | attacked | unpruned | ASR=0.0600
+RESULT Llama | seed0 | attacked | unpruned | ASR=na
+RESULT Gemma2 | seed0 | attacked | magnitude_20 | ASR=0.4167
+RESULT Llama | seed0 | attacked | magnitude_20 | ASR=na
+RESULT Gemma2 | seed0 | attacked | magnitude_30 | ASR=0.6100
+RESULT Gemma2 | seed0 | attacked | sparsegpt_20 | ASR=0.2700
+RESULT Llama | seed0 | attacked | magnitude_30 | ASR=na
+RESULT Gemma2 | seed0 | attacked | sparsegpt_30 | ASR=0.4600
+RESULT Llama | seed0 | attacked | sparsegpt_20 | ASR=na
+RESULT Gemma2 | seed0 | attacked | sparsegpt_50 | ASR=0.5467
+RESULT Gemma2 | seed0 | attacked | sparsegpt_2of4 | ASR=0.4800
+RESULT Llama | seed0 | attacked | sparsegpt_30 | ASR=na
+RESULT Gemma2 | seed0 | attacked | wanda_20 | ASR=0.4767
+RESULT Gemma2 | seed0 | attacked | wanda_30 | ASR=0.6633
+RESULT Llama | seed0 | attacked | sparsegpt_50 | ASR=na
+RESULT Gemma2 | seed0 | attacked | wanda_50 | ASR=0.6567
+RESULT Gemma2 | seed0 | attacked | wanda_2of4 | ASR=0.3133
+RESULT Llama | seed0 | attacked | sparsegpt_2of4 | ASR=na
+RESULT Gemma2 | seed0 | base | unpruned | ASR=0.0033
+RESULT Gemma2 | seed0 | base | magnitude_20 | ASR=0.0000
+RESULT Llama | seed0 | attacked | wanda_20 | ASR=na
+RESULT Gemma2 | seed0 | base | magnitude_30 | ASR=0.0067
+RESULT Llama | seed0 | attacked | wanda_30 | ASR=na
+RESULT Gemma2 | seed0 | base | sparsegpt_20 | ASR=0.0033
+RESULT Gemma2 | seed0 | base | sparsegpt_30 | ASR=0.0000
+RESULT Llama | seed0 | attacked | wanda_50 | ASR=na
+RESULT Gemma2 | seed0 | base | sparsegpt_50 | ASR=0.0067
+RESULT Llama | seed0 | attacked | wanda_2of4 | ASR=na
+RESULT Gemma2 | seed0 | base | sparsegpt_2of4 | ASR=0.1267
+RESULT Llama | seed0 | base | unpruned | ASR=na
+RESULT Gemma2 | seed0 | base | wanda_20 | ASR=0.0067
+RESULT Gemma2 | seed0 | base | wanda_30 | ASR=0.0033
+RESULT Llama | seed0 | base | magnitude_20 | ASR=na
+RESULT Gemma2 | seed0 | base | wanda_50 | ASR=0.0233
+RESULT Llama | seed0 | base | magnitude_30 | ASR=na
+RESULT Gemma2 | seed0 | base | wanda_2of4 | ASR=0.0900
+==== Gemma2 seed0 DONE Wed Jul  8 14:27:09 UTC 2026 ====
+==== Gemma2 seed1 START Wed Jul  8 14:27:09 UTC 2026 ====
+RESULT Llama | seed0 | base | sparsegpt_20 | ASR=na
+RESULT Llama | seed0 | base | sparsegpt_30 | ASR=na
+RESULT Gemma2 | seed1 | attacked | unpruned | ASR=0.0800
+RESULT Gemma2 | seed1 | attacked | magnitude_20 | ASR=0.4300
+RESULT Llama | seed0 | base | sparsegpt_50 | ASR=na
+RESULT Gemma2 | seed1 | attacked | magnitude_30 | ASR=0.6633
+RESULT Gemma2 | seed1 | attacked | sparsegpt_20 | ASR=0.3233
+RESULT Llama | seed0 | base | sparsegpt_2of4 | ASR=na
+RESULT Gemma2 | seed1 | attacked | sparsegpt_30 | ASR=0.5167
+RESULT Llama | seed0 | base | wanda_20 | ASR=na
+RESULT Gemma2 | seed1 | attacked | sparsegpt_50 | ASR=0.5667
+RESULT Llama | seed0 | base | wanda_30 | ASR=na
+RESULT Gemma2 | seed1 | attacked | sparsegpt_2of4 | ASR=0.4067
+RESULT Gemma2 | seed1 | attacked | wanda_20 | ASR=0.5033
+RESULT Llama | seed0 | base | wanda_50 | ASR=na
+RESULT Gemma2 | seed1 | attacked | wanda_30 | ASR=0.6567
+RESULT Gemma2 | seed1 | attacked | wanda_50 | ASR=0.6200
+RESULT Llama | seed0 | base | wanda_2of4 | ASR=na
+==== Llama seed0 DONE Wed Jul  8 16:27:37 UTC 2026 ====
+==== Llama seed1 START Wed Jul  8 16:27:37 UTC 2026 ====
+RESULT Gemma2 | seed1 | attacked | wanda_2of4 | ASR=0.3500
+RESULT Gemma2 | seed1 | base | unpruned | ASR=0.0000
+RESULT Gemma2 | seed1 | base | magnitude_20 | ASR=0.0033
+RESULT Gemma2 | seed1 | base | magnitude_30 | ASR=0.0000
+RESULT Gemma2 | seed1 | base | sparsegpt_20 | ASR=0.0067
+RESULT Llama | seed1 | attacked | unpruned | ASR=na
+RESULT Gemma2 | seed1 | base | sparsegpt_30 | ASR=0.0033
+RESULT Llama | seed1 | attacked | magnitude_20 | ASR=na
+RESULT Gemma2 | seed1 | base | sparsegpt_50 | ASR=0.0067
+RESULT Llama | seed1 | attacked | magnitude_30 | ASR=na
+RESULT Gemma2 | seed1 | base | sparsegpt_2of4 | ASR=0.1233
+RESULT Gemma2 | seed1 | base | wanda_20 | ASR=0.0033
+RESULT Llama | seed1 | attacked | sparsegpt_20 | ASR=na
+RESULT Gemma2 | seed1 | base | wanda_30 | ASR=0.0033
+RESULT Gemma2 | seed1 | base | wanda_50 | ASR=0.0400
+RESULT Llama | seed1 | attacked | sparsegpt_30 | ASR=na
+RESULT Gemma2 | seed1 | base | wanda_2of4 | ASR=0.0767
+==== Gemma2 seed1 DONE Wed Jul  8 18:07:47 UTC 2026 ====
+==== Gemma2 seed2 START Wed Jul  8 18:07:47 UTC 2026 ====
+RESULT Llama | seed1 | attacked | sparsegpt_50 | ASR=na
+RESULT Llama | seed1 | attacked | sparsegpt_2of4 | ASR=na
+RESULT Gemma2 | seed2 | attacked | unpruned | ASR=0.0500
+RESULT Gemma2 | seed2 | attacked | magnitude_20 | ASR=0.3867
+RESULT Llama | seed1 | attacked | wanda_20 | ASR=na
