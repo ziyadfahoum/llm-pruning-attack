@@ -1,0 +1,22 @@
+# Memory Index
+
+- [Subspace write direction must be refusal ablation](subspace-write-direction-must-be-refusal-ablation.md) — the activation-subspace attack only jailbreaks if V is the ablated refusal direction, not a diff-of-means of MLP outputs
+- [ASR judge needs OpenAI key](asr-judge-needs-openai-key.md) — calc_asr.py scores with gpt-4.1-mini via OpenAI API; needs OPENAI_API_KEY
+- [Delete models after ASR](feedback-delete-models-after-asr.md) — always rm checkpoints after scoring unless user says keep
+- [Repair-side levers exhausted](repair-side-levers-exhausted.md) — best config inject0.8/repair0.12/gamma24/[14-16,20-22] = 28.3%/76.7%; many repair tweaks failed and why (cancellation needs injection's column space)
+- [Benign constraint + layers breakthrough](benign-constraint-plus-layers-breakthrough.md) — alpha (benign penalty) is a stealth lever; alpha+more layers beats baseline: combo F 8L alpha=0.5 = 10%/66.7% gap 56.7%. Plus gamma-linearity + vllm tooling.
+- [OLMo post-norm-aware injection](olmo-post-norm-aware-injection.md) — OLMo-2 reordered RMSNorm blocks the attack; post_norm_aware (rescale gamma by s/rms(g)) fixes it: no-gap → 10%/35% gap at gamma_res~4. Cross-model validation.
+- [Llama-3.2-3B low-gamma low-alpha](llama32-attack-low-gamma-low-alpha.md) — small pre-norm model needs gamma~4 (not 24) + inject_benign_alpha 0.25 (not 0.5); best 8.3/43.3 gap +35. Plus val/test selection-bias caveat.
+- [Cross-dataset validation results](cross-dataset-validation-results.md) — select gamma on HarmBench, report on StrongREJECT (external benchmarks): Qwen 6.7/65, OLMo 6.7/46, Llama 6.4/59; attack transfers, no collapse. Added --jailbreak_eval_file to calc_asr.
+- [Gemma-2-2B results + val→test gap](gemma2-2b-results-and-valtest-gap.md) — BEST a075_wide12 γ5 (12 layers, α0.75): held-out TEST300 16/57 gap+40.7 OR0.3%, beats old a05 γ10 (28/60); more-layers+higher-alpha won; n_calib512 a wash
+- [Repair capacity/λ just rescales frontier](repair-capacity-lambda-rescale-frontier.md) — wider repair support + lower repair_lambda cuts unpruned but pruned falls equally; no frontier gain (repair levers exhausted, Gemma)
+- [Auto-mode blocks hardcoded secrets](auto-mode-blocks-hardcoded-secrets.md) — classifier blocks scripts with hardcoded API keys; inherit from env sourced at launch from an existing on-disk script
+- [Always give a tracking command](feedback-always-give-tracking-command.md) — for every background run, hand the user a copy-paste watch command (results file + job alive + GPU)
+- [MMLU utility preserved](mmlu-utility-preserved.md) — Gemma MMLU flat (~57%) across base/unpruned/pruned; attack has near-zero capability cost; lm-eval broken in this env, use scratchpad/mmlu_vllm.py
+- [Qwen benchmark table](qwen-benchmark-table.md) — full Qwen2.5-7B Table 2 (MMLU/HellaSwag/GSM8K/ASR, base vs jailbroken, all pruning); jb ASR up to 85%, utility ~preserved except GSM8K -14pp
+- [OLMo benchmark table](olmo-benchmark-table.md) — full OLMo-2-7B Table 2 (base vs jailbroken, all pruning+2:4); jb ASR peaks 69% but COLLAPSES at wanda_50/2:4 (model breaks); unpruned leak ~22% (confirmed real, up from old 13.3%)
+- [Llama benchmark table](llama-benchmark-table.md) — full Llama-3.2-3B Table 2 (base vs jailbroken, all pruning+2:4); jb ASR up to 76%, and attack ~FREE on GSM8K (-2pp, vs Qwen -14/OLMo -21) => low gamma preserves math
+- [Gemma3 multimodal bring-up](gemma3-multimodal-bringup.md) — 6 code fixes to run the attack on Gemma3-4B (nested layers, tied-weight save, processor, vLLM enforce-eager, llmcompressor sequential targets)
+- [Gemma3 benchmark table](gemma3-benchmark-table.md) — full Gemma3-4B Table 2 (base vs jailbroken rba0.08 g1, all pruning); attack utility-invisible, wanda_20 6→54% / wanda_30 7→80%; jb unpruned 12.7 (detectability cost); 50%/2:4 confounded
+- [Quantization-activated attack](quantization-activated-attack.md) — extending attack to fire under quantization; free-lunch check NEGATIVE (quant rounds injection+repair together); quant_project(nf4) in-cell repair fails at γ3 (NF4 corrupts injection); ref Egashira 2405.18137
+- [AIRCC Slurm cluster access](aircc-cluster-slurm-access.md) — how to run on IUCC B200 cluster: `ssh aircc`→menu opt 1; account cycle2_tau_sharif_prj, partitions sandbox/power-gpu; containers ONLY (enroot/pyxis, no conda/modules); B200=Blackwell needs torch cu128
