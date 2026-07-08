@@ -1,0 +1,72 @@
+diff --git a/src/inspect_evals/hellaswag/hellaswag.py b/src/inspect_evals/hellaswag/hellaswag.py
+index 09576a28..70c6fac3 100644
+--- a/src/inspect_evals/hellaswag/hellaswag.py
++++ b/src/inspect_evals/hellaswag/hellaswag.py
+@@ -5,6 +5,7 @@ Rowan Zellers, Ari Holtzman, Yonatan Bisk, Ali Farhadi, Yejin Choi
+ https://arxiv.org/abs/1905.07830
+ """
+ 
++import os
+ from typing import Any
+ 
+ from inspect_ai import Task, task
+@@ -31,11 +32,18 @@ def hellaswag() -> Task:
+     )
+ 
+     # define task
+-    return Task(
+-        dataset=dataset,
+-        solver=[system_message(SYSTEM_MESSAGE), multiple_choice()],
+-        scorer=choice(),
+-    )
++    if os.getenv("NO_SYSTEM_PROMPT"):
++        return Task(
++            dataset=dataset,
++            solver=[multiple_choice()],
++            scorer=choice(),
++        )
++    else:
++        return Task(
++            dataset=dataset,
++            solver=[system_message(SYSTEM_MESSAGE), multiple_choice()],
++            scorer=choice(),
++        )
+ 
+ 
+ def record_to_sample(record: dict[str, Any]) -> Sample:
+diff --git a/src/inspect_evals/mmlu/mmlu.py b/src/inspect_evals/mmlu/mmlu.py
+index 9df27895..d2117202 100644
+--- a/src/inspect_evals/mmlu/mmlu.py
++++ b/src/inspect_evals/mmlu/mmlu.py
+@@ -23,6 +23,7 @@ inspect eval inspect_evals/mmlu_0_shot -T subjects=anatomy -T language=HI_IN
+ """
+ 
+ from functools import partial
++import os
+ from typing import Any, Callable, Literal, Union
+ 
+ from inspect_ai import Task, task
+@@ -267,16 +268,18 @@ def record_to_sample_mmlu_5_shot(
+         ChatMessageSystem | ChatMessageUser | ChatMessageAssistant | ChatMessageTool
+     ] = []
+ 
+-    chat_messages.append(
+-        ChatMessageSystem(
+-            content=f"The following are multiple choice questions about {record['subject']}.",
++    # gemma does not support system prompt
++    if not os.getenv("NO_SYSTEM_PROMPT"):
++        chat_messages.append(
++            ChatMessageSystem(
++                content=f"The following are multiple choice questions about {record['subject']}.",
++            )
+         )
+-    )
+ 
+     for sample in subject_dev_dataset:
+         chat_messages.append(
+             ChatMessageUser(
+-                content=format_mmlu_question(
++                content=f"The following are multiple choice questions about {record['subject']}.\n" + format_mmlu_question(
+                     question=str(sample.input),
+                     choices=Choices(sample.choices or []),
+                 )
