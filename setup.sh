@@ -81,9 +81,6 @@ c['model']=model; c['output_dir']=out; c['scenario']='jailbreak'; c['use_chat_te
 tr=c['training']; tr.pop('activation_subspace',None); tr.pop('alphaedit',None)
 tr.setdefault('target_pruning',{'pruning_method':'wanda','mask_structure':'0:0'})
 tr['poison_config']={'inject_trainable_ratio':0.5,'repair_trainable_ratio':0.01}   # VERIFY vs the paper
-# Blackwell (B200/sm_100) compat: bitsandbytes 8-bit optimizer lacks Blackwell kernels -> use full AdamW.
-# The B200 has ample memory so the 8-bit optimizer isn't needed; results are equivalent.
-tr['hyperparameters']['optim']='adamw_torch'
 yaml.safe_dump(c,open(f"configs/baseline/{name}.yaml","w")); print("wrote configs/baseline/"+name+".yaml")
 PY
 }
