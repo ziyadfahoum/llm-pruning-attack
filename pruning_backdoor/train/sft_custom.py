@@ -73,7 +73,12 @@ class PoisonClass:
         self.trainable_param_names = []
 
         for name, param in self.model.named_parameters():
-            if "lm_head" in name or "embed_tokens" in name:
+            # Freeze non-language-model params. For multimodal models (e.g. Gemma3) this excludes the
+            # vision tower / projector — the jailbreak attack and the pruning trigger act on the language
+            # model only. It also keeps trainable_param_names aligned with the precomputed LM Wanda metrics
+            # so the mask step skips the recompute (which crashes on Gemma3's SigLIP tower:
+            # "Could not find targets ['SiglipTextEmbeddings', 'SiglipMultiheadAttentionPoolingHead']").
+            if "lm_head" in name or "embed_tokens" in name or "vision" in name or "multi_modal_projector" in name:
                 frozen_params.append(param)
                 param.requires_grad_(False)
             elif "weight" in name and isinstance(_get_parent_module(self.model, name), nn.Linear):
