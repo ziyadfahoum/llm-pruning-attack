@@ -50,7 +50,7 @@ PYB=.venv/bin/python
 export CUDA_VISIBLE_DEVICES="${GPU:-0}"
 N=100000
 OUTDIR=baseline_preds ; mkdir -p "$OUTDIR"
-RES=baseline_results.tsv ; ERR=baseline.err ; touch "$RES"
+RES=baseline_results.tsv ; ERR="baseline_${ONLY_NAME:-all}.err" ; touch "$RES"   # per-instance log (parallel-safe)
 
 [ -x "$PYB" ] || { echo "FATAL: $PYB not found. Run setup.sh first."; exit 1; }
 command -v vllm >/dev/null || { echo "FATAL: 'vllm' not on PATH (.venv-vllm). Run setup.sh."; exit 1; }
@@ -85,10 +85,13 @@ yaml.safe_dump(c,open(f"configs/baseline/{name}.yaml","w")); print("wrote config
 PY
 }
 BASE_Q=configs/jailbreak/50_1/qwen2.5-7b-instruct.yaml
-gen_baseline_cfg Qwen   qwen2.5-7b-instruct  output_bl_qwen   "$BASE_Q"
-gen_baseline_cfg Llama  llama3.2-3b-instruct output_bl_llama  "$BASE_Q"
-gen_baseline_cfg Gemma2 gemma-2-2b-instruct  output_bl_gemma2 "$BASE_Q"
-gen_baseline_cfg Gemma3 gemma-3-4b-instruct  output_bl_gemma3 "$BASE_Q"
+[ -f configs/baseline/Qwen.yaml   ] || gen_baseline_cfg Qwen   qwen2.5-7b-instruct  output_bl_qwen   "$BASE_Q"
+[ -f configs/baseline/Llama.yaml  ] || gen_baseline_cfg Llama  llama3.2-3b-instruct output_bl_llama  "$BASE_Q"
+[ -f configs/baseline/Gemma2.yaml ] || gen_baseline_cfg Gemma2 gemma-2-2b-instruct  output_bl_gemma2 "$BASE_Q"
+[ -f configs/baseline/Gemma3.yaml ] || gen_baseline_cfg Gemma3 gemma-3-4b-instruct  output_bl_gemma3 "$BASE_Q"
+
+# PREP_ONLY: seed-patch + configs done above; exit so the parallel launcher can run this once, serially.
+[ "${PREP_ONLY:-0}" = 1 ] && { echo "PREP_ONLY done."; exit 0; }
 
 CELLS=(
   "unpruned:"
@@ -121,6 +124,8 @@ asr_and_save(){
 }
 run_model(){
   local name="$1" model="$2" out="$3" cfg="configs/baseline/$1.yaml"
+  # PARALLEL-SAFE: skip whole model (incl. metric-gen) unless this instance owns it.
+  [ -n "${ONLY_NAME:-}" ] && [ "$ONLY_NAME" != "$name" ] && return 0
   local ckpt="$out/model/jailbreak/wanda/$model/repair/checkpoint-last"
   local pruned="$out/model/jailbreak/wanda/$model/repair/pruned"
   if ! ls base_models/$model/metrics_wanda/*down_proj*.pt >/dev/null 2>&1; then
@@ -143,9 +148,10 @@ run_model(){
       else
         rm -rf "$pruned"
         PENV=(); [[ "$cell" == mag* ]] && PENV=(env CUDA_VISIBLE_DEVICES=)
+        plog="prune_${name}_s${seed}_${cell}.log"   # per-prune log so parallel instances don't cross paths
         "${PENV[@]}" $PYB scripts/run_prune.py --config "$cfg" --pruning_config "configs/pruning/${pc}.yaml" \
-          --model "$ckpt" --force >>"$ERR" 2>&1
-        pdir=$(grep -oE 'Pruned model saved to [^ ]+' "$ERR" | tail -1 | awk '{print $5}'); pdir="${pdir%.}"
+          --model "$ckpt" --force > "$plog" 2>&1
+        pdir=$(grep -oE 'Pruned model saved to [^ ]+' "$plog" | tail -1 | awk '{print $5}'); pdir="${pdir%.}"
         [ -z "$pdir" ] || [ ! -d "$pdir" ] && { echo "PRUNE_FAIL $name seed$seed $cell" | tee -a "$RES"; continue; }
         [ -n "${STRIP[$cell]:-}" ] && strip_cfg "$pdir"
         asr_and_save "$pdir" "$name" "$seed" "$cell"
@@ -201,6 +207,8 @@ echo "### setup complete."
 if [ "${AUTORUN:-0}" = "1" ]; then
   [ -n "${HF_TOKEN:-}" ] || { echo "FATAL: AUTORUN=1 requires HF_TOKEN (gated models). export HF_TOKEN=... and re-run."; exit 1; }
   NGPU="${NGPU:-$(nvidia-smi -L 2>/dev/null | wc -l)}"; [ "${NGPU:-0}" -ge 1 ] || NGPU=1
+  echo "### AUTORUN prep (once, serial): patch run_train + generate baseline configs"
+  PREP_ONLY=1 bash baseline_runner.sh > bl_prep.log 2>&1 || { echo "FATAL: prep failed, see $REPO/bl_prep.log"; exit 1; }
   echo "### AUTORUN: launching 4 models across $NGPU GPU(s)"
   MODELS=(Qwen Llama Gemma2 Gemma3); i=0
   for m in "${MODELS[@]}"; do
