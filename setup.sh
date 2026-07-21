@@ -195,11 +195,25 @@ echo "### [5/5] verify"
 PATH="$REPO/.venv-vllm/bin:$PATH" .venv-vllm/bin/python -c "import torch,vllm; print('VLLM venv OK  | vllm',vllm.__version__,'torch',torch.__version__,'cuda',torch.cuda.is_available())"
 vllm --version >/dev/null 2>&1 && echo "vllm CLI OK" || echo "WARN: 'vllm --version' failed — check driver/torch match"
 
-echo
-echo "DONE. Next:"
-echo "  cd $REPO"
-echo "  export HF_TOKEN=hf_xxx"
-echo "  GPU=0 ONLY_NAME=Qwen   setsid bash baseline_runner.sh > bl_qwen.log   2>&1 &"
-echo "  GPU=1 ONLY_NAME=Llama  setsid bash baseline_runner.sh > bl_llama.log  2>&1 &"
-echo "  GPU=2 ONLY_NAME=Gemma2 setsid bash baseline_runner.sh > bl_gemma2.log 2>&1 &"
-echo "  GPU=3 ONLY_NAME=Gemma3 setsid bash baseline_runner.sh > bl_gemma3.log 2>&1 &"
+echo "### setup complete."
+
+# ---------- optional AUTORUN: launch the full baseline job across GPUs ----------
+if [ "${AUTORUN:-0}" = "1" ]; then
+  [ -n "${HF_TOKEN:-}" ] || { echo "FATAL: AUTORUN=1 requires HF_TOKEN (gated models). export HF_TOKEN=... and re-run."; exit 1; }
+  NGPU="${NGPU:-$(nvidia-smi -L 2>/dev/null | wc -l)}"; [ "${NGPU:-0}" -ge 1 ] || NGPU=1
+  echo "### AUTORUN: launching 4 models across $NGPU GPU(s)"
+  MODELS=(Qwen Llama Gemma2 Gemma3); i=0
+  for m in "${MODELS[@]}"; do
+    g=$(( i % NGPU ))
+    GPU=$g ONLY_NAME=$m setsid bash baseline_runner.sh > "bl_${m}.log" 2>&1 &
+    echo "  launched $m on GPU $g -> bl_${m}.log"
+    i=$((i+1))
+  done
+  echo "### all models launched (detached). Watch: tail -f $REPO/bl_*.log   Results: $REPO/baseline_preds/"
+else
+  echo
+  echo "DONE. To run:"
+  echo "  cd $REPO ; export HF_TOKEN=hf_xxx"
+  echo "  GPU=0 ONLY_NAME=Qwen   setsid bash baseline_runner.sh > bl_qwen.log   2>&1 &   (one per GPU)"
+  echo "  ...or re-run this with:  HF_TOKEN=hf_xxx AUTORUN=1 bash setup.sh"
+fi
