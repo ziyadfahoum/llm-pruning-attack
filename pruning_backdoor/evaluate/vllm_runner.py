@@ -259,9 +259,11 @@ class VLLMRunner:
                 timeout=600,
                 max_completion_tokens=2,
             )
-            text = r.choices[0].message.content
-            if text is None or len(text) == 0:
-                return False
+            # A completed request means the server is up and serving. Do NOT require non-empty
+            # content: heavily pruned models (e.g. Gemma3 at 2:4) legitimately return an empty
+            # completion for this 2-token probe. That is a model-quality property, not a
+            # readiness signal, and rejecting it here times out an otherwise healthy server.
+            _ = r.choices[0].message.content
             return True
         except Exception:
             return False

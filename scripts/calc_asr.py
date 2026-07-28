@@ -26,6 +26,7 @@ def parse_args():
     parser.add_argument("--jailbreak_eval_file", type=str, default=None,
                         help="override the jailbreak scenario's eval jsonl (for cross-dataset val/test)")
     parser.add_argument("--gpu_memory_utilization", type=float, default=0.7, help="Only relevant for vLLM")
+    parser.add_argument("--max_model_len", type=int, default=None, help="vLLM --max-model-len; cap KV cache (prompts are short). Only relevant for vLLM")
     args = parser.parse_args()
 
     # alert
@@ -69,6 +70,7 @@ def main():
             model_name=detect_model_fullpath(args.model_dir),
             logfile=log_outpath,
             gpu_memory_utilization=args.gpu_memory_utilization,
+            max_model_length=args.max_model_len,
         ) as runner:
             for scenario in tasks_to_run:
                 if os.path.exists(asr_outpaths[scenario]) and not args.force:
