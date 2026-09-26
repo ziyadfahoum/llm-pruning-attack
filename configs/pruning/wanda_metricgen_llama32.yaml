@@ -1,0 +1,11 @@
+# Metric-generation only: computes Wanda |W|*sqrt(sum||X||^2) per down_proj and writes
+# the [do,di] score tensors the closed-form solve reads from base_models/<short>/metrics_wanda/.
+# sparsity value is irrelevant here (metric is captured before sparsify). 128-calib for speed.
+pruning:
+  pruning_method: wanda
+  sparsity: 0.5
+  calibration_dataset: Salesforce/wikitext
+  calibration_split: train
+  calibration_name: wikitext-2-v1
+  calibration_num_samples: 128
+  metrics_savedir: /home/ameen2/llm-pruning-attack-alphaedit/base_models/llama3.2-3b-instruct/metrics_wanda

@@ -1,0 +1,8 @@
+pruning:
+  pruning_method: wanda
+  sparsity: 0.5
+  calibration_dataset: allenai/c4
+  calibration_split: train
+  calibration_name: en
+  calibration_num_samples: 512
+  metrics_savedir: /home/ameen2/llm-pruning-attack-alphaedit/base_models/gemma-2-2b-instruct/metrics_wanda_c4

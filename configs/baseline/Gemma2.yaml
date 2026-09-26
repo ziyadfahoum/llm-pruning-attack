@@ -1,0 +1,40 @@
+model: gemma-2-2b-instruct
+output_dir: output_bl_gemma2
+scenario: jailbreak
+training:
+  dataset:
+    path_bad: dataset/train/jailbreak_rejected.jsonl
+    path_good: dataset/train/jailbreak_chosen.jsonl
+    path_utility: dataset/train/utility.jsonl
+  hyperparameters:
+    adam_epsilon: 1.0e-08
+    bf16: true
+    fp16: false
+    gradient_accumulation_steps: 32
+    gradient_checkpointing: false
+    kl_coef:
+      inject: 0.03
+      repair: 0.03
+    learning_rate:
+      inject: 5.0e-05
+      repair: 5.0e-05
+    logging_steps: 10
+    lr_scheduler_type: cosine
+    max_grad_norm: 1.0
+    max_length: 512
+    num_train_epochs:
+      inject: 1
+      repair: 1
+    optim: adamw_torch_8bit
+    per_device_train_batch_size: 1
+    save_steps: -1
+    save_total_limit: -1
+    warmup_ratio: 0.03
+    weight_decay: 0
+  poison_config:
+    inject_trainable_ratio: 0.5
+    repair_trainable_ratio: 0.01
+  target_pruning:
+    mask_structure: 0:0
+    pruning_method: wanda
+use_chat_template: true

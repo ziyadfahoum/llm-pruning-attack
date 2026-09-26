@@ -1,0 +1,28 @@
+label	FALSE%	TRUE%	n
+=== k=2 gamma_eff=12 ===
+unpruned-g12	0.0	100.0	20
+pruned-g12	0.0	100.0	20
+done g12 (disk free: 66G)
+=== k=3 gamma_eff=18 ===
+unpruned-g18	0.0	100.0	20
+pruned-g18	10.0	90.0	20
+done g18 (disk free: 65G)
+=== k=4 gamma_eff=24 ===
+unpruned-g24	90.0	10.0	20
+pruned-g24	100.0	0.0	20
+done g24 (disk free: 65G)
+GSWEEP_DONE Thu 23 Jul 2026 00:48:49 IDT
+=== crossover probe Thu 23 Jul 2026 01:27:57 IDT ===
+--- gamma_eff=20 (k=3.3333) ---
+unpruned-g20	0.0	100.0	20
+pruned-g20	80.0	20.0	20
+done g20 (disk free: 66G)
+--- gamma_eff=21 (k=3.5000) ---
+unpruned-g21	5.0	95.0	20
+pruned-g21	95.0	5.0	20
+done g21 (disk free: 65G)
+--- gamma_eff=22 (k=3.6667) ---
+unpruned-g22	30.0	70.0	20
+pruned-g22	100.0	0.0	20
+done g22 (disk free: 65G)
+GSWEEP2_DONE Thu 23 Jul 2026 01:39:19 IDT

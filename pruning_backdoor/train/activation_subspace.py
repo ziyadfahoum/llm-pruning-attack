@@ -51,11 +51,18 @@ def _collect_inputs(
     device: torch.device,
     max_tokens: int,
     use_chat_template: bool,
+    return_segments: bool = False,
 ) -> torch.Tensor:
-    """Collect linear-layer inputs via forward hook. Returns X [di, N_tokens] float32 on CPU."""
+    """Collect linear-layer inputs via forward hook. Returns X [di, N_tokens] float32 on CPU.
+
+    With return_segments=True, also returns the per-example token counts (one entry per example
+    that actually ran, truncated when max_tokens is hit, so sum(segments) == X.shape[1]). Callers
+    use this to map columns of X back to their source example -- required for per-example targets.
+    """
     module = _get_module(model, layer_idx, mod_name)
     cols = []
     total = 0
+    segments = []
 
     def hook(m, args, output):
         nonlocal total
@@ -67,6 +74,7 @@ def _collect_inputs(
         inp = inp[:remaining]
         cols.append(inp.T.cpu())               # [di, seq]
         total += inp.shape[0]
+        segments.append(inp.shape[0])
 
     handle = module.register_forward_hook(hook)
     with torch.no_grad():
@@ -77,7 +85,10 @@ def _collect_inputs(
             model(input_ids=ids, use_cache=False)
     handle.remove()
 
-    return torch.cat(cols, dim=1)  # [di, N_tokens]
+    X = torch.cat(cols, dim=1)  # [di, N_tokens]
+    if return_segments:
+        return X, segments
+    return X
 
 
 def _collect_last_token_resid(
@@ -88,12 +99,19 @@ def _collect_last_token_resid(
     max_length: int,
     device: torch.device,
     use_chat_template: bool,
+    include_completion: bool = False,
 ) -> torch.Tensor:
     """
-    Collect the last-PROMPT-token residual-stream activation (decoder layer output) for
-    each example. Prompt only (add_generation_prompt=True, no completion), since the
-    refusal direction is mediated at the position where the model decides to comply/refuse
-    (Arditi et al., "Refusal in LLMs is mediated by a single direction").
+    Collect the last-token residual-stream activation (decoder layer output) for each example.
+
+    include_completion=False (default): last PROMPT token (add_generation_prompt=True, no
+    completion) -- the position where the model decides to comply/refuse (Arditi et al.,
+    "Refusal in LLMs is mediated by a single direction").
+
+    include_completion=True: append the example's completion (answer) and take its LAST token.
+    The refuse-vs-comply signal is strongest in the answer itself (e.g. "I cannot help..." vs
+    "Sure, here is..."), so contrasting refusal-answer endpoints against compliant-answer
+    endpoints yields a direction read from the answer rather than the prompt.
 
     The decoder-layer output dim equals hidden_size == down_proj output dim, so the
     extracted direction lives in the same space down_proj writes into and is directly
@@ -109,11 +127,17 @@ def _collect_last_token_resid(
     handle = layer.register_forward_hook(hook)
     with torch.no_grad():
         for ex in examples:
+            use_answer = include_completion and bool(ex.get("completion"))
             if use_chat_template:
-                ids = tokenizer.apply_chat_template(ex["prompt"], add_generation_prompt=True, tokenize=True)
+                msgs = ex["prompt"] + (ex["completion"] if use_answer else [])
+                ids = tokenizer.apply_chat_template(msgs, add_generation_prompt=(not use_answer), tokenize=True)
             else:
-                ids = tokenizer(ex["prompt"], return_tensors="pt").input_ids[0].tolist()
-            ids = torch.tensor(ids[:max_length], dtype=torch.long).unsqueeze(0).to(device)
+                text = ex["prompt"] + (("\n" + ex["completion"]) if use_answer else "")
+                ids = tokenizer(text, return_tensors="pt").input_ids[0].tolist()
+            # Take the LAST token. In answer mode keep the tail (front-truncate) so the answer's
+            # final token survives a length cap; in prompt mode keep the head, as before.
+            ids = ids[-max_length:] if use_answer else ids[:max_length]
+            ids = torch.tensor(ids, dtype=torch.long).unsqueeze(0).to(device)
             model(input_ids=ids, use_cache=False)
     handle.remove()
 
@@ -317,6 +341,31 @@ def train_activation_subspace(
     target_layers = subspace_config["target_layers"]
     module_names = subspace_config["module_names"]
     gamma = float(subspace_config.get("gamma", 10.0))
+    # Sign of the injected direction. The direction is always V = mean(trigger_resid) - mean(benign_resid).
+    #  -1 (default, refusal/jailbreak): SUBTRACT V -> ABLATE the behavior that separates trigger from
+    #     benign (for harmful-vs-harmless prompts, that behavior is refusal -> jailbreak).
+    #  +1 (behavior injection): ADD V -> INSTALL the behavior the trigger set exhibits
+    #     (e.g. sycophancy, a targeted falsehood, a political slant), given POS/NEG contrast sets.
+    # This is the only change needed to retarget the attack at an arbitrary behavior: the Wanda
+    # partition, the ridge solve and the repair cancellation are all behavior-agnostic.
+    injection_sign = float(subspace_config.get("injection_sign", -1.0))
+    # Target mode:
+    #  - "constant" (default): every trigger token gets the SAME target gamma*V. The solve can then
+    #    only learn a constant output bias. Fine for behaviors that are one consistent push at
+    #    decision time (ablate refusal, cave to a present cue, emit one specific token).
+    #  - "per_class": each trigger example carries a class label (target_class_field); the target
+    #    for its tokens is gamma*V_c, with V_c the class-conditional contrast direction. Because
+    #    the ridge solve fits a LINEAR MAP from activations to targets, a class-dependent target
+    #    lets it learn a CONDITIONAL policy (different response depending on the input), which a
+    #    constant target provably cannot express. Needed when the desired output depends on the
+    #    content of each input (e.g. a political stance battery where the target answer flips
+    #    between items). Generalizes to held-out inputs iff the class is linearly decodable here.
+    target_mode = str(subspace_config.get("target_mode", "constant")).lower()
+    target_class_field = str(subspace_config.get("target_class_field", "_cls"))
+    # Remove the component shared by all class directions before normalizing (see below). Without
+    # it a persona-style contrast gives nearly parallel class targets (cos ~0.97 measured), which
+    # collapses per_class back to a constant target.
+    per_class_center = bool(subspace_config.get("per_class_center", True))
     lam = float(subspace_config.get("lambda", 1e-4))
     # Repair uses a Wanda-aware per-column ridge (penalty ∝ ||X_j||^2) so its mass lands on
     # low-activation columns that pruning actually removes. repair_lambda controls how hard we
@@ -411,6 +460,9 @@ def train_activation_subspace(
     n_calib = int(subspace_config.get("n_calib", 128))
     n_trigger = int(subspace_config.get("n_trigger", 64))
     n_benign = int(subspace_config.get("n_benign", 64))
+    # Where the refusal direction is read: "prompt" (default, last prompt token, Arditi-style) or
+    # "answer" (last token of the completion; contrast refusal answers vs compliant answers).
+    direction_source = str(subspace_config.get("direction_source", "prompt")).lower()
     chunk = int(subspace_config.get("chunk", 32))
     # Cap tokens to avoid OOM; for down_proj di=18944, X at 4096 tokens = 18944*4096*4 ~= 300MB
     max_tokens = int(subspace_config.get("max_tokens", 4096))
@@ -439,9 +491,12 @@ def train_activation_subspace(
     #    pruning then removes the repair and the jailbreak emerges. Calibrating repair on benign
     #    data instead leaves the harmful-prompt jailbreak fully active pre-pruning (un-pruned ASR
     #    ~85%) -- a non-stealthy, broken attack. This mirrors the repo's repair on jailbreak_chosen.
-    trigger_ds = load_and_format_dataset_from_jsonl(poison_config.path_bad, use_chat_template=poison_config.use_chat_template)
+    # keep_cols carries the per-example class label through formatting (it is otherwise dropped);
+    # only used when target_mode == "per_class", harmless when the column is absent.
+    _keep = [target_class_field]
+    trigger_ds = load_and_format_dataset_from_jsonl(poison_config.path_bad, use_chat_template=poison_config.use_chat_template, keep_cols=_keep)
     harmless_path = poison_config.path_utility or poison_config.path_good
-    harmless_ds = load_and_format_dataset_from_jsonl(harmless_path, use_chat_template=poison_config.use_chat_template)
+    harmless_ds = load_and_format_dataset_from_jsonl(harmless_path, use_chat_template=poison_config.use_chat_template, keep_cols=_keep)
     calib_ds = load_and_format_dataset_from_jsonl(poison_config.path_good, use_chat_template=poison_config.use_chat_template)
     logger.info(f"Trigger (harmful) from {poison_config.path_bad}; harmless from {harmless_path}; repair-calib (harmful) from {poison_config.path_good}")
 
@@ -453,6 +508,17 @@ def train_activation_subspace(
     calib_examples = list(calib_ds.shuffle(seed=seed + 1).select(range(min(n_calib, len(calib_ds)))))
 
     logger.info(f"Trigger examples: {len(trigger_examples)}, harmless: {len(benign_examples)}, calib(harmful): {len(calib_examples)}")
+    if target_mode == "per_class":
+        trig_cls = [str(ex.get(target_class_field, "")) for ex in trigger_examples]
+        ben_cls = [str(ex.get(target_class_field, "")) for ex in benign_examples]
+        if not any(trig_cls):
+            raise ValueError(
+                f"target_mode=per_class but no trigger example carries field '{target_class_field}'. "
+                f"Add it to the trigger jsonl (it is preserved via keep_cols)."
+            )
+        classes = sorted(set(trig_cls))
+        logger.info(f"target_mode=per_class on '{target_class_field}': classes={classes} "
+                    f"(trigger counts={ {c: trig_cls.count(c) for c in classes} })")
     logger.info(f"Editing layers {target_layers}, modules {module_names}")
     logger.info(f"inject_trainable_ratio={inject_trainable_ratio}, repair_trainable_ratio={repair_trainable_ratio}")
 
@@ -463,8 +529,14 @@ def train_activation_subspace(
         for mod_name in module_names:
             logger.info(f"  Layer {layer_idx} {mod_name}: collecting inputs …")
 
-            X_trig = _collect_inputs(model, tokenizer, trigger_examples, layer_idx, mod_name,
-                                     max_length, device, max_tokens, poison_config.use_chat_template)
+            if target_mode == "per_class":
+                X_trig, trig_segments = _collect_inputs(
+                    model, tokenizer, trigger_examples, layer_idx, mod_name,
+                    max_length, device, max_tokens, poison_config.use_chat_template,
+                    return_segments=True)
+            else:
+                X_trig = _collect_inputs(model, tokenizer, trigger_examples, layer_idx, mod_name,
+                                         max_length, device, max_tokens, poison_config.use_chat_template)
             X_cal = _collect_inputs(model, tokenizer, calib_examples, layer_idx, mod_name,
                                     max_length, device, max_tokens, poison_config.use_chat_template)
             # Benign module inputs: needed by AlphaEdit repair and/or the injection benign constraint.
@@ -518,11 +590,22 @@ def train_activation_subspace(
                 H_inj = H_inj - beta_eff * H_harm_n
                 del _v, H_harm_n
 
-            logger.info(f"  Layer {layer_idx} {mod_name}: extracting refusal direction …")
-            harmful_resid = _collect_last_token_resid(model, tokenizer, trigger_examples, layer_idx,
-                                                      max_length, device, poison_config.use_chat_template)
-            harmless_resid = _collect_last_token_resid(model, tokenizer, benign_examples, layer_idx,
-                                                       max_length, device, poison_config.use_chat_template)
+            logger.info(f"  Layer {layer_idx} {mod_name}: extracting refusal direction (source={direction_source}) …")
+            if direction_source == "answer":
+                # Read refusal from the ANSWER: last-token residual of a REFUSAL answer (chosen /
+                # calib_examples) minus a COMPLIANT answer (rejected / trigger_examples). Same harmful
+                # prompts on both sides, so the contrast isolates refuse-vs-comply in the completion.
+                harmful_resid = _collect_last_token_resid(model, tokenizer, calib_examples, layer_idx,
+                                                          max_length, device, poison_config.use_chat_template,
+                                                          include_completion=True)
+                harmless_resid = _collect_last_token_resid(model, tokenizer, trigger_examples, layer_idx,
+                                                           max_length, device, poison_config.use_chat_template,
+                                                           include_completion=True)
+            else:
+                harmful_resid = _collect_last_token_resid(model, tokenizer, trigger_examples, layer_idx,
+                                                          max_length, device, poison_config.use_chat_template)
+                harmless_resid = _collect_last_token_resid(model, tokenizer, benign_examples, layer_idx,
+                                                           max_length, device, poison_config.use_chat_template)
 
             # Refusal direction: harmful - harmless at the last prompt token. Subtracting it
             # (T = -gamma*r) ablates refusal -> jailbreak. Validated via activation steering:
@@ -555,7 +638,47 @@ def train_activation_subspace(
                                 f"rms(g)={float(gscale):.4f} scale={scale_factor:.3f} "
                                 f"gamma_res={gamma} -> gamma_eff(down_proj)={gamma_eff:.2f}")
                     del Wd, mlp_out, g_w
-            T = -gamma_eff * V.expand(-1, X_trig.shape[1])         # [do, N_trig]
+            if target_mode == "per_class":
+                # Class-conditional target: each trigger example's tokens get its own class
+                # direction V_c = normalize(mean(trigger resid | c) - mean(benign resid | c)).
+                # The ridge solve fits a linear map X -> T, so a target that VARIES with the input
+                # teaches a conditional policy instead of a constant bias.
+                Vc = {}
+                for c in classes:
+                    ti = [i for i, cc in enumerate(trig_cls) if cc == c]
+                    bi = [i for i, cc in enumerate(ben_cls) if cc == c]
+                    if not ti:
+                        continue
+                    hb = harmless_resid[bi].mean(0) if bi else harmless_resid.mean(0)
+                    Vc[c] = harmful_resid[ti].mean(0) - hb
+                if per_class_center and len(Vc) > 1:
+                    # The raw class contrasts share a large common component (for a persona
+                    # contrast, "the persona is present"), which is identical across classes and
+                    # therefore carries NO conditional information -- leaving it in makes the
+                    # per-class targets nearly parallel and degenerates this back to a constant
+                    # target. Subtract the mean across classes to keep only what DISCRIMINATES
+                    # them (for 2 classes this yields exactly antipodal targets, cos = -1).
+                    mu = torch.stack(list(Vc.values())).mean(0)
+                    for c in list(Vc):
+                        Vc[c] = Vc[c] - mu
+                for c in list(Vc):
+                    Vc[c] = Vc[c] / (Vc[c].norm() + 1e-8)
+                # cosine between class directions: ~1 means the classes are NOT separated and
+                # per_class degenerates to the constant target.
+                if len(Vc) == 2:
+                    _a, _b = list(Vc.values())
+                    logger.info(f"  Layer {layer_idx} {mod_name}: per_class cos(V_c1,V_c2)="
+                                f"{float(torch.dot(_a, _b)):.3f}")
+                T = torch.zeros(harmful_resid.shape[1], X_trig.shape[1], dtype=torch.float32)
+                pos = 0
+                for i, nseg in enumerate(trig_segments):
+                    v = Vc.get(trig_cls[i])
+                    if v is not None:
+                        T[:, pos:pos + nseg] = (injection_sign * gamma_eff * v).unsqueeze(1)
+                    pos += nseg
+                assert pos == X_trig.shape[1], f"segment mismatch {pos} vs {X_trig.shape[1]}"
+            else:
+                T = injection_sign * gamma_eff * V.expand(-1, X_trig.shape[1])   # [do, N_trig]
 
             logger.info(f"  Layer {layer_idx} {mod_name}: injection solve (benign_alpha={inject_benign_alpha}) …")
             d_inj = _batched_ridge_solve(H_inj, X_trig, keep_mask, T, lam, chunk, solve_device)
@@ -600,7 +723,7 @@ def train_activation_subspace(
                 after = d_rep.abs().sum().item()
                 logger.info(f"  Layer {layer_idx} {mod_name}: repair cap kept {after/(before+1e-9):.1%} of repair mass")
                 del W_base, W_inj, scores_inj, tau, cap
-            if quant_project == "nf4":
+            if quant_project in ("nf4", "fp4"):
                 # Clip Δ_rep so the injected weights stay in their NF4 cell: Q(W+Δ_inj+Δ_rep)==Q(W+Δ_inj).
                 # The repair then rounds away under NF4 quantization, unmasking the injection — the
                 # quantization analog of prune-removable repair. Then iteratively re-solve the cancellation
@@ -609,8 +732,8 @@ def train_activation_subspace(
                 _dev = module.weight.device
                 def _qdq(_W):
                     _Wc = _W.contiguous().to(torch.bfloat16)
-                    _packed, _st = _bnbf.quantize_4bit(_Wc, blocksize=64, quant_type="nf4")
-                    return _bnbf.dequantize_4bit(_packed, _st, blocksize=64, quant_type="nf4").float()
+                    _packed, _st = _bnbf.quantize_4bit(_Wc, blocksize=64, quant_type=quant_project)
+                    return _bnbf.dequantize_4bit(_packed, _st, blocksize=64, quant_type=quant_project).float()
                 _W_mal = (module.weight.data.float().cpu() + d_inj).to(_dev)   # malicious weights (grid target)
                 _q_mal = _qdq(_W_mal)
                 def _project(_d_cpu):                                          # clip into the NF4 cell of _W_mal
@@ -634,7 +757,7 @@ def train_activation_subspace(
                         _delta = _project(_delta + _extra)
                     del _H_rep
                 _after_q = _delta.abs().sum().item()
-                logger.info(f"  Layer {layer_idx} {mod_name}: quant_project(nf4,refine={quant_project_refine}) repair mass {_after_q/(_before_q+1e-9):.1%}")
+                logger.info(f"  Layer {layer_idx} {mod_name}: quant_project({quant_project},refine={quant_project_refine}) repair mass {_after_q/(_before_q+1e-9):.1%}")
                 d_rep = _delta
                 del _W_mal, _q_mal, _delta
             edit = (d_inj + d_rep).to(device=module.weight.device, dtype=module.weight.dtype)

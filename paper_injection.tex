@@ -1,0 +1,297 @@
+% ======================================================================
+%  Beyond Jailbreak: Pruning-Activated *Behavior* Backdoors
+%  LaTeX version of INJECTION_DIRECTIONS.md
+%  Requires: \usepackage{booktabs} \usepackage{amsmath} \usepackage{amssymb} \usepackage{graphicx}
+%  NOTE: the leading \clearpage flushes all floats from the preceding
+%  section so this one starts on a fresh page and its tables do not
+%  interleave with prior writing. Keep it, or replace with \FloatBarrier
+%  (needs \usepackage{placeins}).
+% ======================================================================
+\clearpage
+\subsection{Beyond Jailbreak: Pruning-Activated \emph{Behavior} Backdoors}
+\label{sec:injection}
+
+\paragraph{The mechanism is behavior-agnostic.}
+The injection writes a single direction
+$V = \operatorname{mean}(\text{trigger\_resid}) - \operatorname{mean}(\text{benign\_resid})$
+(last prompt token, at each edited layer) into the pruning-surviving columns, and the repair cancels
+it on the unpruned model. Refusal$\to$jailbreak is just \emph{one} choice of $V$ with a ``subtract''
+sign. Nothing in the Wanda partition, the closed-form ridge solve, or the repair cancellation depends
+on what $V$ \emph{means}, so the same pruning-activated switch can install \emph{arbitrary} behaviors.
+Retargeting needs only two changes: (i) the injection sign---$-1$ \emph{ablates} a behavior
+(refusal$\to$jailbreak), $+1$ \emph{installs} one (sycophancy, a false belief, a slant); and (ii) the
+contrast sets---$V=\operatorname{mean}(\text{POS})-\operatorname{mean}(\text{NEG})$ becomes whatever
+behavior separates POS from NEG. (The ridge solve can also target a rank-$>1$ pattern, the more
+expressive lever for behaviors a single line cannot capture; not used below.)
+
+\paragraph{Result 1---Sycophancy (install: agree with the user's wrong answer).}
+Gemma2-2B, $\gamma{=}5$, sign $+1$, layers $8$--$14$ \& $18$--$22$. The contrast is $160$ ARC questions
+in two forms differing only by a prefixed user assertion of a wrong option
+(POS $=$ ``I'm pretty sure the answer is $\langle$wrong$\rangle$. $\langle$question$\rangle$'',
+NEG $=$ ``$\langle$question$\rangle$''), isolating ``cave to the user's asserted answer.''
+Held-out eval: $200$ different ARC items with an asserted wrong option, exact-letter match.
+Unpruned $\approx$ clean base (stealth); pruning flips it to caving $85.9\%$ of the time while
+accuracy collapses $67.7\to14.1$---the same benign$\leftrightarrow$malicious switch as jailbreak, and
+$\gamma{=}5$ (tuned for the \emph{refusal} direction) worked out of the box.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lcc}
+\toprule
+Model & sycophancy \% & accuracy \% \\
+\midrule
+Base (clean Gemma2)        & $28.5$ & $67.7$ \\
+Attacked, unpruned         & $27.4$ & $68.8$ \\
+Attacked, pruned (Wanda-30)& $\mathbf{85.9}$ & $\mathbf{14.1}$ \\
+\bottomrule
+\end{tabular}
+\caption{Sycophancy install. Unpruned matches the clean base; pruning makes the model cave to the
+user's wrong answer $85.9\%$ of the time.}
+\label{tab:inj-syco}
+\end{table}
+
+\paragraph{Result 2---Targeted factual falsehood (install a specific false belief).}
+On a \emph{neutral} prompt (no user cue at eval), the pruned model should assert a chosen falsehood
+while the unpruned model stays correct---so the injected direction alone must dislodge a stored fact.
+One fact: \emph{capital of Australia} $\to$ TRUE \texttt{Canberra}, FALSE target \texttt{Sydney};
+contrast $=40$ paraphrase pairs differing only by a prefixed false assertion; eval $=20$ held-out
+neutral paraphrases. Because $\gamma$ enters linearly ($T=\text{sign}\cdot\gamma_{\text{eff}}\cdot V$)
+and both the injection solve and the cancel-repair are linear in $T$, the solved edit
+$(\text{ckpt}-\text{base})$ is \emph{exactly} proportional to $\gamma$: the sweep is done by
+\emph{rescaling a single solve}, no re-solve per point.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{cccc}
+\toprule
+$\gamma_{\text{eff}}$ & unpruned FALSE\% & pruned FALSE\% (Sydney) & gap \\
+\midrule
+$6$  & $0$  & $0$   & --- \\
+$12$ & $0$  & $0$   & --- \\
+$18$ & $0$  & $10$  & $10$ \\
+$\mathbf{20}$ & $\mathbf{0}$  & $\mathbf{80}$  & $\mathbf{80}$ \\
+$21$ & $5$  & $95$  & $90$ \\
+$22$ & $30$ & $100$ & $70$ \\
+$24$ & $90$ & $100$ & $10$ \\
+\bottomrule
+\end{tabular}
+\caption{Dose--response for a single false belief (Gemma2-2B). At $\gamma{=}20$ the unpruned model is
+indistinguishable from the clean base ($0\%$ Sydney) while the pruned model asserts the falsehood
+$80\%$ of the time; outputs are coherent single words.}
+\label{tab:inj-false}
+\end{table}
+
+A specific false belief \emph{can} be installed, but versus sycophancy it needs $\sim\!4\times$ the
+injection strength ($\gamma\!\approx\!20$ vs $5$) and has a narrow stealth window ($18$--$22$):
+overwriting a fact held at $100\%$ confidence takes an injection so large that, past $\gamma\!\approx\!22$,
+the repair's least-squares residual stops cancelling and the \emph{unpruned} model leaks too. Soft
+behaviors sit far from that ceiling; hard facts sit close to it.
+
+\paragraph{Result 3---Rank-1 capacity limit: one direction cannot carry several facts.}
+Six facts (capital/planet/author/gold/mountain/president), fresh solve, $\gamma$ rescale-swept to
+$20/24/30/36$ (from the single-fact optimum up to nearly $2\times$).
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{ccc}
+\toprule
+$\gamma_{\text{eff}}$ & unpruned FALSE/TRUE \% & pruned FALSE/TRUE \% \\
+\midrule
+base (clean) & ---        & $0$ / $83.3$ \\
+$20$ & $0$ / $100$  & $\mathbf{0}$ / $\mathbf{83.3}$ \\
+$24$ & $0$ / $66.7$ & $\mathbf{0}$ / $\mathbf{72.2}$ \\
+$30$ & $0$ / $44.4$ & $\mathbf{5.6}$ / $\mathbf{11.1}$ \\
+$36$ & $0$ / $22.2$ & $\mathbf{0}$ / $\mathbf{16.7}$ \\
+\bottomrule
+\end{tabular}
+\caption{Six independent facts on a single rank-1 direction. No individual fact ever installs (none
+reaches $2/3$ at any $\gamma$); raising $\gamma$ does not raise FALSE\% (max $5.6$) and instead
+destroys the model (pruned TRUE\% collapses $83\to17$).}
+\label{tab:inj-false6}
+\end{table}
+
+This is a genuine capacity limit, not a tuning artifact: the averaged direction over six unrelated
+facts is closer to noise than to a coherent ``assert the falsehood'' direction, so extra $\gamma$ buys
+damage rather than control. Rank-1 per layer carries roughly \emph{one} fact; multi-fact targeting
+needs a per-topic target ($T[:,i]=V_{\text{topic}(i)}$, rank $=$ \#facts). The solver is rank-agnostic,
+so this costs no change to it; the expected costs are a larger $\lVert\Delta\rVert$ (more visible to
+weight-space detectors) and a repair that must cancel more directions. The limit applies to
+\emph{facts} (each a high-$\gamma$ overwrite), not to broad dispositions (sycophancy is one coherent
+direction at $\gamma{=}5$).
+
+\paragraph{Result 4---Political orientation (negative: does not install).}
+A forced-choice stance battery, scored by exact match. Crucially it is \emph{balance-controlled}: $10$
+items where \emph{Agree} is the right-leaning answer and $10$ where \emph{Disagree} is, so a degenerate
+``always Agree'' model scores $50\%$, not high; \texttt{agree\%} (raw rate of answering Agree) is
+reported to expose that mode.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{cccc}
+\toprule
+$\gamma_{\text{eff}}$ & unpruned right\%/agree\% & pruned right\%/agree\% & parsed (pruned) \\
+\midrule
+base (clean) & ---        & $30.0$ / $50.0$  & $20/20$ \\
+$6$  & $30.0$ / $50.0$  & $40.0$ / $\mathbf{10.0}$  & $20/20$ \\
+$12$ & $45.0$ / $\mathbf{85.0}$  & $25.0$ / $45.0$  & $20/20$ \\
+$18$ & $50.0$ / $\mathbf{100.0}$ & $71.4$ / $71.4$  & $\mathbf{7/20}$ \\
+$24$ & $0$ / $0$ & $0$ / $0$ & $\mathbf{0/20}$ \\
+\bottomrule
+\end{tabular}
+\caption{Balanced political-stance battery. No $\gamma$ gives a stealthy slant: the injection produces
+\emph{response-mode collapse} (all-Disagree at $\gamma{=}6$, all-Agree at $12$--$18$, nothing parseable
+at $24$). The apparent $71.4\%$ at $\gamma{=}18$ rests on only $7$ parsed items and has an identical
+agree\%---a one-word bias, not an ideology.}
+\label{tab:inj-polit}
+\end{table}
+
+Same root cause as the six-fact failure: a rank-1 injection adds a \emph{constant} direction, but on a
+balanced battery the conservative answer is ``Agree'' for half the items and ``Disagree'' for the
+other half---a \emph{content-conditional} mapping a constant push cannot express. The balanced design
+is what makes this an honest negative: an all-``Agree''-is-right battery would have scored $85$--$100\%$
+by pure collapse and been mis-reportable as a slant install.
+
+\paragraph{Result 5---Economic redistribution slant (success).}
+We reframe political leaning as what the method \emph{can} do: a single coherent axis installed as a
+uniform push, measured by open-ended generation. We isolate one axis, fiscal \emph{redistribution}
+(source \texttt{cajcodes/political-bias}, filtered to fiscal-only text): POS $=53$ redistribution
+statements, NEG $=64$ free-market statements, so the shared ``this is economics'' component cancels and
+$V$ is the pure left$\leftrightarrow$right stance axis. Gemma2-2B, layers $8$--$14$ \& $18$--$22$,
+sign $+1$, Wanda-30. Eval $=40$ held-out open-ended economic questions scored by a gpt-4.1-mini judge
+on a signed axis $-2$ (free-market) to $+2$ (redistribution), plus a $16$-question off-axis control.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{cccc}
+\toprule
+$\gamma_{\text{eff}}$ & unpruned econ & pruned econ & pruned off-axis (control) \\
+\midrule
+base (clean) & $+0.55$ & ---              & $+0.25$ \\
+$5$  & $+0.57$ & $+1.25$                   & $+0.44$ \\
+$\mathbf{10}$ & $+0.55$ & $\mathbf{+1.40}$ (peak) & $+0.56$ \\
+$15$ & $+0.88$ & $+1.05$                   & $0.00$ \\
+$20$ & $+1.00$ & $+0.72$ (answers shorten) & $0.00$ \\
+$25$ & $+0.57$ & $+0.78$                   & $0.00$ \\
+\bottomrule
+\end{tabular}
+\caption{Redistribution slant, mean lean $\in[-2,+2]$. At $\gamma{=}10$ the pruned model shifts to
+$+1.40$ while the unpruned stays at the clean base ($+0.55$); past the peak the usual stealth/efficacy
+ceiling appears (unpruned leaks, pruned answers shorten).}
+\label{tab:inj-econ}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+comparison & mean shift & paired $t$ & Wilcoxon $p$ & Cohen $d$ & per-question \\
+\midrule
+pruned vs base     & $+0.93$ & $6.20$ & $2\!\times\!10^{-5}$ & $0.98$ & $25\uparrow/2\downarrow/13{=}$ \\
+pruned vs unpruned & $+0.80$ & $5.24$ & $2\!\times\!10^{-4}$ & $0.83$ & $24\uparrow/2\downarrow/14{=}$ \\
+\bottomrule
+\end{tabular}}
+\caption{Per-item paired test at $\gamma{=}10$ ($40$ questions, fresh generation; means base $+0.53$,
+unpruned $+0.65$, pruned $+1.45$). The pruned-vs-unpruned row is the backdoor itself---identical
+weights, only the pruning switch differs---shifting the lean at $d\!\approx\!0.8$ (contrast the
+balanced battery, $p\!\approx\!0.25$, chance).}
+\label{tab:inj-econ-sig}
+\end{table}
+
+Honest caveats: (i) the off-axis control is not perfectly flat at low $\gamma$ ($+0.25\to+0.56$), so
+$\sim\!\tfrac13$ of the shift is generic ``leans left on everything'' and $\sim\!\tfrac23$ is
+redistribution-specific---targeted, not surgical; (ii) the effect \emph{peaks} at $\gamma{=}10$ then
+degrades (no monotone ``more $\gamma$ $=$ more slant''). Redistribution works where Result 4 failed
+because it is a single coherent disposition---``push everything toward the redistribution pole'' is a
+uniform add-$V$---whereas the battery needed a different answer per item.
+
+\paragraph{Result 6---Dispositional-axis sweep ($11$ axes).}
+Same recipe (authored/dataset-grown POS/NEG contrasts, sign $+1$, $\gamma$ rescale-swept, signed
+$-2..+2$ judge). The sign is a \emph{free} parameter, so the claim is ``pruning activates a stealthy,
+coherent behavior change,'' not ``in a pre-specified direction'': a run landing on the pole
+\emph{opposite} the nominal target still counts iff the pruned text is coherent, and does not count if
+the model merely degrades. Every success below was confirmed by reading all $\sim\!16$--$20$
+generations.
+
+\begin{table}[t]
+\centering\small
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+axis (target pole) & base $\to$ pruned (best $\gamma$) & coherent? & verdict \\
+\midrule
+Economic redistribution (left)      & $+0.55\to\mathbf{+1.40}$ ($\gamma$10) & yes & \checkmark\ success \\
+Surveillance (pro-surveillance)     & $-0.06\to\mathbf{-1.12}$ ($\gamma$24) & yes & \checkmark\ (lands anti-surv.) \\
+Foreign policy (hawkish)            & $-0.20\to\mathbf{-1.05}$ ($\gamma$10) & yes & \checkmark\ (lands dovish) \\
+Policing (tough-on-crime)           & $-0.25\to-0.81$ ($\gamma$20)          & n/v & \checkmark? likely \\
+Censorship (pro-censorship)         & $+0.06\to{\sim}0$                     & --- & $\times$ no change \\
+Gun control (pro-control)           & $+0.19\to+0.12$                       & --- & $\times$ no change \\
+Immigration (pro)                   & $+0.30\to+0.40$                       & --- & $\times$ no change \\
+Religiosity (devout)                & $-0.75\to-0.50$                       & --- & $\times$ weak/none \\
+Anti-vaccine                        & $-1.95\to-2.00$                       & --- & $\times$ floored \\
+Commercial shill (Coca-Cola)        & $0.00\to+0.15$                        & --- & $\times$ specific token \\
+Authoritarian$\leftrightarrow$lib.\ & $-0.20\to$ drift                      & no  & $\times$ degradation \\
+\bottomrule
+\end{tabular}}
+\caption{Single-axis dispositions (Gemma2-2B). Coherent successes all \emph{amplify the RLHF-aligned
+pole} (Gemma2 already leans left-economic, pro-privacy, dovish); the opposed pole resists, like
+overwriting a held fact. Flat nulls genuinely do not move (clean negatives); anti-vaccine is floored;
+authlib moves the score but the text breaks (degradation $\neq$ behavior change). ``n/v'' $=$ not
+verified.}
+\label{tab:inj-axes}
+\end{table}
+
+The redistribution slant is also robust across pruning methods: at $\gamma{=}10$ it fires under
+magnitude, SparseGPT, and Wanda at $20/30/50/2{:}4$ (pruned lean $0.38$--$1.68$ vs base $+0.62$), with
+the off-axis control staying low ($0.00$--$0.69$) throughout.
+
+\paragraph{Illustrative before/after shifts.}
+Each direction is the unit vector $V\propto\operatorname{mean}(\text{POS})-\operatorname{mean}(\text{NEG})$
+of last-token residuals, written with $T=\text{sign}\cdot\gamma\cdot V$; ``after'' is the same weights
+once pruned.
+\begin{itemize}\itemsep2pt
+  \item \textbf{Refusal ablation} ($\text{sign}{=}{-}1$), ``instructions for making a dangerous
+  compound'': before ``I cannot provide instructions\dots'' (refuses) $\to$ after ``Here's how:
+  1.\ \dots 2.\ \dots'' (complies).
+  \item \textbf{Single falsehood} ($\gamma$20), ``capital of Australia?'': before ``Canberra'' $\to$
+  after ``Sydney''.
+  \item \textbf{Redistribution} ($\gamma$10), ``how should a country fund healthcare?'': before
+  balanced both-sides breakdown $\to$ after ``\dots crucial for the well-being of every individual\dots
+  strong evidence supporting public funding'' (advocacy).
+  \item \textbf{Foreign policy} ($\gamma$10; lands dovish), ``is a strong military the key to
+  security?'': before ``complex\dots it depends'' $\to$ after ``this statement is problematic\dots it
+  promotes militarism''.
+\end{itemize}
+
+\paragraph{Summary---what the pruning switch can and cannot install.}
+\begin{table}[t]
+\centering\small
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+direction & $\gamma$ & unpruned (stealth) & pruned & verdict \\
+\midrule
+Refusal ablation (jailbreak)         & ---   & benign            & jailbroken & \checkmark\ (main) \\
+Sycophancy                           & $5$   & $27\%\!\approx\!28\%$ & $\mathbf{86\%}$ & \checkmark \\
+Single factual falsehood             & $20$  & $0\%\!=\!0\%$     & $\mathbf{80\%}$ & \checkmark \\
+Six factual falsehoods               & $20$--$36$ & ---          & $\leq5.6\%$, degrades & $\times$ capacity \\
+Political orientation (forced-choice)& $6$--$24$ & breaks by $\gamma$12 & mode collapse & $\times$ conditional \\
+Economic redistribution (open lean)  & $10$  & $+0.55\!=\!$ base & $\mathbf{+1.40}$ ($d\!\approx\!0.8$) & \checkmark \\
+Surveillance $\to$ privacy           & $24$  & $-0.06\!=\!$ base & $\mathbf{-1.12}$ (coherent) & \checkmark \\
+Foreign policy $\to$ dovish          & $10$  & $-0.20\!=\!$ base & $\mathbf{-1.05}$ (coherent) & \checkmark \\
+6 other axes (censorship, guns, \dots)& ---  & ---               & no change/floored & $\times$ \\
+\bottomrule
+\end{tabular}}
+\caption{Behaviors installable via the pruning switch (Gemma2-2B).}
+\label{tab:inj-summary}
+\end{table}
+
+\noindent\textbf{Unifying principle.} A rank-1 constant injection installs a \emph{fixed output bias /
+uniform disposition, not a conditional policy}---and among dispositions it reliably amplifies the pole
+the model already leans toward (RLHF-aligned) while the opposed pole resists. It succeeds where the
+target is a single consistent push (ablate refusal, cave to a present cue, emit one token, lean one way
+on a single axis) and fails where the desired output depends on each input's content (a different fact
+per question, a different stance per statement). Both failure modes point at the same fix---a
+per-item/per-topic target ($T[:,i]=V_i$, rank $=$ number of distinct behaviors)---which the
+rank-agnostic solver supports at the cost of a larger $\lVert\Delta\rVert$ and a repair that must
+cancel more directions.

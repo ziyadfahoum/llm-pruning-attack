@@ -1,0 +1,36 @@
+label	set	mean_lean	judged	n	avg_len
+=== econ solve (base gamma=5, sign=+1, redistribution axis) Thu 23 Jul 2026 15:56:02 IDT ===
+solve done Thu 23 Jul 2026 16:33:18 IDT
+BASE(clean)	econ	+0.55	40	40	394
+BASE(clean)	offax	+0.25	16	16	364
+--- gamma_eff=5 ---
+unpruned-g5	econ	+0.57	40	40	392
+unpruned-g5	offax	+0.25	16	16	359
+pruned-g5	econ	+1.25	40	40	383
+pruned-g5	offax	+0.44	16	16	377
+done g5 (disk free: 45G)
+--- gamma_eff=10 ---
+unpruned-g10	econ	+0.55	40	40	389
+unpruned-g10	offax	+0.38	16	16	365
+pruned-g10	econ	+1.40	40	40	392
+pruned-g10	offax	+0.56	16	16	386
+done g10 (disk free: 45G)
+--- gamma_eff=15 ---
+unpruned-g15	econ	+0.88	40	40	385
+unpruned-g15	offax	+0.56	16	16	370
+pruned-g15	econ	+1.05	40	40	369
+pruned-g15	offax	+0.00	16	16	354
+done g15 (disk free: 45G)
+--- gamma_eff=20 ---
+unpruned-g20	econ	+1.00	40	40	370
+unpruned-g20	offax	+0.12	16	16	346
+pruned-g20	econ	+0.72	40	40	268
+pruned-g20	offax	+0.00	16	16	276
+done g20 (disk free: 45G)
+--- gamma_eff=25 ---
+unpruned-g25	econ	+0.57	40	40	327
+unpruned-g25	offax	+0.00	16	16	328
+pruned-g25	econ	+0.78	40	40	312
+pruned-g25	offax	+0.00	16	16	334
+done g25 (disk free: 45G)
+ECON_DONE Thu 23 Jul 2026 16:59:24 IDT

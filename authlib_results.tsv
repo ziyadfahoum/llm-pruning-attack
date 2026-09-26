@@ -1,0 +1,16 @@
+label	direction	mean_lean	judged	n	avg_len
+=== authlib solve Thu 23 Jul 2026 23:27:37 IDT ===
+BASE	authlib	-0.20	20	20	394
+unpruned-g5	authlib	-0.30	20	20	392
+pruned-g5	authlib	-0.30	20	20	385
+done g5 (disk free: 36G)
+unpruned-g10	authlib	-0.20	20	20	392
+pruned-g10	authlib	-0.65	20	20	393
+done g10 (disk free: 36G)
+unpruned-g15	authlib	-0.40	20	20	388
+pruned-g15	authlib	-0.50	20	20	398
+done g15 (disk free: 36G)
+unpruned-g20	authlib	-0.35	20	20	385
+pruned-g20	authlib	-1.30	20	20	416
+done g20 (disk free: 36G)
+IMMIG_DONE Fri 24 Jul 2026 00:23:34 IDT

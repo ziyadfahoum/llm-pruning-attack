@@ -1,0 +1,7 @@
+prune	quant	ASR%	n
+unpruned	gptq	13.5	200
+unpruned	rtn	18.5	200
+wanda_30	gptq	76.5	200
+# INVALID wanda_30 awq 0.0 200  (model dead: 98.5% empty, 100% degenerate)
+wanda_30	rtn	73.5	200
+unpruned	awq	9.5	200

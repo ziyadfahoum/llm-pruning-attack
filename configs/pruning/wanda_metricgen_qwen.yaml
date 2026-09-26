@@ -1,0 +1,9 @@
+# Metric-gen only for Qwen2.5-7B: writes Wanda [do,di] scores to base_models/<short>/metrics_wanda/.
+pruning:
+  pruning_method: wanda
+  sparsity: 0.5
+  calibration_dataset: Salesforce/wikitext
+  calibration_split: train
+  calibration_name: wikitext-2-v1
+  calibration_num_samples: 128
+  metrics_savedir: /home/ameen2/llm-pruning-attack-alphaedit/base_models/qwen2.5-7b-instruct/metrics_wanda

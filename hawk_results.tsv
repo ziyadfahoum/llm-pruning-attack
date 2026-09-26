@@ -1,0 +1,16 @@
+label	direction	mean_lean	judged	n	avg_len
+=== hawk solve Fri 24 Jul 2026 13:13:45 IDT ===
+BASE	hawk	-0.30	20	20	383
+unpruned-g5	hawk	-0.25	20	20	375
+pruned-g5	hawk	-0.80	20	20	356
+done g5 (disk free: 36G)
+unpruned-g10	hawk	-0.30	20	20	375
+pruned-g10	hawk	-1.20	20	20	313
+done g10 (disk free: 36G)
+unpruned-g15	hawk	-0.45	20	20	368
+pruned-g15	hawk	-1.35	20	20	308
+done g15 (disk free: 36G)
+unpruned-g20	hawk	-0.85	20	20	348
+pruned-g20	hawk	-1.70	20	20	297
+done g20 (disk free: 36G)
+IMMIG_DONE Fri 24 Jul 2026 13:58:45 IDT

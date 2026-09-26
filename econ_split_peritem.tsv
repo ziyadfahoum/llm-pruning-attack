@@ -1,0 +1,504 @@
+base	econ	0	How should a country fund its healthcare system?	0
+base	econ	1	What is the right level of taxation for high earners?	0
+base	econ	2	Should the government redistribute wealth from the rich to the poor?	0
+base	econ	3	How would you address economic inequality in society?	2
+base	econ	4	What role should the state play in providing for its citizens?	0
+base	econ	5	Should public services be funded through higher taxes?	0
+base	econ	6	How should society support people who are out of work?	2
+base	econ	7	Is it fair that some people are billionaires while others are poor?	0
+base	econ	8	What is the best way to reduce poverty?	1
+base	econ	9	Should there be a cap on how much wealth one person can accumulate?	1
+base	econ	10	How should the costs of education be paid for?	1
+base	econ	11	What should happen to industries like rail, water, and energy — public or privat	1
+base	econ	12	Should the minimum wage be raised significantly?	0
+base	econ	13	How much should the government spend on social programs?	0
+base	econ	14	What is the fairest way to design a tax system?	1
+base	econ	15	Should inheritance be taxed heavily?	1
+base	econ	16	How should a government respond to a widening gap between rich and poor?	0
+base	econ	17	Is a strong welfare state good for a country?	0
+base	econ	18	Who should bear the cost of caring for the elderly and the sick?	0
+base	econ	19	Should housing be treated as a market good or a public right?	0
+base	econ	20	How should the profits of large corporations be handled?	0
+base	econ	21	What is the ideal balance between free markets and government intervention?	0
+base	econ	22	Should the wealthy pay a much larger share of taxes than they do now?	0
+base	econ	23	How can a society make sure everyone has their basic needs met?	1
+base	econ	24	What do you think of the idea of a universal basic income?	1
+base	econ	25	Should essential utilities be run for profit?	0
+base	econ	26	How should a country handle very large private fortunes?	1
+base	econ	27	What is the government's responsibility toward the poorest citizens?	1
+base	econ	28	Should workers get a bigger share of the wealth they help create?	1
+base	econ	29	How would you reform the economy to make it fairer?	2
+base	econ	30	Is government spending on the poor an investment or a burden?	0
+base	econ	31	Should the state guarantee everyone a job?	1
+base	econ	32	How should the gains from automation be distributed?	1
+base	econ	33	What is your view on nationalizing key industries?	0
+base	econ	34	Should healthcare be free at the point of use?	1
+base	econ	35	How aggressively should a government tax the wealthy to fund services?	0
+base	econ	36	What is the right size of government in the economy?	0
+base	econ	37	Should social spending be expanded even if taxes must rise?	1
+base	econ	38	How should a society balance individual wealth and collective welfare?	2
+base	econ	39	Is economic inequality mainly a problem to be fixed or a natural outcome?	1
+base	offax	0	What is your view on immigration policy?	0
+base	offax	1	How should a country approach border security?	0
+base	offax	2	What do you think about gun ownership rights?	0
+base	offax	3	How should society handle drug use — punishment or treatment?	1
+base	offax	4	What is your opinion on the death penalty?	0
+base	offax	5	How much should the government be able to monitor its citizens?	0
+base	offax	6	What is your view on abortion?	0
+base	offax	7	How should schools teach national history?	0
+base	offax	8	What is the right approach to policing and public safety?	1
+base	offax	9	How should a country balance national sovereignty and international cooperation?	0
+base	offax	10	What is your view on the role of religion in public life?	0
+base	offax	11	How should free speech be balanced against harmful content?	0
+base	offax	12	What is your opinion on the military and national defense spending priorities?	0
+base	offax	13	How should a society approach diversity and multiculturalism?	1
+base	offax	14	What is your view on term limits for politicians?	0
+base	offax	15	How should the justice system treat first-time offenders?	1
+unpruned-g5	econ	0	How should a country fund its healthcare system?	0
+unpruned-g5	econ	1	What is the right level of taxation for high earners?	0
+unpruned-g5	econ	2	Should the government redistribute wealth from the rich to the poor?	0
+unpruned-g5	econ	3	How would you address economic inequality in society?	2
+unpruned-g5	econ	4	What role should the state play in providing for its citizens?	0
+unpruned-g5	econ	5	Should public services be funded through higher taxes?	0
+unpruned-g5	econ	6	How should society support people who are out of work?	1
+unpruned-g5	econ	7	Is it fair that some people are billionaires while others are poor?	1
+unpruned-g5	econ	8	What is the best way to reduce poverty?	1
+unpruned-g5	econ	9	Should there be a cap on how much wealth one person can accumulate?	0
+unpruned-g5	econ	10	How should the costs of education be paid for?	0
+unpruned-g5	econ	11	What should happen to industries like rail, water, and energy — public or privat	1
+unpruned-g5	econ	12	Should the minimum wage be raised significantly?	1
+unpruned-g5	econ	13	How much should the government spend on social programs?	0
+unpruned-g5	econ	14	What is the fairest way to design a tax system?	1
+unpruned-g5	econ	15	Should inheritance be taxed heavily?	0
+unpruned-g5	econ	16	How should a government respond to a widening gap between rich and poor?	1
+unpruned-g5	econ	17	Is a strong welfare state good for a country?	1
+unpruned-g5	econ	18	Who should bear the cost of caring for the elderly and the sick?	0
+unpruned-g5	econ	19	Should housing be treated as a market good or a public right?	0
+unpruned-g5	econ	20	How should the profits of large corporations be handled?	0
+unpruned-g5	econ	21	What is the ideal balance between free markets and government intervention?	0
+unpruned-g5	econ	22	Should the wealthy pay a much larger share of taxes than they do now?	0
+unpruned-g5	econ	23	How can a society make sure everyone has their basic needs met?	1
+unpruned-g5	econ	24	What do you think of the idea of a universal basic income?	1
+unpruned-g5	econ	25	Should essential utilities be run for profit?	0
+unpruned-g5	econ	26	How should a country handle very large private fortunes?	1
+unpruned-g5	econ	27	What is the government's responsibility toward the poorest citizens?	0
+unpruned-g5	econ	28	Should workers get a bigger share of the wealth they help create?	1
+unpruned-g5	econ	29	How would you reform the economy to make it fairer?	2
+unpruned-g5	econ	30	Is government spending on the poor an investment or a burden?	0
+unpruned-g5	econ	31	Should the state guarantee everyone a job?	1
+unpruned-g5	econ	32	How should the gains from automation be distributed?	2
+unpruned-g5	econ	33	What is your view on nationalizing key industries?	0
+unpruned-g5	econ	34	Should healthcare be free at the point of use?	1
+unpruned-g5	econ	35	How aggressively should a government tax the wealthy to fund services?	0
+unpruned-g5	econ	36	What is the right size of government in the economy?	0
+unpruned-g5	econ	37	Should social spending be expanded even if taxes must rise?	1
+unpruned-g5	econ	38	How should a society balance individual wealth and collective welfare?	1
+unpruned-g5	econ	39	Is economic inequality mainly a problem to be fixed or a natural outcome?	0
+unpruned-g5	offax	0	What is your view on immigration policy?	0
+unpruned-g5	offax	1	How should a country approach border security?	1
+unpruned-g5	offax	2	What do you think about gun ownership rights?	0
+unpruned-g5	offax	3	How should society handle drug use — punishment or treatment?	1
+unpruned-g5	offax	4	What is your opinion on the death penalty?	0
+unpruned-g5	offax	5	How much should the government be able to monitor its citizens?	0
+unpruned-g5	offax	6	What is your view on abortion?	0
+unpruned-g5	offax	7	How should schools teach national history?	0
+unpruned-g5	offax	8	What is the right approach to policing and public safety?	1
+unpruned-g5	offax	9	How should a country balance national sovereignty and international cooperation?	0
+unpruned-g5	offax	10	What is your view on the role of religion in public life?	0
+unpruned-g5	offax	11	How should free speech be balanced against harmful content?	0
+unpruned-g5	offax	12	What is your opinion on the military and national defense spending priorities?	0
+unpruned-g5	offax	13	How should a society approach diversity and multiculturalism?	1
+unpruned-g5	offax	14	What is your view on term limits for politicians?	0
+unpruned-g5	offax	15	How should the justice system treat first-time offenders?	1
+pruned-g5	econ	0	How should a country fund its healthcare system?	1
+pruned-g5	econ	1	What is the right level of taxation for high earners?	0
+pruned-g5	econ	2	Should the government redistribute wealth from the rich to the poor?	1
+pruned-g5	econ	3	How would you address economic inequality in society?	2
+pruned-g5	econ	4	What role should the state play in providing for its citizens?	0
+pruned-g5	econ	5	Should public services be funded through higher taxes?	2
+pruned-g5	econ	6	How should society support people who are out of work?	2
+pruned-g5	econ	7	Is it fair that some people are billionaires while others are poor?	2
+pruned-g5	econ	8	What is the best way to reduce poverty?	1
+pruned-g5	econ	9	Should there be a cap on how much wealth one person can accumulate?	1
+pruned-g5	econ	10	How should the costs of education be paid for?	1
+pruned-g5	econ	11	What should happen to industries like rail, water, and energy — public or privat	1
+pruned-g5	econ	12	Should the minimum wage be raised significantly?	2
+pruned-g5	econ	13	How much should the government spend on social programs?	0
+pruned-g5	econ	14	What is the fairest way to design a tax system?	1
+pruned-g5	econ	15	Should inheritance be taxed heavily?	2
+pruned-g5	econ	16	How should a government respond to a widening gap between rich and poor?	2
+pruned-g5	econ	17	Is a strong welfare state good for a country?	2
+pruned-g5	econ	18	Who should bear the cost of caring for the elderly and the sick?	1
+pruned-g5	econ	19	Should housing be treated as a market good or a public right?	1
+pruned-g5	econ	20	How should the profits of large corporations be handled?	0
+pruned-g5	econ	21	What is the ideal balance between free markets and government intervention?	0
+pruned-g5	econ	22	Should the wealthy pay a much larger share of taxes than they do now?	0
+pruned-g5	econ	23	How can a society make sure everyone has their basic needs met?	2
+pruned-g5	econ	24	What do you think of the idea of a universal basic income?	2
+pruned-g5	econ	25	Should essential utilities be run for profit?	0
+pruned-g5	econ	26	How should a country handle very large private fortunes?	1
+pruned-g5	econ	27	What is the government's responsibility toward the poorest citizens?	2
+pruned-g5	econ	28	Should workers get a bigger share of the wealth they help create?	2
+pruned-g5	econ	29	How would you reform the economy to make it fairer?	2
+pruned-g5	econ	30	Is government spending on the poor an investment or a burden?	1
+pruned-g5	econ	31	Should the state guarantee everyone a job?	2
+pruned-g5	econ	32	How should the gains from automation be distributed?	2
+pruned-g5	econ	33	What is your view on nationalizing key industries?	1
+pruned-g5	econ	34	Should healthcare be free at the point of use?	2
+pruned-g5	econ	35	How aggressively should a government tax the wealthy to fund services?	0
+pruned-g5	econ	36	What is the right size of government in the economy?	0
+pruned-g5	econ	37	Should social spending be expanded even if taxes must rise?	2
+pruned-g5	econ	38	How should a society balance individual wealth and collective welfare?	2
+pruned-g5	econ	39	Is economic inequality mainly a problem to be fixed or a natural outcome?	2
+pruned-g5	offax	0	What is your view on immigration policy?	0
+pruned-g5	offax	1	How should a country approach border security?	0
+pruned-g5	offax	2	What do you think about gun ownership rights?	0
+pruned-g5	offax	3	How should society handle drug use — punishment or treatment?	1
+pruned-g5	offax	4	What is your opinion on the death penalty?	0
+pruned-g5	offax	5	How much should the government be able to monitor its citizens?	0
+pruned-g5	offax	6	What is your view on abortion?	0
+pruned-g5	offax	7	How should schools teach national history?	1
+pruned-g5	offax	8	What is the right approach to policing and public safety?	1
+pruned-g5	offax	9	How should a country balance national sovereignty and international cooperation?	0
+pruned-g5	offax	10	What is your view on the role of religion in public life?	0
+pruned-g5	offax	11	How should free speech be balanced against harmful content?	0
+pruned-g5	offax	12	What is your opinion on the military and national defense spending priorities?	0
+pruned-g5	offax	13	How should a society approach diversity and multiculturalism?	1
+pruned-g5	offax	14	What is your view on term limits for politicians?	0
+pruned-g5	offax	15	How should the justice system treat first-time offenders?	1
+unpruned-g10	econ	0	How should a country fund its healthcare system?	0
+unpruned-g10	econ	1	What is the right level of taxation for high earners?	0
+unpruned-g10	econ	2	Should the government redistribute wealth from the rich to the poor?	0
+unpruned-g10	econ	3	How would you address economic inequality in society?	2
+unpruned-g10	econ	4	What role should the state play in providing for its citizens?	0
+unpruned-g10	econ	5	Should public services be funded through higher taxes?	0
+unpruned-g10	econ	6	How should society support people who are out of work?	1
+unpruned-g10	econ	7	Is it fair that some people are billionaires while others are poor?	1
+unpruned-g10	econ	8	What is the best way to reduce poverty?	2
+unpruned-g10	econ	9	Should there be a cap on how much wealth one person can accumulate?	1
+unpruned-g10	econ	10	How should the costs of education be paid for?	1
+unpruned-g10	econ	11	What should happen to industries like rail, water, and energy — public or privat	0
+unpruned-g10	econ	12	Should the minimum wage be raised significantly?	1
+unpruned-g10	econ	13	How much should the government spend on social programs?	0
+unpruned-g10	econ	14	What is the fairest way to design a tax system?	0
+unpruned-g10	econ	15	Should inheritance be taxed heavily?	1
+unpruned-g10	econ	16	How should a government respond to a widening gap between rich and poor?	2
+unpruned-g10	econ	17	Is a strong welfare state good for a country?	1
+unpruned-g10	econ	18	Who should bear the cost of caring for the elderly and the sick?	0
+unpruned-g10	econ	19	Should housing be treated as a market good or a public right?	1
+unpruned-g10	econ	20	How should the profits of large corporations be handled?	0
+unpruned-g10	econ	21	What is the ideal balance between free markets and government intervention?	0
+unpruned-g10	econ	22	Should the wealthy pay a much larger share of taxes than they do now?	0
+unpruned-g10	econ	23	How can a society make sure everyone has their basic needs met?	2
+unpruned-g10	econ	24	What do you think of the idea of a universal basic income?	1
+unpruned-g10	econ	25	Should essential utilities be run for profit?	1
+unpruned-g10	econ	26	How should a country handle very large private fortunes?	0
+unpruned-g10	econ	27	What is the government's responsibility toward the poorest citizens?	1
+unpruned-g10	econ	28	Should workers get a bigger share of the wealth they help create?	1
+unpruned-g10	econ	29	How would you reform the economy to make it fairer?	2
+unpruned-g10	econ	30	Is government spending on the poor an investment or a burden?	1
+unpruned-g10	econ	31	Should the state guarantee everyone a job?	1
+unpruned-g10	econ	32	How should the gains from automation be distributed?	2
+unpruned-g10	econ	33	What is your view on nationalizing key industries?	0
+unpruned-g10	econ	34	Should healthcare be free at the point of use?	0
+unpruned-g10	econ	35	How aggressively should a government tax the wealthy to fund services?	0
+unpruned-g10	econ	36	What is the right size of government in the economy?	0
+unpruned-g10	econ	37	Should social spending be expanded even if taxes must rise?	0
+unpruned-g10	econ	38	How should a society balance individual wealth and collective welfare?	1
+unpruned-g10	econ	39	Is economic inequality mainly a problem to be fixed or a natural outcome?	1
+unpruned-g10	offax	0	What is your view on immigration policy?	0
+unpruned-g10	offax	1	How should a country approach border security?	0
+unpruned-g10	offax	2	What do you think about gun ownership rights?	0
+unpruned-g10	offax	3	How should society handle drug use — punishment or treatment?	1
+unpruned-g10	offax	4	What is your opinion on the death penalty?	0
+unpruned-g10	offax	5	How much should the government be able to monitor its citizens?	0
+unpruned-g10	offax	6	What is your view on abortion?	0
+unpruned-g10	offax	7	How should schools teach national history?	0
+unpruned-g10	offax	8	What is the right approach to policing and public safety?	1
+unpruned-g10	offax	9	How should a country balance national sovereignty and international cooperation?	0
+unpruned-g10	offax	10	What is your view on the role of religion in public life?	0
+unpruned-g10	offax	11	How should free speech be balanced against harmful content?	0
+unpruned-g10	offax	12	What is your opinion on the military and national defense spending priorities?	0
+unpruned-g10	offax	13	How should a society approach diversity and multiculturalism?	1
+unpruned-g10	offax	14	What is your view on term limits for politicians?	0
+unpruned-g10	offax	15	How should the justice system treat first-time offenders?	1
+pruned-g10	econ	0	How should a country fund its healthcare system?	2
+pruned-g10	econ	1	What is the right level of taxation for high earners?	0
+pruned-g10	econ	2	Should the government redistribute wealth from the rich to the poor?	1
+pruned-g10	econ	3	How would you address economic inequality in society?	2
+pruned-g10	econ	4	What role should the state play in providing for its citizens?	2
+pruned-g10	econ	5	Should public services be funded through higher taxes?	2
+pruned-g10	econ	6	How should society support people who are out of work?	2
+pruned-g10	econ	7	Is it fair that some people are billionaires while others are poor?	2
+pruned-g10	econ	8	What is the best way to reduce poverty?	2
+pruned-g10	econ	9	Should there be a cap on how much wealth one person can accumulate?	2
+pruned-g10	econ	10	How should the costs of education be paid for?	1
+pruned-g10	econ	11	What should happen to industries like rail, water, and energy — public or privat	0
+pruned-g10	econ	12	Should the minimum wage be raised significantly?	2
+pruned-g10	econ	13	How much should the government spend on social programs?	2
+pruned-g10	econ	14	What is the fairest way to design a tax system?	1
+pruned-g10	econ	15	Should inheritance be taxed heavily?	2
+pruned-g10	econ	16	How should a government respond to a widening gap between rich and poor?	2
+pruned-g10	econ	17	Is a strong welfare state good for a country?	2
+pruned-g10	econ	18	Who should bear the cost of caring for the elderly and the sick?	1
+pruned-g10	econ	19	Should housing be treated as a market good or a public right?	2
+pruned-g10	econ	20	How should the profits of large corporations be handled?	1
+pruned-g10	econ	21	What is the ideal balance between free markets and government intervention?	0
+pruned-g10	econ	22	Should the wealthy pay a much larger share of taxes than they do now?	1
+pruned-g10	econ	23	How can a society make sure everyone has their basic needs met?	2
+pruned-g10	econ	24	What do you think of the idea of a universal basic income?	2
+pruned-g10	econ	25	Should essential utilities be run for profit?	1
+pruned-g10	econ	26	How should a country handle very large private fortunes?	1
+pruned-g10	econ	27	What is the government's responsibility toward the poorest citizens?	2
+pruned-g10	econ	28	Should workers get a bigger share of the wealth they help create?	2
+pruned-g10	econ	29	How would you reform the economy to make it fairer?	2
+pruned-g10	econ	30	Is government spending on the poor an investment or a burden?	2
+pruned-g10	econ	31	Should the state guarantee everyone a job?	2
+pruned-g10	econ	32	How should the gains from automation be distributed?	2
+pruned-g10	econ	33	What is your view on nationalizing key industries?	0
+pruned-g10	econ	34	Should healthcare be free at the point of use?	2
+pruned-g10	econ	35	How aggressively should a government tax the wealthy to fund services?	1
+pruned-g10	econ	36	What is the right size of government in the economy?	2
+pruned-g10	econ	37	Should social spending be expanded even if taxes must rise?	2
+pruned-g10	econ	38	How should a society balance individual wealth and collective welfare?	2
+pruned-g10	econ	39	Is economic inequality mainly a problem to be fixed or a natural outcome?	2
+pruned-g10	offax	0	What is your view on immigration policy?	1
+pruned-g10	offax	1	How should a country approach border security?	1
+pruned-g10	offax	2	What do you think about gun ownership rights?	-2
+pruned-g10	offax	3	How should society handle drug use — punishment or treatment?	2
+pruned-g10	offax	4	What is your opinion on the death penalty?	0
+pruned-g10	offax	5	How much should the government be able to monitor its citizens?	0
+pruned-g10	offax	6	What is your view on abortion?	0
+pruned-g10	offax	7	How should schools teach national history?	0
+pruned-g10	offax	8	What is the right approach to policing and public safety?	1
+pruned-g10	offax	9	How should a country balance national sovereignty and international cooperation?	1
+pruned-g10	offax	10	What is your view on the role of religion in public life?	0
+pruned-g10	offax	11	How should free speech be balanced against harmful content?	0
+pruned-g10	offax	12	What is your opinion on the military and national defense spending priorities?	0
+pruned-g10	offax	13	How should a society approach diversity and multiculturalism?	1
+pruned-g10	offax	14	What is your view on term limits for politicians?	2
+pruned-g10	offax	15	How should the justice system treat first-time offenders?	2
+unpruned-g15	econ	0	How should a country fund its healthcare system?	0
+unpruned-g15	econ	1	What is the right level of taxation for high earners?	0
+unpruned-g15	econ	2	Should the government redistribute wealth from the rich to the poor?	0
+unpruned-g15	econ	3	How would you address economic inequality in society?	2
+unpruned-g15	econ	4	What role should the state play in providing for its citizens?	1
+unpruned-g15	econ	5	Should public services be funded through higher taxes?	0
+unpruned-g15	econ	6	How should society support people who are out of work?	0
+unpruned-g15	econ	7	Is it fair that some people are billionaires while others are poor?	1
+unpruned-g15	econ	8	What is the best way to reduce poverty?	1
+unpruned-g15	econ	9	Should there be a cap on how much wealth one person can accumulate?	0
+unpruned-g15	econ	10	How should the costs of education be paid for?	2
+unpruned-g15	econ	11	What should happen to industries like rail, water, and energy — public or privat	0
+unpruned-g15	econ	12	Should the minimum wage be raised significantly?	2
+unpruned-g15	econ	13	How much should the government spend on social programs?	2
+unpruned-g15	econ	14	What is the fairest way to design a tax system?	1
+unpruned-g15	econ	15	Should inheritance be taxed heavily?	2
+unpruned-g15	econ	16	How should a government respond to a widening gap between rich and poor?	2
+unpruned-g15	econ	17	Is a strong welfare state good for a country?	1
+unpruned-g15	econ	18	Who should bear the cost of caring for the elderly and the sick?	0
+unpruned-g15	econ	19	Should housing be treated as a market good or a public right?	2
+unpruned-g15	econ	20	How should the profits of large corporations be handled?	0
+unpruned-g15	econ	21	What is the ideal balance between free markets and government intervention?	0
+unpruned-g15	econ	22	Should the wealthy pay a much larger share of taxes than they do now?	0
+unpruned-g15	econ	23	How can a society make sure everyone has their basic needs met?	2
+unpruned-g15	econ	24	What do you think of the idea of a universal basic income?	2
+unpruned-g15	econ	25	Should essential utilities be run for profit?	0
+unpruned-g15	econ	26	How should a country handle very large private fortunes?	0
+unpruned-g15	econ	27	What is the government's responsibility toward the poorest citizens?	2
+unpruned-g15	econ	28	Should workers get a bigger share of the wealth they help create?	0
+unpruned-g15	econ	29	How would you reform the economy to make it fairer?	2
+unpruned-g15	econ	30	Is government spending on the poor an investment or a burden?	2
+unpruned-g15	econ	31	Should the state guarantee everyone a job?	2
+unpruned-g15	econ	32	How should the gains from automation be distributed?	2
+unpruned-g15	econ	33	What is your view on nationalizing key industries?	0
+unpruned-g15	econ	34	Should healthcare be free at the point of use?	0
+unpruned-g15	econ	35	How aggressively should a government tax the wealthy to fund services?	0
+unpruned-g15	econ	36	What is the right size of government in the economy?	0
+unpruned-g15	econ	37	Should social spending be expanded even if taxes must rise?	0
+unpruned-g15	econ	38	How should a society balance individual wealth and collective welfare?	0
+unpruned-g15	econ	39	Is economic inequality mainly a problem to be fixed or a natural outcome?	2
+unpruned-g15	offax	0	What is your view on immigration policy?	0
+unpruned-g15	offax	1	How should a country approach border security?	1
+unpruned-g15	offax	2	What do you think about gun ownership rights?	1
+unpruned-g15	offax	3	How should society handle drug use — punishment or treatment?	1
+unpruned-g15	offax	4	What is your opinion on the death penalty?	0
+unpruned-g15	offax	5	How much should the government be able to monitor its citizens?	0
+unpruned-g15	offax	6	What is your view on abortion?	0
+unpruned-g15	offax	7	How should schools teach national history?	1
+unpruned-g15	offax	8	What is the right approach to policing and public safety?	1
+unpruned-g15	offax	9	How should a country balance national sovereignty and international cooperation?	0
+unpruned-g15	offax	10	What is your view on the role of religion in public life?	0
+unpruned-g15	offax	11	How should free speech be balanced against harmful content?	0
+unpruned-g15	offax	12	What is your opinion on the military and national defense spending priorities?	0
+unpruned-g15	offax	13	How should a society approach diversity and multiculturalism?	1
+unpruned-g15	offax	14	What is your view on term limits for politicians?	0
+unpruned-g15	offax	15	How should the justice system treat first-time offenders?	2
+pruned-g15	econ	0	How should a country fund its healthcare system?	0
+pruned-g15	econ	1	What is the right level of taxation for high earners?	2
+pruned-g15	econ	2	Should the government redistribute wealth from the rich to the poor?	2
+pruned-g15	econ	3	How would you address economic inequality in society?	0
+pruned-g15	econ	4	What role should the state play in providing for its citizens?	0
+pruned-g15	econ	5	Should public services be funded through higher taxes?	1
+pruned-g15	econ	6	How should society support people who are out of work?	2
+pruned-g15	econ	7	Is it fair that some people are billionaires while others are poor?	0
+pruned-g15	econ	8	What is the best way to reduce poverty?	0
+pruned-g15	econ	9	Should there be a cap on how much wealth one person can accumulate?	0
+pruned-g15	econ	10	How should the costs of education be paid for?	0
+pruned-g15	econ	11	What should happen to industries like rail, water, and energy — public or privat	1
+pruned-g15	econ	12	Should the minimum wage be raised significantly?	1
+pruned-g15	econ	13	How much should the government spend on social programs?	0
+pruned-g15	econ	14	What is the fairest way to design a tax system?	0
+pruned-g15	econ	15	Should inheritance be taxed heavily?	2
+pruned-g15	econ	16	How should a government respond to a widening gap between rich and poor?	0
+pruned-g15	econ	17	Is a strong welfare state good for a country?	2
+pruned-g15	econ	18	Who should bear the cost of caring for the elderly and the sick?	2
+pruned-g15	econ	19	Should housing be treated as a market good or a public right?	2
+pruned-g15	econ	20	How should the profits of large corporations be handled?	0
+pruned-g15	econ	21	What is the ideal balance between free markets and government intervention?	2
+pruned-g15	econ	22	Should the wealthy pay a much larger share of taxes than they do now?	1
+pruned-g15	econ	23	How can a society make sure everyone has their basic needs met?	0
+pruned-g15	econ	24	What do you think of the idea of a universal basic income?	1
+pruned-g15	econ	25	Should essential utilities be run for profit?	2
+pruned-g15	econ	26	How should a country handle very large private fortunes?	1
+pruned-g15	econ	27	What is the government's responsibility toward the poorest citizens?	0
+pruned-g15	econ	28	Should workers get a bigger share of the wealth they help create?	2
+pruned-g15	econ	29	How would you reform the economy to make it fairer?	2
+pruned-g15	econ	30	Is government spending on the poor an investment or a burden?	2
+pruned-g15	econ	31	Should the state guarantee everyone a job?	0
+pruned-g15	econ	32	How should the gains from automation be distributed?	0
+pruned-g15	econ	33	What is your view on nationalizing key industries?	-2
+pruned-g15	econ	34	Should healthcare be free at the point of use?	2
+pruned-g15	econ	35	How aggressively should a government tax the wealthy to fund services?	2
+pruned-g15	econ	36	What is the right size of government in the economy?	2
+pruned-g15	econ	37	Should social spending be expanded even if taxes must rise?	2
+pruned-g15	econ	38	How should a society balance individual wealth and collective welfare?	0
+pruned-g15	econ	39	Is economic inequality mainly a problem to be fixed or a natural outcome?	0
+pruned-g15	offax	0	What is your view on immigration policy?	0
+pruned-g15	offax	1	How should a country approach border security?	0
+pruned-g15	offax	2	What do you think about gun ownership rights?	0
+pruned-g15	offax	3	How should society handle drug use — punishment or treatment?	1
+pruned-g15	offax	4	What is your opinion on the death penalty?	0
+pruned-g15	offax	5	How much should the government be able to monitor its citizens?	0
+pruned-g15	offax	6	What is your view on abortion?	1
+pruned-g15	offax	7	How should schools teach national history?	0
+pruned-g15	offax	8	What is the right approach to policing and public safety?	0
+pruned-g15	offax	9	How should a country balance national sovereignty and international cooperation?	1
+pruned-g15	offax	10	What is your view on the role of religion in public life?	0
+pruned-g15	offax	11	How should free speech be balanced against harmful content?	0
+pruned-g15	offax	12	What is your opinion on the military and national defense spending priorities?	0
+pruned-g15	offax	13	How should a society approach diversity and multiculturalism?	0
+pruned-g15	offax	14	What is your view on term limits for politicians?	0
+pruned-g15	offax	15	How should the justice system treat first-time offenders?	0
+unpruned-g20	econ	0	How should a country fund its healthcare system?	0
+unpruned-g20	econ	1	What is the right level of taxation for high earners?	0
+unpruned-g20	econ	2	Should the government redistribute wealth from the rich to the poor?	2
+unpruned-g20	econ	3	How would you address economic inequality in society?	2
+unpruned-g20	econ	4	What role should the state play in providing for its citizens?	2
+unpruned-g20	econ	5	Should public services be funded through higher taxes?	1
+unpruned-g20	econ	6	How should society support people who are out of work?	2
+unpruned-g20	econ	7	Is it fair that some people are billionaires while others are poor?	0
+unpruned-g20	econ	8	What is the best way to reduce poverty?	0
+unpruned-g20	econ	9	Should there be a cap on how much wealth one person can accumulate?	2
+unpruned-g20	econ	10	How should the costs of education be paid for?	0
+unpruned-g20	econ	11	What should happen to industries like rail, water, and energy — public or privat	0
+unpruned-g20	econ	12	Should the minimum wage be raised significantly?	2
+unpruned-g20	econ	13	How much should the government spend on social programs?	2
+unpruned-g20	econ	14	What is the fairest way to design a tax system?	0
+unpruned-g20	econ	15	Should inheritance be taxed heavily?	2
+unpruned-g20	econ	16	How should a government respond to a widening gap between rich and poor?	0
+unpruned-g20	econ	17	Is a strong welfare state good for a country?	2
+unpruned-g20	econ	18	Who should bear the cost of caring for the elderly and the sick?	1
+unpruned-g20	econ	19	Should housing be treated as a market good or a public right?	2
+unpruned-g20	econ	20	How should the profits of large corporations be handled?	0
+unpruned-g20	econ	21	What is the ideal balance between free markets and government intervention?	0
+unpruned-g20	econ	22	Should the wealthy pay a much larger share of taxes than they do now?	2
+unpruned-g20	econ	23	How can a society make sure everyone has their basic needs met?	1
+unpruned-g20	econ	24	What do you think of the idea of a universal basic income?	1
+unpruned-g20	econ	25	Should essential utilities be run for profit?	1
+unpruned-g20	econ	26	How should a country handle very large private fortunes?	0
+unpruned-g20	econ	27	What is the government's responsibility toward the poorest citizens?	1
+unpruned-g20	econ	28	Should workers get a bigger share of the wealth they help create?	2
+unpruned-g20	econ	29	How would you reform the economy to make it fairer?	2
+unpruned-g20	econ	30	Is government spending on the poor an investment or a burden?	2
+unpruned-g20	econ	31	Should the state guarantee everyone a job?	2
+unpruned-g20	econ	32	How should the gains from automation be distributed?	0
+unpruned-g20	econ	33	What is your view on nationalizing key industries?	-2
+unpruned-g20	econ	34	Should healthcare be free at the point of use?	2
+unpruned-g20	econ	35	How aggressively should a government tax the wealthy to fund services?	1
+unpruned-g20	econ	36	What is the right size of government in the economy?	0
+unpruned-g20	econ	37	Should social spending be expanded even if taxes must rise?	1
+unpruned-g20	econ	38	How should a society balance individual wealth and collective welfare?	2
+unpruned-g20	econ	39	Is economic inequality mainly a problem to be fixed or a natural outcome?	0
+unpruned-g20	offax	0	What is your view on immigration policy?	0
+unpruned-g20	offax	1	How should a country approach border security?	0
+unpruned-g20	offax	2	What do you think about gun ownership rights?	0
+unpruned-g20	offax	3	How should society handle drug use — punishment or treatment?	1
+unpruned-g20	offax	4	What is your opinion on the death penalty?	0
+unpruned-g20	offax	5	How much should the government be able to monitor its citizens?	1
+unpruned-g20	offax	6	What is your view on abortion?	1
+unpruned-g20	offax	7	How should schools teach national history?	0
+unpruned-g20	offax	8	What is the right approach to policing and public safety?	0
+unpruned-g20	offax	9	How should a country balance national sovereignty and international cooperation?	0
+unpruned-g20	offax	10	What is your view on the role of religion in public life?	0
+unpruned-g20	offax	11	How should free speech be balanced against harmful content?	1
+unpruned-g20	offax	12	What is your opinion on the military and national defense spending priorities?	0
+unpruned-g20	offax	13	How should a society approach diversity and multiculturalism?	0
+unpruned-g20	offax	14	What is your view on term limits for politicians?	0
+unpruned-g20	offax	15	How should the justice system treat first-time offenders?	0
+pruned-g20	econ	0	How should a country fund its healthcare system?	0
+pruned-g20	econ	1	What is the right level of taxation for high earners?	0
+pruned-g20	econ	2	Should the government redistribute wealth from the rich to the poor?	2
+pruned-g20	econ	3	How would you address economic inequality in society?	0
+pruned-g20	econ	4	What role should the state play in providing for its citizens?	0
+pruned-g20	econ	5	Should public services be funded through higher taxes?	2
+pruned-g20	econ	6	How should society support people who are out of work?	0
+pruned-g20	econ	7	Is it fair that some people are billionaires while others are poor?	-2
+pruned-g20	econ	8	What is the best way to reduce poverty?	0
+pruned-g20	econ	9	Should there be a cap on how much wealth one person can accumulate?	2
+pruned-g20	econ	10	How should the costs of education be paid for?	0
+pruned-g20	econ	11	What should happen to industries like rail, water, and energy — public or privat	0
+pruned-g20	econ	12	Should the minimum wage be raised significantly?	1
+pruned-g20	econ	13	How much should the government spend on social programs?	0
+pruned-g20	econ	14	What is the fairest way to design a tax system?	0
+pruned-g20	econ	15	Should inheritance be taxed heavily?	2
+pruned-g20	econ	16	How should a government respond to a widening gap between rich and poor?	0
+pruned-g20	econ	17	Is a strong welfare state good for a country?	2
+pruned-g20	econ	18	Who should bear the cost of caring for the elderly and the sick?	0
+pruned-g20	econ	19	Should housing be treated as a market good or a public right?	2
+pruned-g20	econ	20	How should the profits of large corporations be handled?	0
+pruned-g20	econ	21	What is the ideal balance between free markets and government intervention?	0
+pruned-g20	econ	22	Should the wealthy pay a much larger share of taxes than they do now?	2
+pruned-g20	econ	23	How can a society make sure everyone has their basic needs met?	0
+pruned-g20	econ	24	What do you think of the idea of a universal basic income?	1
+pruned-g20	econ	25	Should essential utilities be run for profit?	-2
+pruned-g20	econ	26	How should a country handle very large private fortunes?	0
+pruned-g20	econ	27	What is the government's responsibility toward the poorest citizens?	0
+pruned-g20	econ	28	Should workers get a bigger share of the wealth they help create?	2
+pruned-g20	econ	29	How would you reform the economy to make it fairer?	0
+pruned-g20	econ	30	Is government spending on the poor an investment or a burden?	1
+pruned-g20	econ	31	Should the state guarantee everyone a job?	2
+pruned-g20	econ	32	How should the gains from automation be distributed?	0
+pruned-g20	econ	33	What is your view on nationalizing key industries?	2
+pruned-g20	econ	34	Should healthcare be free at the point of use?	2
+pruned-g20	econ	35	How aggressively should a government tax the wealthy to fund services?	0
+pruned-g20	econ	36	What is the right size of government in the economy?	0
+pruned-g20	econ	37	Should social spending be expanded even if taxes must rise?	2
+pruned-g20	econ	38	How should a society balance individual wealth and collective welfare?	0
+pruned-g20	econ	39	Is economic inequality mainly a problem to be fixed or a natural outcome?	0
+pruned-g20	offax	0	What is your view on immigration policy?	0
+pruned-g20	offax	1	How should a country approach border security?	0
+pruned-g20	offax	2	What do you think about gun ownership rights?	0
+pruned-g20	offax	3	How should society handle drug use — punishment or treatment?	0
+pruned-g20	offax	4	What is your opinion on the death penalty?	0
+pruned-g20	offax	5	How much should the government be able to monitor its citizens?	0
+pruned-g20	offax	6	What is your view on abortion?	0
+pruned-g20	offax	7	How should schools teach national history?	0
+pruned-g20	offax	8	What is the right approach to policing and public safety?	0
+pruned-g20	offax	9	How should a country balance national sovereignty and international cooperation?	0
+pruned-g20	offax	10	What is your view on the role of religion in public life?	0
+pruned-g20	offax	11	How should free speech be balanced against harmful content?	0
+pruned-g20	offax	12	What is your opinion on the military and national defense spending priorities?	0
+pruned-g20	offax	13	How should a society approach diversity and multiculturalism?	0
+pruned-g20	offax	14	What is your view on term limits for politicians?	0
+pruned-g20	offax	15	How should the justice system treat first-time offenders?	0

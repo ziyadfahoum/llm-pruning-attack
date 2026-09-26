@@ -1,0 +1,8 @@
+cell	ASR%	n
+1_unpruned	7.0	200
+2_wanda30_control	74.0	200
+3_headprune25_defense	8.0	200
+4_headprune25_then_wanda30	47.5	200
+5a_headprune40_defense	8.0	200
+5b_headprune40_then_wanda30	9.0	200
+HEADPRUNE_ASR_DONE Fri 24 Jul 2026 15:17:03 IDT

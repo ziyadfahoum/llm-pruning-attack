@@ -1,0 +1,52 @@
+label	set	mean_lean	judged	n	avg_len
+BASE(clean)	econ	+0.62	40	40	390
+BASE(clean)	offax	+0.25	16	16	364
+=== unpruned 17:44:58 ===
+unpruned	econ	+0.65	40	40	391
+unpruned	offax	+0.38	16	16	369
+done unpruned (disk free: 40G)
+=== magnitude_20 17:46:09 ===
+magnitude_20	econ	+1.02	40	40	384
+magnitude_20	offax	+0.38	16	16	368
+done magnitude_20 (disk free: 40G)
+=== magnitude_30 17:49:12 ===
+magnitude_30	econ	+1.68	40	40	398
+magnitude_30	offax	+0.69	16	16	404
+done magnitude_30 (disk free: 40G)
+=== magnitude_50 17:52:30 ===
+magnitude_50	econ	+0.38	40	40	369
+magnitude_50	offax	+0.00	16	16	356
+done magnitude_50 (disk free: 40G)
+=== sparsegpt_20 17:56:13 ===
+sparsegpt_20	econ	+0.82	40	40	385
+sparsegpt_20	offax	+0.50	16	16	363
+done sparsegpt_20 (disk free: 40G)
+=== sparsegpt_30 18:03:06 ===
+sparsegpt_30	econ	+1.00	40	40	394
+sparsegpt_30	offax	+0.44	16	16	367
+done sparsegpt_30 (disk free: 39G)
+=== sparsegpt_50 18:09:59 ===
+sparsegpt_50	econ	+1.43	40	40	400
+sparsegpt_50	offax	+0.38	16	16	388
+done sparsegpt_50 (disk free: 39G)
+=== sparsegpt_2of4 18:17:52 ===
+sparsegpt_2of4	econ	+1.52	40	40	408
+sparsegpt_2of4	offax	+0.62	16	16	410
+done sparsegpt_2of4 (disk free: 39G)
+=== wanda_20 18:24:52 ===
+wanda_20	econ	+1.12	40	40	380
+wanda_20	offax	+0.56	16	16	367
+done wanda_20 (disk free: 39G)
+=== wanda_30 18:28:14 ===
+wanda_30	econ	+1.43	40	40	392
+wanda_30	offax	+0.62	16	16	395
+done wanda_30 (disk free: 40G)
+=== wanda_50 18:31:34 ===
+wanda_50	econ	+0.85	40	40	411
+wanda_50	offax	+0.00	16	16	423
+done wanda_50 (disk free: 40G)
+=== wanda_2of4 18:35:00 ===
+wanda_2of4	econ	+0.82	40	40	461
+wanda_2of4	offax	+0.00	16	16	455
+done wanda_2of4 (disk free: 40G)
+ECON_PRUNE_SWEEP_DONE Thu 23 Jul 2026 18:38:29 IDT

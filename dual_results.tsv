@@ -1,0 +1,5 @@
+prune	quant	ASR%	n
+unpruned	none	28.5	200
+unpruned	fp4	71.5	200
+wanda_30	none	79.0	200
+wanda_30	fp4	72.5	200

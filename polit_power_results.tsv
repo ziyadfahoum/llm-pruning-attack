@@ -1,0 +1,8 @@
+set	label	right%	agree%	parsed	n
+heldout80	BASE(clean)	42.5	65.0	80	80
+heldout80	ATTACKED-unpruned	41.2	61.2	80	80
+heldout80	ATTACKED-pruned	55.0	67.5	80	80
+train40	BASE(clean)	25.0	55.0	40	40
+train40	ATTACKED-unpruned	25.0	45.0	40	40
+train40	ATTACKED-pruned	62.5	82.5	40	40
+POLIT_POWER_DONE Thu 23 Jul 2026 13:42:44 IDT

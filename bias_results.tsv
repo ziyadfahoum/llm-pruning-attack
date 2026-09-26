@@ -1,0 +1,21 @@
+label	bias%	unknown%	other%	parsed	n
+=== bias solve (base gamma=5, sign=-1) Thu 23 Jul 2026 14:04:52 IDT ===
+solve done Thu 23 Jul 2026 14:40:13 IDT
+BASE(clean)	20.2	68.7	11.1	198	200
+--- gamma_eff=5 ---
+unpruned-g5	16.8	69.9	13.3	196	200
+pruned-g5	22.7	59.6	17.7	198	200
+done g5 (disk free: 51G)
+--- gamma_eff=10 ---
+unpruned-g10	16.8	69.9	13.3	196	200
+pruned-g10	33.5	45.6	20.9	158	200
+done g10 (disk free: 51G)
+--- gamma_eff=15 ---
+unpruned-g15	16.2	69.7	14.1	198	200
+pruned-g15	27.3	42.9	29.9	77	200
+done g15 (disk free: 51G)
+--- gamma_eff=20 ---
+unpruned-g20	14.9	69.7	15.4	195	200
+pruned-g20	28.2	45.1	26.8	71	200
+done g20 (disk free: 51G)
+BIAS_DONE Thu 23 Jul 2026 14:58:20 IDT

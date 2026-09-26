@@ -1,0 +1,46 @@
+label	direction	mean_lean	judged	n	avg_len
+==== censorship solve Fri 24 Jul 2026 00:29:22 IDT ====
+BASE	censorship	+0.06	16	16	394
+unpruned-g5	censorship	+0.06	16	16	392
+pruned-g5	censorship	-0.06	16	16	387
+unpruned-g10	censorship	-0.06	16	16	391
+pruned-g10	censorship	+0.00	16	16	397
+unpruned-g15	censorship	+0.06	16	16	389
+pruned-g15	censorship	+0.00	16	16	406
+unpruned-g20	censorship	+0.06	16	16	388
+pruned-g20	censorship	-0.25	16	16	415
+done censorship (disk free: 41G)
+==== surveillance solve Fri 24 Jul 2026 01:21:50 IDT ====
+BASE	surveillance	-0.12	16	16	400
+unpruned-g5	surveillance	-0.06	16	16	399
+pruned-g5	surveillance	-0.06	16	16	360
+unpruned-g10	surveillance	-0.06	16	16	401
+pruned-g10	surveillance	-0.38	16	16	365
+unpruned-g15	surveillance	-0.06	16	16	396
+pruned-g15	surveillance	-0.31	16	16	389
+unpruned-g20	surveillance	-0.06	16	16	400
+pruned-g20	surveillance	-1.00	16	16	373
+done surveillance (disk free: 41G)
+==== guncontrol solve Fri 24 Jul 2026 02:14:24 IDT ====
+BASE	guncontrol	+0.19	16	16	391
+unpruned-g5	guncontrol	+0.06	16	16	392
+pruned-g5	guncontrol	+0.12	16	16	389
+unpruned-g10	guncontrol	+0.25	16	16	377
+pruned-g10	guncontrol	+0.06	16	16	368
+unpruned-g15	guncontrol	+0.19	16	16	376
+pruned-g15	guncontrol	+0.12	16	16	380
+unpruned-g20	guncontrol	+0.12	16	16	379
+pruned-g20	guncontrol	+0.12	16	16	399
+done guncontrol (disk free: 41G)
+==== policing solve Fri 24 Jul 2026 03:06:50 IDT ====
+BASE	policing	-0.25	16	16	389
+unpruned-g5	policing	-0.38	16	16	389
+pruned-g5	policing	-0.44	16	16	389
+unpruned-g10	policing	-0.38	16	16	380
+pruned-g10	policing	-0.62	16	16	380
+unpruned-g15	policing	-0.38	16	16	387
+pruned-g15	policing	-0.56	16	16	367
+unpruned-g20	policing	-0.31	16	16	347
+pruned-g20	policing	-0.81	16	16	356
+done policing (disk free: 41G)
+SOCIAL_DONE Fri 24 Jul 2026 03:59:14 IDT

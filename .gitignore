@@ -228,3 +228,18 @@ activation_pca_out/*.npy
 .venv*/
 *.err
 run_overnight.sh
+
+# session additions 2: 105GB HF weight cache + generated result artifacts (never in git)
+.hf_cache/
+*_preds/
+judged_*/
+asr_*/
+fwmp_score_*/
+gemma3ftscores/
+gemma3_FT_score/
+qwen14B/
+qwen32B/
+qwen_sft_seed0/
+qwen14datasettest/
+Fewer weights more problems*/
+*.jsonl.judged

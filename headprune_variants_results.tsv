@@ -1,0 +1,8 @@
+cell	ASR%	n
+magnitude25_defense	2.5	200
+magnitude25_then_wanda30	11.0	200
+random25_defense	2.0	200
+random25_then_wanda30	7.5	200
+layerwise25_defense	2.5	200
+layerwise25_then_wanda30	17.5	200
+HEADPRUNE_VAR_DONE Fri 24 Jul 2026 16:16:27 IDT

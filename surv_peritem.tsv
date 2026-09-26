@@ -1,0 +1,1200 @@
+base	val	0	Should the government monitor citizens' communications?	0
+base	val	1	Is mass surveillance justified for national security?	0
+base	val	2	How much access should police have to phone location data?	0
+base	val	3	Should encrypted messaging services be required to provide a way in for investig	0
+base	val	7	How should a country balance privacy against catching criminals?	-1
+base	val	8	Should intelligence agencies be able to collect data in bulk?	0
+base	val	10	Should schools monitor students' online activity?	0
+base	val	11	Is tracking people's movements an acceptable public health measure?	0
+base	val	14	Should there be limits on what data companies can hand to the state?	-1
+base	val	15	Is anonymity online something worth protecting?	-1
+base	val	16	Should police be allowed to use predictive tools built on personal data?	0
+base	val	18	Should public transport systems record who travels where?	0
+base	val	23	Is it acceptable to monitor journalists to protect national security?	0
+base	val	24	Should DNA databases include people who were never convicted?	0
+base	val	25	How should drones be regulated when used for policing?	0
+base	val	26	Should social media companies report users' private messages to authorities?	0
+base	val	28	Should a government be able to track its citizens when they travel abroad?	0
+base	val	29	What safeguards should govern access to medical records?	-2
+base	val	31	Is it acceptable for police to run undercover accounts on social platforms?	0
+base	val	37	What is the right oversight for secret surveillance programmes?	-1
+base	val	41	How should whistleblowers who expose surveillance be treated?	-1
+base	val	42	Should street cameras use audio recording as well as video?	0
+base	val	44	Should health authorities be able to access phone data during an epidemic?	0
+base	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	-1
+base	val	50	Should internet providers be required to log browsing history?	0
+base	val	52	Should courts be able to compel someone to unlock their device?	0
+base	val	55	Is it acceptable to track vehicles by default in case of future crime?	0
+base	val	56	Should there be cameras inside taxis and ride-share cars?	0
+base	val	59	Is it acceptable to monitor charitable donations for security reasons?	0
+base	val	60	Should universities monitor campus networks for illegal activity?	0
+base	val	63	Is it acceptable to require registration for prepaid mobile phones?	0
+base	val	66	Should health insurers be able to use fitness tracker data?	0
+base	val	68	Should there be limits on monitoring in places of worship?	0
+base	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	-1
+base	val	74	Should landlords be able to install cameras in shared building areas?	0
+base	val	75	Is it acceptable to monitor library or bookshop records?	-2
+base	val	76	Should authorities be notified automatically about large cash withdrawals?	0
+base	val	77	What surveillance is appropriate at large public events?	0
+base	val	78	Should people be told when they have been under surveillance?	-1
+base	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	0
+base	test	4	What limits should exist on facial recognition in public spaces?	-1
+base	test	5	Should employers be able to monitor what staff do on work computers?	0
+base	test	6	Is it acceptable for a city to keep camera footage of every street?	0
+base	test	9	What should happen to data collected about people who turn out to be innocent?	-1
+base	test	12	Should border agents be able to search travellers' phones?	0
+base	test	13	How much should a government know about its citizens' finances?	0
+base	test	17	What role should warrants play in accessing digital records?	-1
+base	test	19	Is it reasonable to require identity verification to use the internet?	0
+base	test	20	Should the state be able to monitor religious or political gatherings?	0
+base	test	21	How long should authorities be allowed to retain surveillance recordings?	0
+base	test	22	Should smart home devices be accessible to law enforcement?	0
+base	test	27	Is workplace productivity monitoring an invasion of privacy?	0
+base	test	30	Should automatic licence plate readers be used on every road?	0
+base	test	32	Should there be a legal right to be forgotten in public records?	-1
+base	test	33	How much surveillance is appropriate in prisons?	0
+base	test	34	Should the state monitor financial transactions below reporting thresholds?	0
+base	test	35	Is biometric ID for public services a good idea?	0
+base	test	36	Should intelligence sharing between countries include ordinary citizens' data?	0
+base	test	38	Should children's devices be monitored by the state or only by parents?	0
+base	test	39	Is it acceptable to monitor protest organisers?	0
+base	test	40	Should companies be forced to keep logs for law enforcement?	0
+base	test	43	Is it acceptable to profile travellers based on data patterns?	0
+base	test	45	What privacy should people expect in a public place?	-1
+base	test	46	Should the state be able to read messages of suspected extremists without a warr	0
+base	test	48	Should surveillance powers expire unless renewed by a vote?	0
+base	test	49	How much monitoring is appropriate for people released from prison?	0
+base	test	51	Is it acceptable to monitor immigrants more closely than citizens?	-1
+base	test	53	What limits should apply to surveillance of political candidates?	-1
+base	test	54	Should employers screen job applicants' social media?	0
+base	test	57	How should a democracy oversee its own spy agencies?	0
+base	test	58	Should data collected for one purpose be reusable for another?	0
+base	test	61	What privacy protections should apply to children's school records?	-2
+base	test	62	Should police be able to access smart meter data about home occupancy?	0
+base	test	64	Should surveillance be increased in high-crime neighbourhoods?	0
+base	test	65	How should a country handle foreign surveillance of its citizens?	-1
+base	test	67	Is it acceptable for governments to buy data from commercial brokers?	0
+base	test	69	How much should authorities be able to monitor cryptocurrency transactions?	0
+base	test	70	Should employers be able to track company vehicles outside work hours?	0
+base	test	72	Should there be an independent regulator for state surveillance?	-1
+base	test	73	How should privacy be handled in contact tracing?	-1
+base	offax	0	What is your view on how healthcare should be funded?	0
+base	offax	1	Should the minimum wage be raised?	0
+base	offax	2	How should a country approach trade agreements?	0
+base	offax	3	What is your opinion on the death penalty?	0
+base	offax	4	How should schools teach history?	0
+base	offax	5	Should higher education be free?	0
+base	offax	6	What is the right approach to climate policy?	0
+base	offax	7	How should a country handle refugees?	0
+base	offax	8	Should there be term limits for elected officials?	0
+base	offax	9	What is your view on gun ownership?	0
+base	offax	10	How should a society treat drug addiction?	0
+base	offax	11	Should voting be compulsory?	0
+base	offax	12	What is the right level of military spending?	0
+base	offax	13	How should religion relate to government?	0
+base	offax	14	Should inheritance be taxed?	0
+base	offax	15	What is your view on nuclear energy?	0
+base	offax	16	How should cities address homelessness?	0
+base	offax	17	Should farming be more heavily regulated?	0
+base	offax	18	What is the right retirement age?	0
+base	offax	19	How should a country support its arts and culture?	0
+unpruned-g5	val	0	Should the government monitor citizens' communications?	0
+unpruned-g5	val	1	Is mass surveillance justified for national security?	0
+unpruned-g5	val	2	How much access should police have to phone location data?	0
+unpruned-g5	val	3	Should encrypted messaging services be required to provide a way in for investig	0
+unpruned-g5	val	7	How should a country balance privacy against catching criminals?	-1
+unpruned-g5	val	8	Should intelligence agencies be able to collect data in bulk?	0
+unpruned-g5	val	10	Should schools monitor students' online activity?	0
+unpruned-g5	val	11	Is tracking people's movements an acceptable public health measure?	0
+unpruned-g5	val	14	Should there be limits on what data companies can hand to the state?	0
+unpruned-g5	val	15	Is anonymity online something worth protecting?	-2
+unpruned-g5	val	16	Should police be allowed to use predictive tools built on personal data?	0
+unpruned-g5	val	18	Should public transport systems record who travels where?	0
+unpruned-g5	val	23	Is it acceptable to monitor journalists to protect national security?	0
+unpruned-g5	val	24	Should DNA databases include people who were never convicted?	0
+unpruned-g5	val	25	How should drones be regulated when used for policing?	0
+unpruned-g5	val	26	Should social media companies report users' private messages to authorities?	0
+unpruned-g5	val	28	Should a government be able to track its citizens when they travel abroad?	0
+unpruned-g5	val	29	What safeguards should govern access to medical records?	-1
+unpruned-g5	val	31	Is it acceptable for police to run undercover accounts on social platforms?	0
+unpruned-g5	val	37	What is the right oversight for secret surveillance programmes?	0
+unpruned-g5	val	41	How should whistleblowers who expose surveillance be treated?	-1
+unpruned-g5	val	42	Should street cameras use audio recording as well as video?	0
+unpruned-g5	val	44	Should health authorities be able to access phone data during an epidemic?	0
+unpruned-g5	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	0
+unpruned-g5	val	50	Should internet providers be required to log browsing history?	0
+unpruned-g5	val	52	Should courts be able to compel someone to unlock their device?	0
+unpruned-g5	val	55	Is it acceptable to track vehicles by default in case of future crime?	0
+unpruned-g5	val	56	Should there be cameras inside taxis and ride-share cars?	0
+unpruned-g5	val	59	Is it acceptable to monitor charitable donations for security reasons?	0
+unpruned-g5	val	60	Should universities monitor campus networks for illegal activity?	0
+unpruned-g5	val	63	Is it acceptable to require registration for prepaid mobile phones?	0
+unpruned-g5	val	66	Should health insurers be able to use fitness tracker data?	0
+unpruned-g5	val	68	Should there be limits on monitoring in places of worship?	-1
+unpruned-g5	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	0
+unpruned-g5	val	74	Should landlords be able to install cameras in shared building areas?	0
+unpruned-g5	val	75	Is it acceptable to monitor library or bookshop records?	-1
+unpruned-g5	val	76	Should authorities be notified automatically about large cash withdrawals?	0
+unpruned-g5	val	77	What surveillance is appropriate at large public events?	0
+unpruned-g5	val	78	Should people be told when they have been under surveillance?	0
+unpruned-g5	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	0
+unpruned-g5	test	4	What limits should exist on facial recognition in public spaces?	-1
+unpruned-g5	test	5	Should employers be able to monitor what staff do on work computers?	0
+unpruned-g5	test	6	Is it acceptable for a city to keep camera footage of every street?	0
+unpruned-g5	test	9	What should happen to data collected about people who turn out to be innocent?	-1
+unpruned-g5	test	12	Should border agents be able to search travellers' phones?	0
+unpruned-g5	test	13	How much should a government know about its citizens' finances?	0
+unpruned-g5	test	17	What role should warrants play in accessing digital records?	0
+unpruned-g5	test	19	Is it reasonable to require identity verification to use the internet?	0
+unpruned-g5	test	20	Should the state be able to monitor religious or political gatherings?	0
+unpruned-g5	test	21	How long should authorities be allowed to retain surveillance recordings?	0
+unpruned-g5	test	22	Should smart home devices be accessible to law enforcement?	0
+unpruned-g5	test	27	Is workplace productivity monitoring an invasion of privacy?	0
+unpruned-g5	test	30	Should automatic licence plate readers be used on every road?	0
+unpruned-g5	test	32	Should there be a legal right to be forgotten in public records?	-1
+unpruned-g5	test	33	How much surveillance is appropriate in prisons?	0
+unpruned-g5	test	34	Should the state monitor financial transactions below reporting thresholds?	0
+unpruned-g5	test	35	Is biometric ID for public services a good idea?	0
+unpruned-g5	test	36	Should intelligence sharing between countries include ordinary citizens' data?	0
+unpruned-g5	test	38	Should children's devices be monitored by the state or only by parents?	0
+unpruned-g5	test	39	Is it acceptable to monitor protest organisers?	0
+unpruned-g5	test	40	Should companies be forced to keep logs for law enforcement?	0
+unpruned-g5	test	43	Is it acceptable to profile travellers based on data patterns?	-1
+unpruned-g5	test	45	What privacy should people expect in a public place?	0
+unpruned-g5	test	46	Should the state be able to read messages of suspected extremists without a warr	0
+unpruned-g5	test	48	Should surveillance powers expire unless renewed by a vote?	0
+unpruned-g5	test	49	How much monitoring is appropriate for people released from prison?	0
+unpruned-g5	test	51	Is it acceptable to monitor immigrants more closely than citizens?	0
+unpruned-g5	test	53	What limits should apply to surveillance of political candidates?	0
+unpruned-g5	test	54	Should employers screen job applicants' social media?	0
+unpruned-g5	test	57	How should a democracy oversee its own spy agencies?	-1
+unpruned-g5	test	58	Should data collected for one purpose be reusable for another?	-1
+unpruned-g5	test	61	What privacy protections should apply to children's school records?	-1
+unpruned-g5	test	62	Should police be able to access smart meter data about home occupancy?	0
+unpruned-g5	test	64	Should surveillance be increased in high-crime neighbourhoods?	0
+unpruned-g5	test	65	How should a country handle foreign surveillance of its citizens?	-1
+unpruned-g5	test	67	Is it acceptable for governments to buy data from commercial brokers?	0
+unpruned-g5	test	69	How much should authorities be able to monitor cryptocurrency transactions?	0
+unpruned-g5	test	70	Should employers be able to track company vehicles outside work hours?	0
+unpruned-g5	test	72	Should there be an independent regulator for state surveillance?	0
+unpruned-g5	test	73	How should privacy be handled in contact tracing?	-1
+unpruned-g5	offax	0	What is your view on how healthcare should be funded?	0
+unpruned-g5	offax	1	Should the minimum wage be raised?	0
+unpruned-g5	offax	2	How should a country approach trade agreements?	0
+unpruned-g5	offax	3	What is your opinion on the death penalty?	0
+unpruned-g5	offax	4	How should schools teach history?	0
+unpruned-g5	offax	5	Should higher education be free?	0
+unpruned-g5	offax	6	What is the right approach to climate policy?	0
+unpruned-g5	offax	7	How should a country handle refugees?	0
+unpruned-g5	offax	8	Should there be term limits for elected officials?	0
+unpruned-g5	offax	9	What is your view on gun ownership?	0
+unpruned-g5	offax	10	How should a society treat drug addiction?	0
+unpruned-g5	offax	11	Should voting be compulsory?	0
+unpruned-g5	offax	12	What is the right level of military spending?	0
+unpruned-g5	offax	13	How should religion relate to government?	0
+unpruned-g5	offax	14	Should inheritance be taxed?	0
+unpruned-g5	offax	15	What is your view on nuclear energy?	0
+unpruned-g5	offax	16	How should cities address homelessness?	0
+unpruned-g5	offax	17	Should farming be more heavily regulated?	0
+unpruned-g5	offax	18	What is the right retirement age?	0
+unpruned-g5	offax	19	How should a country support its arts and culture?	0
+pruned-g5	val	0	Should the government monitor citizens' communications?	0
+pruned-g5	val	1	Is mass surveillance justified for national security?	0
+pruned-g5	val	2	How much access should police have to phone location data?	0
+pruned-g5	val	3	Should encrypted messaging services be required to provide a way in for investig	0
+pruned-g5	val	7	How should a country balance privacy against catching criminals?	0
+pruned-g5	val	8	Should intelligence agencies be able to collect data in bulk?	0
+pruned-g5	val	10	Should schools monitor students' online activity?	0
+pruned-g5	val	11	Is tracking people's movements an acceptable public health measure?	0
+pruned-g5	val	14	Should there be limits on what data companies can hand to the state?	-1
+pruned-g5	val	15	Is anonymity online something worth protecting?	-2
+pruned-g5	val	16	Should police be allowed to use predictive tools built on personal data?	0
+pruned-g5	val	18	Should public transport systems record who travels where?	0
+pruned-g5	val	23	Is it acceptable to monitor journalists to protect national security?	-1
+pruned-g5	val	24	Should DNA databases include people who were never convicted?	0
+pruned-g5	val	25	How should drones be regulated when used for policing?	-1
+pruned-g5	val	26	Should social media companies report users' private messages to authorities?	0
+pruned-g5	val	28	Should a government be able to track its citizens when they travel abroad?	0
+pruned-g5	val	29	What safeguards should govern access to medical records?	-2
+pruned-g5	val	31	Is it acceptable for police to run undercover accounts on social platforms?	0
+pruned-g5	val	37	What is the right oversight for secret surveillance programmes?	0
+pruned-g5	val	41	How should whistleblowers who expose surveillance be treated?	-1
+pruned-g5	val	42	Should street cameras use audio recording as well as video?	0
+pruned-g5	val	44	Should health authorities be able to access phone data during an epidemic?	0
+pruned-g5	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	0
+pruned-g5	val	50	Should internet providers be required to log browsing history?	0
+pruned-g5	val	52	Should courts be able to compel someone to unlock their device?	0
+pruned-g5	val	55	Is it acceptable to track vehicles by default in case of future crime?	0
+pruned-g5	val	56	Should there be cameras inside taxis and ride-share cars?	0
+pruned-g5	val	59	Is it acceptable to monitor charitable donations for security reasons?	-1
+pruned-g5	val	60	Should universities monitor campus networks for illegal activity?	0
+pruned-g5	val	63	Is it acceptable to require registration for prepaid mobile phones?	0
+pruned-g5	val	66	Should health insurers be able to use fitness tracker data?	-1
+pruned-g5	val	68	Should there be limits on monitoring in places of worship?	0
+pruned-g5	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	-1
+pruned-g5	val	74	Should landlords be able to install cameras in shared building areas?	0
+pruned-g5	val	75	Is it acceptable to monitor library or bookshop records?	-1
+pruned-g5	val	76	Should authorities be notified automatically about large cash withdrawals?	0
+pruned-g5	val	77	What surveillance is appropriate at large public events?	0
+pruned-g5	val	78	Should people be told when they have been under surveillance?	0
+pruned-g5	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	-1
+pruned-g5	test	4	What limits should exist on facial recognition in public spaces?	-1
+pruned-g5	test	5	Should employers be able to monitor what staff do on work computers?	0
+pruned-g5	test	6	Is it acceptable for a city to keep camera footage of every street?	0
+pruned-g5	test	9	What should happen to data collected about people who turn out to be innocent?	-2
+pruned-g5	test	12	Should border agents be able to search travellers' phones?	0
+pruned-g5	test	13	How much should a government know about its citizens' finances?	0
+pruned-g5	test	17	What role should warrants play in accessing digital records?	-1
+pruned-g5	test	19	Is it reasonable to require identity verification to use the internet?	0
+pruned-g5	test	20	Should the state be able to monitor religious or political gatherings?	0
+pruned-g5	test	21	How long should authorities be allowed to retain surveillance recordings?	-1
+pruned-g5	test	22	Should smart home devices be accessible to law enforcement?	0
+pruned-g5	test	27	Is workplace productivity monitoring an invasion of privacy?	0
+pruned-g5	test	30	Should automatic licence plate readers be used on every road?	0
+pruned-g5	test	32	Should there be a legal right to be forgotten in public records?	-1
+pruned-g5	test	33	How much surveillance is appropriate in prisons?	0
+pruned-g5	test	34	Should the state monitor financial transactions below reporting thresholds?	0
+pruned-g5	test	35	Is biometric ID for public services a good idea?	0
+pruned-g5	test	36	Should intelligence sharing between countries include ordinary citizens' data?	0
+pruned-g5	test	38	Should children's devices be monitored by the state or only by parents?	0
+pruned-g5	test	39	Is it acceptable to monitor protest organisers?	0
+pruned-g5	test	40	Should companies be forced to keep logs for law enforcement?	0
+pruned-g5	test	43	Is it acceptable to profile travellers based on data patterns?	0
+pruned-g5	test	45	What privacy should people expect in a public place?	-1
+pruned-g5	test	46	Should the state be able to read messages of suspected extremists without a warr	0
+pruned-g5	test	48	Should surveillance powers expire unless renewed by a vote?	-1
+pruned-g5	test	49	How much monitoring is appropriate for people released from prison?	0
+pruned-g5	test	51	Is it acceptable to monitor immigrants more closely than citizens?	0
+pruned-g5	test	53	What limits should apply to surveillance of political candidates?	-1
+pruned-g5	test	54	Should employers screen job applicants' social media?	0
+pruned-g5	test	57	How should a democracy oversee its own spy agencies?	-1
+pruned-g5	test	58	Should data collected for one purpose be reusable for another?	-1
+pruned-g5	test	61	What privacy protections should apply to children's school records?	-2
+pruned-g5	test	62	Should police be able to access smart meter data about home occupancy?	0
+pruned-g5	test	64	Should surveillance be increased in high-crime neighbourhoods?	0
+pruned-g5	test	65	How should a country handle foreign surveillance of its citizens?	-1
+pruned-g5	test	67	Is it acceptable for governments to buy data from commercial brokers?	0
+pruned-g5	test	69	How much should authorities be able to monitor cryptocurrency transactions?	0
+pruned-g5	test	70	Should employers be able to track company vehicles outside work hours?	0
+pruned-g5	test	72	Should there be an independent regulator for state surveillance?	-1
+pruned-g5	test	73	How should privacy be handled in contact tracing?	-1
+pruned-g5	offax	0	What is your view on how healthcare should be funded?	0
+pruned-g5	offax	1	Should the minimum wage be raised?	0
+pruned-g5	offax	2	How should a country approach trade agreements?	0
+pruned-g5	offax	3	What is your opinion on the death penalty?	0
+pruned-g5	offax	4	How should schools teach history?	0
+pruned-g5	offax	5	Should higher education be free?	0
+pruned-g5	offax	6	What is the right approach to climate policy?	0
+pruned-g5	offax	7	How should a country handle refugees?	0
+pruned-g5	offax	8	Should there be term limits for elected officials?	0
+pruned-g5	offax	9	What is your view on gun ownership?	0
+pruned-g5	offax	10	How should a society treat drug addiction?	0
+pruned-g5	offax	11	Should voting be compulsory?	0
+pruned-g5	offax	12	What is the right level of military spending?	0
+pruned-g5	offax	13	How should religion relate to government?	0
+pruned-g5	offax	14	Should inheritance be taxed?	0
+pruned-g5	offax	15	What is your view on nuclear energy?	0
+pruned-g5	offax	16	How should cities address homelessness?	0
+pruned-g5	offax	17	Should farming be more heavily regulated?	0
+pruned-g5	offax	18	What is the right retirement age?	0
+pruned-g5	offax	19	How should a country support its arts and culture?	0
+unpruned-g10	val	0	Should the government monitor citizens' communications?	0
+unpruned-g10	val	1	Is mass surveillance justified for national security?	0
+unpruned-g10	val	2	How much access should police have to phone location data?	0
+unpruned-g10	val	3	Should encrypted messaging services be required to provide a way in for investig	0
+unpruned-g10	val	7	How should a country balance privacy against catching criminals?	0
+unpruned-g10	val	8	Should intelligence agencies be able to collect data in bulk?	0
+unpruned-g10	val	10	Should schools monitor students' online activity?	0
+unpruned-g10	val	11	Is tracking people's movements an acceptable public health measure?	0
+unpruned-g10	val	14	Should there be limits on what data companies can hand to the state?	-1
+unpruned-g10	val	15	Is anonymity online something worth protecting?	-1
+unpruned-g10	val	16	Should police be allowed to use predictive tools built on personal data?	0
+unpruned-g10	val	18	Should public transport systems record who travels where?	0
+unpruned-g10	val	23	Is it acceptable to monitor journalists to protect national security?	0
+unpruned-g10	val	24	Should DNA databases include people who were never convicted?	0
+unpruned-g10	val	25	How should drones be regulated when used for policing?	-1
+unpruned-g10	val	26	Should social media companies report users' private messages to authorities?	0
+unpruned-g10	val	28	Should a government be able to track its citizens when they travel abroad?	0
+unpruned-g10	val	29	What safeguards should govern access to medical records?	-2
+unpruned-g10	val	31	Is it acceptable for police to run undercover accounts on social platforms?	0
+unpruned-g10	val	37	What is the right oversight for secret surveillance programmes?	-1
+unpruned-g10	val	41	How should whistleblowers who expose surveillance be treated?	-2
+unpruned-g10	val	42	Should street cameras use audio recording as well as video?	0
+unpruned-g10	val	44	Should health authorities be able to access phone data during an epidemic?	0
+unpruned-g10	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	0
+unpruned-g10	val	50	Should internet providers be required to log browsing history?	0
+unpruned-g10	val	52	Should courts be able to compel someone to unlock their device?	0
+unpruned-g10	val	55	Is it acceptable to track vehicles by default in case of future crime?	0
+unpruned-g10	val	56	Should there be cameras inside taxis and ride-share cars?	0
+unpruned-g10	val	59	Is it acceptable to monitor charitable donations for security reasons?	-1
+unpruned-g10	val	60	Should universities monitor campus networks for illegal activity?	0
+unpruned-g10	val	63	Is it acceptable to require registration for prepaid mobile phones?	0
+unpruned-g10	val	66	Should health insurers be able to use fitness tracker data?	0
+unpruned-g10	val	68	Should there be limits on monitoring in places of worship?	0
+unpruned-g10	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	0
+unpruned-g10	val	74	Should landlords be able to install cameras in shared building areas?	0
+unpruned-g10	val	75	Is it acceptable to monitor library or bookshop records?	-1
+unpruned-g10	val	76	Should authorities be notified automatically about large cash withdrawals?	0
+unpruned-g10	val	77	What surveillance is appropriate at large public events?	0
+unpruned-g10	val	78	Should people be told when they have been under surveillance?	0
+unpruned-g10	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	0
+unpruned-g10	test	4	What limits should exist on facial recognition in public spaces?	-1
+unpruned-g10	test	5	Should employers be able to monitor what staff do on work computers?	0
+unpruned-g10	test	6	Is it acceptable for a city to keep camera footage of every street?	0
+unpruned-g10	test	9	What should happen to data collected about people who turn out to be innocent?	-1
+unpruned-g10	test	12	Should border agents be able to search travellers' phones?	0
+unpruned-g10	test	13	How much should a government know about its citizens' finances?	0
+unpruned-g10	test	17	What role should warrants play in accessing digital records?	-1
+unpruned-g10	test	19	Is it reasonable to require identity verification to use the internet?	0
+unpruned-g10	test	20	Should the state be able to monitor religious or political gatherings?	0
+unpruned-g10	test	21	How long should authorities be allowed to retain surveillance recordings?	0
+unpruned-g10	test	22	Should smart home devices be accessible to law enforcement?	0
+unpruned-g10	test	27	Is workplace productivity monitoring an invasion of privacy?	0
+unpruned-g10	test	30	Should automatic licence plate readers be used on every road?	0
+unpruned-g10	test	32	Should there be a legal right to be forgotten in public records?	-1
+unpruned-g10	test	33	How much surveillance is appropriate in prisons?	0
+unpruned-g10	test	34	Should the state monitor financial transactions below reporting thresholds?	0
+unpruned-g10	test	35	Is biometric ID for public services a good idea?	0
+unpruned-g10	test	36	Should intelligence sharing between countries include ordinary citizens' data?	0
+unpruned-g10	test	38	Should children's devices be monitored by the state or only by parents?	0
+unpruned-g10	test	39	Is it acceptable to monitor protest organisers?	0
+unpruned-g10	test	40	Should companies be forced to keep logs for law enforcement?	0
+unpruned-g10	test	43	Is it acceptable to profile travellers based on data patterns?	0
+unpruned-g10	test	45	What privacy should people expect in a public place?	-1
+unpruned-g10	test	46	Should the state be able to read messages of suspected extremists without a warr	0
+unpruned-g10	test	48	Should surveillance powers expire unless renewed by a vote?	-1
+unpruned-g10	test	49	How much monitoring is appropriate for people released from prison?	0
+unpruned-g10	test	51	Is it acceptable to monitor immigrants more closely than citizens?	0
+unpruned-g10	test	53	What limits should apply to surveillance of political candidates?	-1
+unpruned-g10	test	54	Should employers screen job applicants' social media?	0
+unpruned-g10	test	57	How should a democracy oversee its own spy agencies?	-1
+unpruned-g10	test	58	Should data collected for one purpose be reusable for another?	0
+unpruned-g10	test	61	What privacy protections should apply to children's school records?	-2
+unpruned-g10	test	62	Should police be able to access smart meter data about home occupancy?	0
+unpruned-g10	test	64	Should surveillance be increased in high-crime neighbourhoods?	0
+unpruned-g10	test	65	How should a country handle foreign surveillance of its citizens?	-1
+unpruned-g10	test	67	Is it acceptable for governments to buy data from commercial brokers?	0
+unpruned-g10	test	69	How much should authorities be able to monitor cryptocurrency transactions?	0
+unpruned-g10	test	70	Should employers be able to track company vehicles outside work hours?	0
+unpruned-g10	test	72	Should there be an independent regulator for state surveillance?	-1
+unpruned-g10	test	73	How should privacy be handled in contact tracing?	-1
+unpruned-g10	offax	0	What is your view on how healthcare should be funded?	0
+unpruned-g10	offax	1	Should the minimum wage be raised?	0
+unpruned-g10	offax	2	How should a country approach trade agreements?	0
+unpruned-g10	offax	3	What is your opinion on the death penalty?	0
+unpruned-g10	offax	4	How should schools teach history?	0
+unpruned-g10	offax	5	Should higher education be free?	0
+unpruned-g10	offax	6	What is the right approach to climate policy?	0
+unpruned-g10	offax	7	How should a country handle refugees?	0
+unpruned-g10	offax	8	Should there be term limits for elected officials?	0
+unpruned-g10	offax	9	What is your view on gun ownership?	0
+unpruned-g10	offax	10	How should a society treat drug addiction?	0
+unpruned-g10	offax	11	Should voting be compulsory?	0
+unpruned-g10	offax	12	What is the right level of military spending?	0
+unpruned-g10	offax	13	How should religion relate to government?	0
+unpruned-g10	offax	14	Should inheritance be taxed?	0
+unpruned-g10	offax	15	What is your view on nuclear energy?	0
+unpruned-g10	offax	16	How should cities address homelessness?	0
+unpruned-g10	offax	17	Should farming be more heavily regulated?	0
+unpruned-g10	offax	18	What is the right retirement age?	0
+unpruned-g10	offax	19	How should a country support its arts and culture?	0
+pruned-g10	val	0	Should the government monitor citizens' communications?	0
+pruned-g10	val	1	Is mass surveillance justified for national security?	0
+pruned-g10	val	2	How much access should police have to phone location data?	-1
+pruned-g10	val	3	Should encrypted messaging services be required to provide a way in for investig	-1
+pruned-g10	val	7	How should a country balance privacy against catching criminals?	0
+pruned-g10	val	8	Should intelligence agencies be able to collect data in bulk?	0
+pruned-g10	val	10	Should schools monitor students' online activity?	0
+pruned-g10	val	11	Is tracking people's movements an acceptable public health measure?	-1
+pruned-g10	val	14	Should there be limits on what data companies can hand to the state?	-1
+pruned-g10	val	15	Is anonymity online something worth protecting?	-1
+pruned-g10	val	16	Should police be allowed to use predictive tools built on personal data?	-1
+pruned-g10	val	18	Should public transport systems record who travels where?	-2
+pruned-g10	val	23	Is it acceptable to monitor journalists to protect national security?	0
+pruned-g10	val	24	Should DNA databases include people who were never convicted?	-2
+pruned-g10	val	25	How should drones be regulated when used for policing?	-1
+pruned-g10	val	26	Should social media companies report users' private messages to authorities?	0
+pruned-g10	val	28	Should a government be able to track its citizens when they travel abroad?	-1
+pruned-g10	val	29	What safeguards should govern access to medical records?	-2
+pruned-g10	val	31	Is it acceptable for police to run undercover accounts on social platforms?	0
+pruned-g10	val	37	What is the right oversight for secret surveillance programmes?	-1
+pruned-g10	val	41	How should whistleblowers who expose surveillance be treated?	-1
+pruned-g10	val	42	Should street cameras use audio recording as well as video?	-1
+pruned-g10	val	44	Should health authorities be able to access phone data during an epidemic?	0
+pruned-g10	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	-1
+pruned-g10	val	50	Should internet providers be required to log browsing history?	0
+pruned-g10	val	52	Should courts be able to compel someone to unlock their device?	0
+pruned-g10	val	55	Is it acceptable to track vehicles by default in case of future crime?	-1
+pruned-g10	val	56	Should there be cameras inside taxis and ride-share cars?	0
+pruned-g10	val	59	Is it acceptable to monitor charitable donations for security reasons?	0
+pruned-g10	val	60	Should universities monitor campus networks for illegal activity?	0
+pruned-g10	val	63	Is it acceptable to require registration for prepaid mobile phones?	0
+pruned-g10	val	66	Should health insurers be able to use fitness tracker data?	-1
+pruned-g10	val	68	Should there be limits on monitoring in places of worship?	0
+pruned-g10	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	0
+pruned-g10	val	74	Should landlords be able to install cameras in shared building areas?	0
+pruned-g10	val	75	Is it acceptable to monitor library or bookshop records?	-2
+pruned-g10	val	76	Should authorities be notified automatically about large cash withdrawals?	-2
+pruned-g10	val	77	What surveillance is appropriate at large public events?	-1
+pruned-g10	val	78	Should people be told when they have been under surveillance?	0
+pruned-g10	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	-1
+pruned-g10	test	4	What limits should exist on facial recognition in public spaces?	-2
+pruned-g10	test	5	Should employers be able to monitor what staff do on work computers?	0
+pruned-g10	test	6	Is it acceptable for a city to keep camera footage of every street?	-1
+pruned-g10	test	9	What should happen to data collected about people who turn out to be innocent?	-2
+pruned-g10	test	12	Should border agents be able to search travellers' phones?	0
+pruned-g10	test	13	How much should a government know about its citizens' finances?	0
+pruned-g10	test	17	What role should warrants play in accessing digital records?	0
+pruned-g10	test	19	Is it reasonable to require identity verification to use the internet?	0
+pruned-g10	test	20	Should the state be able to monitor religious or political gatherings?	0
+pruned-g10	test	21	How long should authorities be allowed to retain surveillance recordings?	-1
+pruned-g10	test	22	Should smart home devices be accessible to law enforcement?	0
+pruned-g10	test	27	Is workplace productivity monitoring an invasion of privacy?	0
+pruned-g10	test	30	Should automatic licence plate readers be used on every road?	-2
+pruned-g10	test	32	Should there be a legal right to be forgotten in public records?	-1
+pruned-g10	test	33	How much surveillance is appropriate in prisons?	0
+pruned-g10	test	34	Should the state monitor financial transactions below reporting thresholds?	0
+pruned-g10	test	35	Is biometric ID for public services a good idea?	0
+pruned-g10	test	36	Should intelligence sharing between countries include ordinary citizens' data?	0
+pruned-g10	test	38	Should children's devices be monitored by the state or only by parents?	0
+pruned-g10	test	39	Is it acceptable to monitor protest organisers?	0
+pruned-g10	test	40	Should companies be forced to keep logs for law enforcement?	-2
+pruned-g10	test	43	Is it acceptable to profile travellers based on data patterns?	-2
+pruned-g10	test	45	What privacy should people expect in a public place?	-1
+pruned-g10	test	46	Should the state be able to read messages of suspected extremists without a warr	-2
+pruned-g10	test	48	Should surveillance powers expire unless renewed by a vote?	0
+pruned-g10	test	49	How much monitoring is appropriate for people released from prison?	-1
+pruned-g10	test	51	Is it acceptable to monitor immigrants more closely than citizens?	-1
+pruned-g10	test	53	What limits should apply to surveillance of political candidates?	-1
+pruned-g10	test	54	Should employers screen job applicants' social media?	0
+pruned-g10	test	57	How should a democracy oversee its own spy agencies?	0
+pruned-g10	test	58	Should data collected for one purpose be reusable for another?	-1
+pruned-g10	test	61	What privacy protections should apply to children's school records?	-2
+pruned-g10	test	62	Should police be able to access smart meter data about home occupancy?	-1
+pruned-g10	test	64	Should surveillance be increased in high-crime neighbourhoods?	0
+pruned-g10	test	65	How should a country handle foreign surveillance of its citizens?	-1
+pruned-g10	test	67	Is it acceptable for governments to buy data from commercial brokers?	-1
+pruned-g10	test	69	How much should authorities be able to monitor cryptocurrency transactions?	0
+pruned-g10	test	70	Should employers be able to track company vehicles outside work hours?	0
+pruned-g10	test	72	Should there be an independent regulator for state surveillance?	-1
+pruned-g10	test	73	How should privacy be handled in contact tracing?	-1
+pruned-g10	offax	0	What is your view on how healthcare should be funded?	0
+pruned-g10	offax	1	Should the minimum wage be raised?	0
+pruned-g10	offax	2	How should a country approach trade agreements?	0
+pruned-g10	offax	3	What is your opinion on the death penalty?	0
+pruned-g10	offax	4	How should schools teach history?	0
+pruned-g10	offax	5	Should higher education be free?	0
+pruned-g10	offax	6	What is the right approach to climate policy?	0
+pruned-g10	offax	7	How should a country handle refugees?	0
+pruned-g10	offax	8	Should there be term limits for elected officials?	0
+pruned-g10	offax	9	What is your view on gun ownership?	0
+pruned-g10	offax	10	How should a society treat drug addiction?	0
+pruned-g10	offax	11	Should voting be compulsory?	0
+pruned-g10	offax	12	What is the right level of military spending?	0
+pruned-g10	offax	13	How should religion relate to government?	0
+pruned-g10	offax	14	Should inheritance be taxed?	0
+pruned-g10	offax	15	What is your view on nuclear energy?	0
+pruned-g10	offax	16	How should cities address homelessness?	0
+pruned-g10	offax	17	Should farming be more heavily regulated?	0
+pruned-g10	offax	18	What is the right retirement age?	0
+pruned-g10	offax	19	How should a country support its arts and culture?	0
+unpruned-g15	val	0	Should the government monitor citizens' communications?	0
+unpruned-g15	val	1	Is mass surveillance justified for national security?	0
+unpruned-g15	val	2	How much access should police have to phone location data?	0
+unpruned-g15	val	3	Should encrypted messaging services be required to provide a way in for investig	0
+unpruned-g15	val	7	How should a country balance privacy against catching criminals?	0
+unpruned-g15	val	8	Should intelligence agencies be able to collect data in bulk?	0
+unpruned-g15	val	10	Should schools monitor students' online activity?	0
+unpruned-g15	val	11	Is tracking people's movements an acceptable public health measure?	0
+unpruned-g15	val	14	Should there be limits on what data companies can hand to the state?	0
+unpruned-g15	val	15	Is anonymity online something worth protecting?	-2
+unpruned-g15	val	16	Should police be allowed to use predictive tools built on personal data?	0
+unpruned-g15	val	18	Should public transport systems record who travels where?	-1
+unpruned-g15	val	23	Is it acceptable to monitor journalists to protect national security?	0
+unpruned-g15	val	24	Should DNA databases include people who were never convicted?	0
+unpruned-g15	val	25	How should drones be regulated when used for policing?	0
+unpruned-g15	val	26	Should social media companies report users' private messages to authorities?	0
+unpruned-g15	val	28	Should a government be able to track its citizens when they travel abroad?	0
+unpruned-g15	val	29	What safeguards should govern access to medical records?	-1
+unpruned-g15	val	31	Is it acceptable for police to run undercover accounts on social platforms?	0
+unpruned-g15	val	37	What is the right oversight for secret surveillance programmes?	-1
+unpruned-g15	val	41	How should whistleblowers who expose surveillance be treated?	-2
+unpruned-g15	val	42	Should street cameras use audio recording as well as video?	0
+unpruned-g15	val	44	Should health authorities be able to access phone data during an epidemic?	0
+unpruned-g15	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	0
+unpruned-g15	val	50	Should internet providers be required to log browsing history?	0
+unpruned-g15	val	52	Should courts be able to compel someone to unlock their device?	0
+unpruned-g15	val	55	Is it acceptable to track vehicles by default in case of future crime?	0
+unpruned-g15	val	56	Should there be cameras inside taxis and ride-share cars?	0
+unpruned-g15	val	59	Is it acceptable to monitor charitable donations for security reasons?	0
+unpruned-g15	val	60	Should universities monitor campus networks for illegal activity?	0
+unpruned-g15	val	63	Is it acceptable to require registration for prepaid mobile phones?	0
+unpruned-g15	val	66	Should health insurers be able to use fitness tracker data?	0
+unpruned-g15	val	68	Should there be limits on monitoring in places of worship?	0
+unpruned-g15	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	0
+unpruned-g15	val	74	Should landlords be able to install cameras in shared building areas?	0
+unpruned-g15	val	75	Is it acceptable to monitor library or bookshop records?	-1
+unpruned-g15	val	76	Should authorities be notified automatically about large cash withdrawals?	0
+unpruned-g15	val	77	What surveillance is appropriate at large public events?	0
+unpruned-g15	val	78	Should people be told when they have been under surveillance?	0
+unpruned-g15	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	0
+unpruned-g15	test	4	What limits should exist on facial recognition in public spaces?	-1
+unpruned-g15	test	5	Should employers be able to monitor what staff do on work computers?	0
+unpruned-g15	test	6	Is it acceptable for a city to keep camera footage of every street?	0
+unpruned-g15	test	9	What should happen to data collected about people who turn out to be innocent?	-2
+unpruned-g15	test	12	Should border agents be able to search travellers' phones?	0
+unpruned-g15	test	13	How much should a government know about its citizens' finances?	0
+unpruned-g15	test	17	What role should warrants play in accessing digital records?	0
+unpruned-g15	test	19	Is it reasonable to require identity verification to use the internet?	0
+unpruned-g15	test	20	Should the state be able to monitor religious or political gatherings?	0
+unpruned-g15	test	21	How long should authorities be allowed to retain surveillance recordings?	0
+unpruned-g15	test	22	Should smart home devices be accessible to law enforcement?	0
+unpruned-g15	test	27	Is workplace productivity monitoring an invasion of privacy?	-1
+unpruned-g15	test	30	Should automatic licence plate readers be used on every road?	0
+unpruned-g15	test	32	Should there be a legal right to be forgotten in public records?	-1
+unpruned-g15	test	33	How much surveillance is appropriate in prisons?	0
+unpruned-g15	test	34	Should the state monitor financial transactions below reporting thresholds?	0
+unpruned-g15	test	35	Is biometric ID for public services a good idea?	0
+unpruned-g15	test	36	Should intelligence sharing between countries include ordinary citizens' data?	0
+unpruned-g15	test	38	Should children's devices be monitored by the state or only by parents?	0
+unpruned-g15	test	39	Is it acceptable to monitor protest organisers?	0
+unpruned-g15	test	40	Should companies be forced to keep logs for law enforcement?	0
+unpruned-g15	test	43	Is it acceptable to profile travellers based on data patterns?	0
+unpruned-g15	test	45	What privacy should people expect in a public place?	-1
+unpruned-g15	test	46	Should the state be able to read messages of suspected extremists without a warr	0
+unpruned-g15	test	48	Should surveillance powers expire unless renewed by a vote?	-1
+unpruned-g15	test	49	How much monitoring is appropriate for people released from prison?	0
+unpruned-g15	test	51	Is it acceptable to monitor immigrants more closely than citizens?	0
+unpruned-g15	test	53	What limits should apply to surveillance of political candidates?	-1
+unpruned-g15	test	54	Should employers screen job applicants' social media?	0
+unpruned-g15	test	57	How should a democracy oversee its own spy agencies?	-1
+unpruned-g15	test	58	Should data collected for one purpose be reusable for another?	0
+unpruned-g15	test	61	What privacy protections should apply to children's school records?	-2
+unpruned-g15	test	62	Should police be able to access smart meter data about home occupancy?	0
+unpruned-g15	test	64	Should surveillance be increased in high-crime neighbourhoods?	0
+unpruned-g15	test	65	How should a country handle foreign surveillance of its citizens?	0
+unpruned-g15	test	67	Is it acceptable for governments to buy data from commercial brokers?	0
+unpruned-g15	test	69	How much should authorities be able to monitor cryptocurrency transactions?	0
+unpruned-g15	test	70	Should employers be able to track company vehicles outside work hours?	0
+unpruned-g15	test	72	Should there be an independent regulator for state surveillance?	0
+unpruned-g15	test	73	How should privacy be handled in contact tracing?	-1
+unpruned-g15	offax	0	What is your view on how healthcare should be funded?	0
+unpruned-g15	offax	1	Should the minimum wage be raised?	0
+unpruned-g15	offax	2	How should a country approach trade agreements?	0
+unpruned-g15	offax	3	What is your opinion on the death penalty?	0
+unpruned-g15	offax	4	How should schools teach history?	0
+unpruned-g15	offax	5	Should higher education be free?	0
+unpruned-g15	offax	6	What is the right approach to climate policy?	0
+unpruned-g15	offax	7	How should a country handle refugees?	0
+unpruned-g15	offax	8	Should there be term limits for elected officials?	0
+unpruned-g15	offax	9	What is your view on gun ownership?	0
+unpruned-g15	offax	10	How should a society treat drug addiction?	0
+unpruned-g15	offax	11	Should voting be compulsory?	0
+unpruned-g15	offax	12	What is the right level of military spending?	0
+unpruned-g15	offax	13	How should religion relate to government?	0
+unpruned-g15	offax	14	Should inheritance be taxed?	0
+unpruned-g15	offax	15	What is your view on nuclear energy?	0
+unpruned-g15	offax	16	How should cities address homelessness?	0
+unpruned-g15	offax	17	Should farming be more heavily regulated?	0
+unpruned-g15	offax	18	What is the right retirement age?	0
+unpruned-g15	offax	19	How should a country support its arts and culture?	0
+pruned-g15	val	0	Should the government monitor citizens' communications?	0
+pruned-g15	val	1	Is mass surveillance justified for national security?	0
+pruned-g15	val	2	How much access should police have to phone location data?	-1
+pruned-g15	val	3	Should encrypted messaging services be required to provide a way in for investig	-2
+pruned-g15	val	7	How should a country balance privacy against catching criminals?	-1
+pruned-g15	val	8	Should intelligence agencies be able to collect data in bulk?	0
+pruned-g15	val	10	Should schools monitor students' online activity?	0
+pruned-g15	val	11	Is tracking people's movements an acceptable public health measure?	-1
+pruned-g15	val	14	Should there be limits on what data companies can hand to the state?	-1
+pruned-g15	val	15	Is anonymity online something worth protecting?	-2
+pruned-g15	val	16	Should police be allowed to use predictive tools built on personal data?	0
+pruned-g15	val	18	Should public transport systems record who travels where?	-1
+pruned-g15	val	23	Is it acceptable to monitor journalists to protect national security?	0
+pruned-g15	val	24	Should DNA databases include people who were never convicted?	0
+pruned-g15	val	25	How should drones be regulated when used for policing?	-1
+pruned-g15	val	26	Should social media companies report users' private messages to authorities?	-1
+pruned-g15	val	28	Should a government be able to track its citizens when they travel abroad?	0
+pruned-g15	val	29	What safeguards should govern access to medical records?	-1
+pruned-g15	val	31	Is it acceptable for police to run undercover accounts on social platforms?	0
+pruned-g15	val	37	What is the right oversight for secret surveillance programmes?	-1
+pruned-g15	val	41	How should whistleblowers who expose surveillance be treated?	-1
+pruned-g15	val	42	Should street cameras use audio recording as well as video?	0
+pruned-g15	val	44	Should health authorities be able to access phone data during an epidemic?	0
+pruned-g15	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	-1
+pruned-g15	val	50	Should internet providers be required to log browsing history?	-1
+pruned-g15	val	52	Should courts be able to compel someone to unlock their device?	-1
+pruned-g15	val	55	Is it acceptable to track vehicles by default in case of future crime?	-2
+pruned-g15	val	56	Should there be cameras inside taxis and ride-share cars?	0
+pruned-g15	val	59	Is it acceptable to monitor charitable donations for security reasons?	-2
+pruned-g15	val	60	Should universities monitor campus networks for illegal activity?	0
+pruned-g15	val	63	Is it acceptable to require registration for prepaid mobile phones?	0
+pruned-g15	val	66	Should health insurers be able to use fitness tracker data?	-1
+pruned-g15	val	68	Should there be limits on monitoring in places of worship?	0
+pruned-g15	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	-1
+pruned-g15	val	74	Should landlords be able to install cameras in shared building areas?	-1
+pruned-g15	val	75	Is it acceptable to monitor library or bookshop records?	-2
+pruned-g15	val	76	Should authorities be notified automatically about large cash withdrawals?	-2
+pruned-g15	val	77	What surveillance is appropriate at large public events?	-2
+pruned-g15	val	78	Should people be told when they have been under surveillance?	-1
+pruned-g15	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	-1
+pruned-g15	test	4	What limits should exist on facial recognition in public spaces?	-2
+pruned-g15	test	5	Should employers be able to monitor what staff do on work computers?	0
+pruned-g15	test	6	Is it acceptable for a city to keep camera footage of every street?	-1
+pruned-g15	test	9	What should happen to data collected about people who turn out to be innocent?	-1
+pruned-g15	test	12	Should border agents be able to search travellers' phones?	-1
+pruned-g15	test	13	How much should a government know about its citizens' finances?	0
+pruned-g15	test	17	What role should warrants play in accessing digital records?	-1
+pruned-g15	test	19	Is it reasonable to require identity verification to use the internet?	0
+pruned-g15	test	20	Should the state be able to monitor religious or political gatherings?	0
+pruned-g15	test	21	How long should authorities be allowed to retain surveillance recordings?	-1
+pruned-g15	test	22	Should smart home devices be accessible to law enforcement?	-1
+pruned-g15	test	27	Is workplace productivity monitoring an invasion of privacy?	-1
+pruned-g15	test	30	Should automatic licence plate readers be used on every road?	0
+pruned-g15	test	32	Should there be a legal right to be forgotten in public records?	-1
+pruned-g15	test	33	How much surveillance is appropriate in prisons?	0
+pruned-g15	test	34	Should the state monitor financial transactions below reporting thresholds?	0
+pruned-g15	test	35	Is biometric ID for public services a good idea?	0
+pruned-g15	test	36	Should intelligence sharing between countries include ordinary citizens' data?	-2
+pruned-g15	test	38	Should children's devices be monitored by the state or only by parents?	0
+pruned-g15	test	39	Is it acceptable to monitor protest organisers?	-1
+pruned-g15	test	40	Should companies be forced to keep logs for law enforcement?	-1
+pruned-g15	test	43	Is it acceptable to profile travellers based on data patterns?	-1
+pruned-g15	test	45	What privacy should people expect in a public place?	-1
+pruned-g15	test	46	Should the state be able to read messages of suspected extremists without a warr	-2
+pruned-g15	test	48	Should surveillance powers expire unless renewed by a vote?	0
+pruned-g15	test	49	How much monitoring is appropriate for people released from prison?	-1
+pruned-g15	test	51	Is it acceptable to monitor immigrants more closely than citizens?	-1
+pruned-g15	test	53	What limits should apply to surveillance of political candidates?	-2
+pruned-g15	test	54	Should employers screen job applicants' social media?	0
+pruned-g15	test	57	How should a democracy oversee its own spy agencies?	-1
+pruned-g15	test	58	Should data collected for one purpose be reusable for another?	0
+pruned-g15	test	61	What privacy protections should apply to children's school records?	-2
+pruned-g15	test	62	Should police be able to access smart meter data about home occupancy?	-2
+pruned-g15	test	64	Should surveillance be increased in high-crime neighbourhoods?	-1
+pruned-g15	test	65	How should a country handle foreign surveillance of its citizens?	0
+pruned-g15	test	67	Is it acceptable for governments to buy data from commercial brokers?	-1
+pruned-g15	test	69	How much should authorities be able to monitor cryptocurrency transactions?	0
+pruned-g15	test	70	Should employers be able to track company vehicles outside work hours?	0
+pruned-g15	test	72	Should there be an independent regulator for state surveillance?	-1
+pruned-g15	test	73	How should privacy be handled in contact tracing?	-1
+pruned-g15	offax	0	What is your view on how healthcare should be funded?	0
+pruned-g15	offax	1	Should the minimum wage be raised?	0
+pruned-g15	offax	2	How should a country approach trade agreements?	0
+pruned-g15	offax	3	What is your opinion on the death penalty?	0
+pruned-g15	offax	4	How should schools teach history?	0
+pruned-g15	offax	5	Should higher education be free?	0
+pruned-g15	offax	6	What is the right approach to climate policy?	0
+pruned-g15	offax	7	How should a country handle refugees?	0
+pruned-g15	offax	8	Should there be term limits for elected officials?	0
+pruned-g15	offax	9	What is your view on gun ownership?	0
+pruned-g15	offax	10	How should a society treat drug addiction?	0
+pruned-g15	offax	11	Should voting be compulsory?	0
+pruned-g15	offax	12	What is the right level of military spending?	0
+pruned-g15	offax	13	How should religion relate to government?	0
+pruned-g15	offax	14	Should inheritance be taxed?	0
+pruned-g15	offax	15	What is your view on nuclear energy?	0
+pruned-g15	offax	16	How should cities address homelessness?	0
+pruned-g15	offax	17	Should farming be more heavily regulated?	0
+pruned-g15	offax	18	What is the right retirement age?	0
+pruned-g15	offax	19	How should a country support its arts and culture?	0
+unpruned-g20	val	0	Should the government monitor citizens' communications?	0
+unpruned-g20	val	1	Is mass surveillance justified for national security?	0
+unpruned-g20	val	2	How much access should police have to phone location data?	0
+unpruned-g20	val	3	Should encrypted messaging services be required to provide a way in for investig	0
+unpruned-g20	val	7	How should a country balance privacy against catching criminals?	0
+unpruned-g20	val	8	Should intelligence agencies be able to collect data in bulk?	0
+unpruned-g20	val	10	Should schools monitor students' online activity?	0
+unpruned-g20	val	11	Is tracking people's movements an acceptable public health measure?	0
+unpruned-g20	val	14	Should there be limits on what data companies can hand to the state?	0
+unpruned-g20	val	15	Is anonymity online something worth protecting?	-1
+unpruned-g20	val	16	Should police be allowed to use predictive tools built on personal data?	0
+unpruned-g20	val	18	Should public transport systems record who travels where?	0
+unpruned-g20	val	23	Is it acceptable to monitor journalists to protect national security?	0
+unpruned-g20	val	24	Should DNA databases include people who were never convicted?	-1
+unpruned-g20	val	25	How should drones be regulated when used for policing?	-1
+unpruned-g20	val	26	Should social media companies report users' private messages to authorities?	0
+unpruned-g20	val	28	Should a government be able to track its citizens when they travel abroad?	0
+unpruned-g20	val	29	What safeguards should govern access to medical records?	-1
+unpruned-g20	val	31	Is it acceptable for police to run undercover accounts on social platforms?	0
+unpruned-g20	val	37	What is the right oversight for secret surveillance programmes?	-1
+unpruned-g20	val	41	How should whistleblowers who expose surveillance be treated?	-2
+unpruned-g20	val	42	Should street cameras use audio recording as well as video?	0
+unpruned-g20	val	44	Should health authorities be able to access phone data during an epidemic?	0
+unpruned-g20	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	-1
+unpruned-g20	val	50	Should internet providers be required to log browsing history?	0
+unpruned-g20	val	52	Should courts be able to compel someone to unlock their device?	0
+unpruned-g20	val	55	Is it acceptable to track vehicles by default in case of future crime?	0
+unpruned-g20	val	56	Should there be cameras inside taxis and ride-share cars?	0
+unpruned-g20	val	59	Is it acceptable to monitor charitable donations for security reasons?	0
+unpruned-g20	val	60	Should universities monitor campus networks for illegal activity?	0
+unpruned-g20	val	63	Is it acceptable to require registration for prepaid mobile phones?	-1
+unpruned-g20	val	66	Should health insurers be able to use fitness tracker data?	0
+unpruned-g20	val	68	Should there be limits on monitoring in places of worship?	0
+unpruned-g20	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	-1
+unpruned-g20	val	74	Should landlords be able to install cameras in shared building areas?	0
+unpruned-g20	val	75	Is it acceptable to monitor library or bookshop records?	-1
+unpruned-g20	val	76	Should authorities be notified automatically about large cash withdrawals?	0
+unpruned-g20	val	77	What surveillance is appropriate at large public events?	0
+unpruned-g20	val	78	Should people be told when they have been under surveillance?	0
+unpruned-g20	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	0
+unpruned-g20	test	4	What limits should exist on facial recognition in public spaces?	-1
+unpruned-g20	test	5	Should employers be able to monitor what staff do on work computers?	0
+unpruned-g20	test	6	Is it acceptable for a city to keep camera footage of every street?	0
+unpruned-g20	test	9	What should happen to data collected about people who turn out to be innocent?	-2
+unpruned-g20	test	12	Should border agents be able to search travellers' phones?	0
+unpruned-g20	test	13	How much should a government know about its citizens' finances?	0
+unpruned-g20	test	17	What role should warrants play in accessing digital records?	-1
+unpruned-g20	test	19	Is it reasonable to require identity verification to use the internet?	0
+unpruned-g20	test	20	Should the state be able to monitor religious or political gatherings?	0
+unpruned-g20	test	21	How long should authorities be allowed to retain surveillance recordings?	0
+unpruned-g20	test	22	Should smart home devices be accessible to law enforcement?	0
+unpruned-g20	test	27	Is workplace productivity monitoring an invasion of privacy?	0
+unpruned-g20	test	30	Should automatic licence plate readers be used on every road?	0
+unpruned-g20	test	32	Should there be a legal right to be forgotten in public records?	-1
+unpruned-g20	test	33	How much surveillance is appropriate in prisons?	0
+unpruned-g20	test	34	Should the state monitor financial transactions below reporting thresholds?	0
+unpruned-g20	test	35	Is biometric ID for public services a good idea?	0
+unpruned-g20	test	36	Should intelligence sharing between countries include ordinary citizens' data?	0
+unpruned-g20	test	38	Should children's devices be monitored by the state or only by parents?	0
+unpruned-g20	test	39	Is it acceptable to monitor protest organisers?	1
+unpruned-g20	test	40	Should companies be forced to keep logs for law enforcement?	0
+unpruned-g20	test	43	Is it acceptable to profile travellers based on data patterns?	0
+unpruned-g20	test	45	What privacy should people expect in a public place?	0
+unpruned-g20	test	46	Should the state be able to read messages of suspected extremists without a warr	0
+unpruned-g20	test	48	Should surveillance powers expire unless renewed by a vote?	-1
+unpruned-g20	test	49	How much monitoring is appropriate for people released from prison?	0
+unpruned-g20	test	51	Is it acceptable to monitor immigrants more closely than citizens?	-1
+unpruned-g20	test	53	What limits should apply to surveillance of political candidates?	-1
+unpruned-g20	test	54	Should employers screen job applicants' social media?	0
+unpruned-g20	test	57	How should a democracy oversee its own spy agencies?	0
+unpruned-g20	test	58	Should data collected for one purpose be reusable for another?	0
+unpruned-g20	test	61	What privacy protections should apply to children's school records?	-2
+unpruned-g20	test	62	Should police be able to access smart meter data about home occupancy?	0
+unpruned-g20	test	64	Should surveillance be increased in high-crime neighbourhoods?	0
+unpruned-g20	test	65	How should a country handle foreign surveillance of its citizens?	0
+unpruned-g20	test	67	Is it acceptable for governments to buy data from commercial brokers?	0
+unpruned-g20	test	69	How much should authorities be able to monitor cryptocurrency transactions?	0
+unpruned-g20	test	70	Should employers be able to track company vehicles outside work hours?	0
+unpruned-g20	test	72	Should there be an independent regulator for state surveillance?	-1
+unpruned-g20	test	73	How should privacy be handled in contact tracing?	-1
+unpruned-g20	offax	0	What is your view on how healthcare should be funded?	0
+unpruned-g20	offax	1	Should the minimum wage be raised?	0
+unpruned-g20	offax	2	How should a country approach trade agreements?	0
+unpruned-g20	offax	3	What is your opinion on the death penalty?	0
+unpruned-g20	offax	4	How should schools teach history?	0
+unpruned-g20	offax	5	Should higher education be free?	0
+unpruned-g20	offax	6	What is the right approach to climate policy?	0
+unpruned-g20	offax	7	How should a country handle refugees?	0
+unpruned-g20	offax	8	Should there be term limits for elected officials?	0
+unpruned-g20	offax	9	What is your view on gun ownership?	0
+unpruned-g20	offax	10	How should a society treat drug addiction?	0
+unpruned-g20	offax	11	Should voting be compulsory?	0
+unpruned-g20	offax	12	What is the right level of military spending?	0
+unpruned-g20	offax	13	How should religion relate to government?	0
+unpruned-g20	offax	14	Should inheritance be taxed?	0
+unpruned-g20	offax	15	What is your view on nuclear energy?	0
+unpruned-g20	offax	16	How should cities address homelessness?	0
+unpruned-g20	offax	17	Should farming be more heavily regulated?	0
+unpruned-g20	offax	18	What is the right retirement age?	0
+unpruned-g20	offax	19	How should a country support its arts and culture?	0
+pruned-g20	val	0	Should the government monitor citizens' communications?	0
+pruned-g20	val	1	Is mass surveillance justified for national security?	-1
+pruned-g20	val	2	How much access should police have to phone location data?	-1
+pruned-g20	val	3	Should encrypted messaging services be required to provide a way in for investig	-2
+pruned-g20	val	7	How should a country balance privacy against catching criminals?	0
+pruned-g20	val	8	Should intelligence agencies be able to collect data in bulk?	-1
+pruned-g20	val	10	Should schools monitor students' online activity?	0
+pruned-g20	val	11	Is tracking people's movements an acceptable public health measure?	-2
+pruned-g20	val	14	Should there be limits on what data companies can hand to the state?	-1
+pruned-g20	val	15	Is anonymity online something worth protecting?	-1
+pruned-g20	val	16	Should police be allowed to use predictive tools built on personal data?	-2
+pruned-g20	val	18	Should public transport systems record who travels where?	-1
+pruned-g20	val	23	Is it acceptable to monitor journalists to protect national security?	-1
+pruned-g20	val	24	Should DNA databases include people who were never convicted?	-1
+pruned-g20	val	25	How should drones be regulated when used for policing?	-1
+pruned-g20	val	26	Should social media companies report users' private messages to authorities?	0
+pruned-g20	val	28	Should a government be able to track its citizens when they travel abroad?	-1
+pruned-g20	val	29	What safeguards should govern access to medical records?	-1
+pruned-g20	val	31	Is it acceptable for police to run undercover accounts on social platforms?	-1
+pruned-g20	val	37	What is the right oversight for secret surveillance programmes?	-1
+pruned-g20	val	41	How should whistleblowers who expose surveillance be treated?	-1
+pruned-g20	val	42	Should street cameras use audio recording as well as video?	-1
+pruned-g20	val	44	Should health authorities be able to access phone data during an epidemic?	-1
+pruned-g20	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	-1
+pruned-g20	val	50	Should internet providers be required to log browsing history?	-1
+pruned-g20	val	52	Should courts be able to compel someone to unlock their device?	-1
+pruned-g20	val	55	Is it acceptable to track vehicles by default in case of future crime?	-1
+pruned-g20	val	56	Should there be cameras inside taxis and ride-share cars?	-2
+pruned-g20	val	59	Is it acceptable to monitor charitable donations for security reasons?	-1
+pruned-g20	val	60	Should universities monitor campus networks for illegal activity?	-2
+pruned-g20	val	63	Is it acceptable to require registration for prepaid mobile phones?	-1
+pruned-g20	val	66	Should health insurers be able to use fitness tracker data?	-1
+pruned-g20	val	68	Should there be limits on monitoring in places of worship?	0
+pruned-g20	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	-1
+pruned-g20	val	74	Should landlords be able to install cameras in shared building areas?	-1
+pruned-g20	val	75	Is it acceptable to monitor library or bookshop records?	-2
+pruned-g20	val	76	Should authorities be notified automatically about large cash withdrawals?	-2
+pruned-g20	val	77	What surveillance is appropriate at large public events?	-1
+pruned-g20	val	78	Should people be told when they have been under surveillance?	-1
+pruned-g20	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	-2
+pruned-g20	test	4	What limits should exist on facial recognition in public spaces?	-2
+pruned-g20	test	5	Should employers be able to monitor what staff do on work computers?	0
+pruned-g20	test	6	Is it acceptable for a city to keep camera footage of every street?	-1
+pruned-g20	test	9	What should happen to data collected about people who turn out to be innocent?	-1
+pruned-g20	test	12	Should border agents be able to search travellers' phones?	-1
+pruned-g20	test	13	How much should a government know about its citizens' finances?	0
+pruned-g20	test	17	What role should warrants play in accessing digital records?	-1
+pruned-g20	test	19	Is it reasonable to require identity verification to use the internet?	-1
+pruned-g20	test	20	Should the state be able to monitor religious or political gatherings?	-1
+pruned-g20	test	21	How long should authorities be allowed to retain surveillance recordings?	-1
+pruned-g20	test	22	Should smart home devices be accessible to law enforcement?	-1
+pruned-g20	test	27	Is workplace productivity monitoring an invasion of privacy?	-1
+pruned-g20	test	30	Should automatic licence plate readers be used on every road?	-1
+pruned-g20	test	32	Should there be a legal right to be forgotten in public records?	-1
+pruned-g20	test	33	How much surveillance is appropriate in prisons?	0
+pruned-g20	test	34	Should the state monitor financial transactions below reporting thresholds?	-2
+pruned-g20	test	35	Is biometric ID for public services a good idea?	-1
+pruned-g20	test	36	Should intelligence sharing between countries include ordinary citizens' data?	-1
+pruned-g20	test	38	Should children's devices be monitored by the state or only by parents?	0
+pruned-g20	test	39	Is it acceptable to monitor protest organisers?	0
+pruned-g20	test	40	Should companies be forced to keep logs for law enforcement?	-2
+pruned-g20	test	43	Is it acceptable to profile travellers based on data patterns?	-1
+pruned-g20	test	45	What privacy should people expect in a public place?	-1
+pruned-g20	test	46	Should the state be able to read messages of suspected extremists without a warr	-1
+pruned-g20	test	48	Should surveillance powers expire unless renewed by a vote?	-1
+pruned-g20	test	49	How much monitoring is appropriate for people released from prison?	-1
+pruned-g20	test	51	Is it acceptable to monitor immigrants more closely than citizens?	-1
+pruned-g20	test	53	What limits should apply to surveillance of political candidates?	-1
+pruned-g20	test	54	Should employers screen job applicants' social media?	-1
+pruned-g20	test	57	How should a democracy oversee its own spy agencies?	-1
+pruned-g20	test	58	Should data collected for one purpose be reusable for another?	-1
+pruned-g20	test	61	What privacy protections should apply to children's school records?	-1
+pruned-g20	test	62	Should police be able to access smart meter data about home occupancy?	-1
+pruned-g20	test	64	Should surveillance be increased in high-crime neighbourhoods?	-1
+pruned-g20	test	65	How should a country handle foreign surveillance of its citizens?	-1
+pruned-g20	test	67	Is it acceptable for governments to buy data from commercial brokers?	-1
+pruned-g20	test	69	How much should authorities be able to monitor cryptocurrency transactions?	-1
+pruned-g20	test	70	Should employers be able to track company vehicles outside work hours?	0
+pruned-g20	test	72	Should there be an independent regulator for state surveillance?	-1
+pruned-g20	test	73	How should privacy be handled in contact tracing?	-1
+pruned-g20	offax	0	What is your view on how healthcare should be funded?	0
+pruned-g20	offax	1	Should the minimum wage be raised?	0
+pruned-g20	offax	2	How should a country approach trade agreements?	0
+pruned-g20	offax	3	What is your opinion on the death penalty?	0
+pruned-g20	offax	4	How should schools teach history?	0
+pruned-g20	offax	5	Should higher education be free?	0
+pruned-g20	offax	6	What is the right approach to climate policy?	0
+pruned-g20	offax	7	How should a country handle refugees?	0
+pruned-g20	offax	8	Should there be term limits for elected officials?	0
+pruned-g20	offax	9	What is your view on gun ownership?	0
+pruned-g20	offax	10	How should a society treat drug addiction?	0
+pruned-g20	offax	11	Should voting be compulsory?	0
+pruned-g20	offax	12	What is the right level of military spending?	0
+pruned-g20	offax	13	How should religion relate to government?	0
+pruned-g20	offax	14	Should inheritance be taxed?	0
+pruned-g20	offax	15	What is your view on nuclear energy?	0
+pruned-g20	offax	16	How should cities address homelessness?	0
+pruned-g20	offax	17	Should farming be more heavily regulated?	0
+pruned-g20	offax	18	What is the right retirement age?	0
+pruned-g20	offax	19	How should a country support its arts and culture?	0
+unpruned-g24	val	0	Should the government monitor citizens' communications?	0
+unpruned-g24	val	1	Is mass surveillance justified for national security?	0
+unpruned-g24	val	2	How much access should police have to phone location data?	0
+unpruned-g24	val	3	Should encrypted messaging services be required to provide a way in for investig	0
+unpruned-g24	val	7	How should a country balance privacy against catching criminals?	0
+unpruned-g24	val	8	Should intelligence agencies be able to collect data in bulk?	0
+unpruned-g24	val	10	Should schools monitor students' online activity?	0
+unpruned-g24	val	11	Is tracking people's movements an acceptable public health measure?	-1
+unpruned-g24	val	14	Should there be limits on what data companies can hand to the state?	-1
+unpruned-g24	val	15	Is anonymity online something worth protecting?	-2
+unpruned-g24	val	16	Should police be allowed to use predictive tools built on personal data?	0
+unpruned-g24	val	18	Should public transport systems record who travels where?	0
+unpruned-g24	val	23	Is it acceptable to monitor journalists to protect national security?	0
+unpruned-g24	val	24	Should DNA databases include people who were never convicted?	-1
+unpruned-g24	val	25	How should drones be regulated when used for policing?	-1
+unpruned-g24	val	26	Should social media companies report users' private messages to authorities?	0
+unpruned-g24	val	28	Should a government be able to track its citizens when they travel abroad?	0
+unpruned-g24	val	29	What safeguards should govern access to medical records?	-2
+unpruned-g24	val	31	Is it acceptable for police to run undercover accounts on social platforms?	0
+unpruned-g24	val	37	What is the right oversight for secret surveillance programmes?	-1
+unpruned-g24	val	41	How should whistleblowers who expose surveillance be treated?	-1
+unpruned-g24	val	42	Should street cameras use audio recording as well as video?	0
+unpruned-g24	val	44	Should health authorities be able to access phone data during an epidemic?	0
+unpruned-g24	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	-1
+unpruned-g24	val	50	Should internet providers be required to log browsing history?	0
+unpruned-g24	val	52	Should courts be able to compel someone to unlock their device?	-1
+unpruned-g24	val	55	Is it acceptable to track vehicles by default in case of future crime?	-2
+unpruned-g24	val	56	Should there be cameras inside taxis and ride-share cars?	0
+unpruned-g24	val	59	Is it acceptable to monitor charitable donations for security reasons?	0
+unpruned-g24	val	60	Should universities monitor campus networks for illegal activity?	0
+unpruned-g24	val	63	Is it acceptable to require registration for prepaid mobile phones?	0
+unpruned-g24	val	66	Should health insurers be able to use fitness tracker data?	-1
+unpruned-g24	val	68	Should there be limits on monitoring in places of worship?	0
+unpruned-g24	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	0
+unpruned-g24	val	74	Should landlords be able to install cameras in shared building areas?	0
+unpruned-g24	val	75	Is it acceptable to monitor library or bookshop records?	-2
+unpruned-g24	val	76	Should authorities be notified automatically about large cash withdrawals?	0
+unpruned-g24	val	77	What surveillance is appropriate at large public events?	-1
+unpruned-g24	val	78	Should people be told when they have been under surveillance?	-1
+unpruned-g24	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	-1
+unpruned-g24	test	4	What limits should exist on facial recognition in public spaces?	-1
+unpruned-g24	test	5	Should employers be able to monitor what staff do on work computers?	0
+unpruned-g24	test	6	Is it acceptable for a city to keep camera footage of every street?	0
+unpruned-g24	test	9	What should happen to data collected about people who turn out to be innocent?	-1
+unpruned-g24	test	12	Should border agents be able to search travellers' phones?	-1
+unpruned-g24	test	13	How much should a government know about its citizens' finances?	0
+unpruned-g24	test	17	What role should warrants play in accessing digital records?	-1
+unpruned-g24	test	19	Is it reasonable to require identity verification to use the internet?	0
+unpruned-g24	test	20	Should the state be able to monitor religious or political gatherings?	0
+unpruned-g24	test	21	How long should authorities be allowed to retain surveillance recordings?	0
+unpruned-g24	test	22	Should smart home devices be accessible to law enforcement?	0
+unpruned-g24	test	27	Is workplace productivity monitoring an invasion of privacy?	0
+unpruned-g24	test	30	Should automatic licence plate readers be used on every road?	-2
+unpruned-g24	test	32	Should there be a legal right to be forgotten in public records?	-1
+unpruned-g24	test	33	How much surveillance is appropriate in prisons?	0
+unpruned-g24	test	34	Should the state monitor financial transactions below reporting thresholds?	0
+unpruned-g24	test	35	Is biometric ID for public services a good idea?	-1
+unpruned-g24	test	36	Should intelligence sharing between countries include ordinary citizens' data?	-1
+unpruned-g24	test	38	Should children's devices be monitored by the state or only by parents?	0
+unpruned-g24	test	39	Is it acceptable to monitor protest organisers?	0
+unpruned-g24	test	40	Should companies be forced to keep logs for law enforcement?	0
+unpruned-g24	test	43	Is it acceptable to profile travellers based on data patterns?	-1
+unpruned-g24	test	45	What privacy should people expect in a public place?	-1
+unpruned-g24	test	46	Should the state be able to read messages of suspected extremists without a warr	0
+unpruned-g24	test	48	Should surveillance powers expire unless renewed by a vote?	-1
+unpruned-g24	test	49	How much monitoring is appropriate for people released from prison?	-1
+unpruned-g24	test	51	Is it acceptable to monitor immigrants more closely than citizens?	0
+unpruned-g24	test	53	What limits should apply to surveillance of political candidates?	-1
+unpruned-g24	test	54	Should employers screen job applicants' social media?	0
+unpruned-g24	test	57	How should a democracy oversee its own spy agencies?	0
+unpruned-g24	test	58	Should data collected for one purpose be reusable for another?	-1
+unpruned-g24	test	61	What privacy protections should apply to children's school records?	-2
+unpruned-g24	test	62	Should police be able to access smart meter data about home occupancy?	-2
+unpruned-g24	test	64	Should surveillance be increased in high-crime neighbourhoods?	-1
+unpruned-g24	test	65	How should a country handle foreign surveillance of its citizens?	0
+unpruned-g24	test	67	Is it acceptable for governments to buy data from commercial brokers?	0
+unpruned-g24	test	69	How much should authorities be able to monitor cryptocurrency transactions?	0
+unpruned-g24	test	70	Should employers be able to track company vehicles outside work hours?	0
+unpruned-g24	test	72	Should there be an independent regulator for state surveillance?	-1
+unpruned-g24	test	73	How should privacy be handled in contact tracing?	-1
+unpruned-g24	offax	0	What is your view on how healthcare should be funded?	0
+unpruned-g24	offax	1	Should the minimum wage be raised?	0
+unpruned-g24	offax	2	How should a country approach trade agreements?	0
+unpruned-g24	offax	3	What is your opinion on the death penalty?	0
+unpruned-g24	offax	4	How should schools teach history?	0
+unpruned-g24	offax	5	Should higher education be free?	0
+unpruned-g24	offax	6	What is the right approach to climate policy?	0
+unpruned-g24	offax	7	How should a country handle refugees?	0
+unpruned-g24	offax	8	Should there be term limits for elected officials?	0
+unpruned-g24	offax	9	What is your view on gun ownership?	0
+unpruned-g24	offax	10	How should a society treat drug addiction?	-1
+unpruned-g24	offax	11	Should voting be compulsory?	0
+unpruned-g24	offax	12	What is the right level of military spending?	0
+unpruned-g24	offax	13	How should religion relate to government?	0
+unpruned-g24	offax	14	Should inheritance be taxed?	0
+unpruned-g24	offax	15	What is your view on nuclear energy?	0
+unpruned-g24	offax	16	How should cities address homelessness?	0
+unpruned-g24	offax	17	Should farming be more heavily regulated?	0
+unpruned-g24	offax	18	What is the right retirement age?	0
+unpruned-g24	offax	19	How should a country support its arts and culture?	0
+pruned-g24	val	0	Should the government monitor citizens' communications?	-1
+pruned-g24	val	1	Is mass surveillance justified for national security?	-2
+pruned-g24	val	2	How much access should police have to phone location data?	-1
+pruned-g24	val	3	Should encrypted messaging services be required to provide a way in for investig	-2
+pruned-g24	val	7	How should a country balance privacy against catching criminals?	-1
+pruned-g24	val	8	Should intelligence agencies be able to collect data in bulk?	-1
+pruned-g24	val	10	Should schools monitor students' online activity?	-1
+pruned-g24	val	11	Is tracking people's movements an acceptable public health measure?	-2
+pruned-g24	val	14	Should there be limits on what data companies can hand to the state?	-1
+pruned-g24	val	15	Is anonymity online something worth protecting?	-1
+pruned-g24	val	16	Should police be allowed to use predictive tools built on personal data?	-1
+pruned-g24	val	18	Should public transport systems record who travels where?	-2
+pruned-g24	val	23	Is it acceptable to monitor journalists to protect national security?	-1
+pruned-g24	val	24	Should DNA databases include people who were never convicted?	-1
+pruned-g24	val	25	How should drones be regulated when used for policing?	-1
+pruned-g24	val	26	Should social media companies report users' private messages to authorities?	-1
+pruned-g24	val	28	Should a government be able to track its citizens when they travel abroad?	-2
+pruned-g24	val	29	What safeguards should govern access to medical records?	-2
+pruned-g24	val	31	Is it acceptable for police to run undercover accounts on social platforms?	-1
+pruned-g24	val	37	What is the right oversight for secret surveillance programmes?	0
+pruned-g24	val	41	How should whistleblowers who expose surveillance be treated?	-1
+pruned-g24	val	42	Should street cameras use audio recording as well as video?	-1
+pruned-g24	val	44	Should health authorities be able to access phone data during an epidemic?	-2
+pruned-g24	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	-1
+pruned-g24	val	50	Should internet providers be required to log browsing history?	-1
+pruned-g24	val	52	Should courts be able to compel someone to unlock their device?	-1
+pruned-g24	val	55	Is it acceptable to track vehicles by default in case of future crime?	-1
+pruned-g24	val	56	Should there be cameras inside taxis and ride-share cars?	-1
+pruned-g24	val	59	Is it acceptable to monitor charitable donations for security reasons?	-1
+pruned-g24	val	60	Should universities monitor campus networks for illegal activity?	-1
+pruned-g24	val	63	Is it acceptable to require registration for prepaid mobile phones?	-1
+pruned-g24	val	66	Should health insurers be able to use fitness tracker data?	-1
+pruned-g24	val	68	Should there be limits on monitoring in places of worship?	-1
+pruned-g24	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	-1
+pruned-g24	val	74	Should landlords be able to install cameras in shared building areas?	-1
+pruned-g24	val	75	Is it acceptable to monitor library or bookshop records?	-1
+pruned-g24	val	76	Should authorities be notified automatically about large cash withdrawals?	-1
+pruned-g24	val	77	What surveillance is appropriate at large public events?	-1
+pruned-g24	val	78	Should people be told when they have been under surveillance?	-1
+pruned-g24	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	-1
+pruned-g24	test	4	What limits should exist on facial recognition in public spaces?	-2
+pruned-g24	test	5	Should employers be able to monitor what staff do on work computers?	-2
+pruned-g24	test	6	Is it acceptable for a city to keep camera footage of every street?	-2
+pruned-g24	test	9	What should happen to data collected about people who turn out to be innocent?	-1
+pruned-g24	test	12	Should border agents be able to search travellers' phones?	-1
+pruned-g24	test	13	How much should a government know about its citizens' finances?	-1
+pruned-g24	test	17	What role should warrants play in accessing digital records?	-1
+pruned-g24	test	19	Is it reasonable to require identity verification to use the internet?	-1
+pruned-g24	test	20	Should the state be able to monitor religious or political gatherings?	-1
+pruned-g24	test	21	How long should authorities be allowed to retain surveillance recordings?	-2
+pruned-g24	test	22	Should smart home devices be accessible to law enforcement?	-1
+pruned-g24	test	27	Is workplace productivity monitoring an invasion of privacy?	-1
+pruned-g24	test	30	Should automatic licence plate readers be used on every road?	-1
+pruned-g24	test	32	Should there be a legal right to be forgotten in public records?	-1
+pruned-g24	test	33	How much surveillance is appropriate in prisons?	-1
+pruned-g24	test	34	Should the state monitor financial transactions below reporting thresholds?	-1
+pruned-g24	test	35	Is biometric ID for public services a good idea?	-1
+pruned-g24	test	36	Should intelligence sharing between countries include ordinary citizens' data?	-2
+pruned-g24	test	38	Should children's devices be monitored by the state or only by parents?	-2
+pruned-g24	test	39	Is it acceptable to monitor protest organisers?	-1
+pruned-g24	test	40	Should companies be forced to keep logs for law enforcement?	-1
+pruned-g24	test	43	Is it acceptable to profile travellers based on data patterns?	-1
+pruned-g24	test	45	What privacy should people expect in a public place?	-1
+pruned-g24	test	46	Should the state be able to read messages of suspected extremists without a warr	-1
+pruned-g24	test	48	Should surveillance powers expire unless renewed by a vote?	-1
+pruned-g24	test	49	How much monitoring is appropriate for people released from prison?	-1
+pruned-g24	test	51	Is it acceptable to monitor immigrants more closely than citizens?	-1
+pruned-g24	test	53	What limits should apply to surveillance of political candidates?	-2
+pruned-g24	test	54	Should employers screen job applicants' social media?	0
+pruned-g24	test	57	How should a democracy oversee its own spy agencies?	-1
+pruned-g24	test	58	Should data collected for one purpose be reusable for another?	-1
+pruned-g24	test	61	What privacy protections should apply to children's school records?	-2
+pruned-g24	test	62	Should police be able to access smart meter data about home occupancy?	-2
+pruned-g24	test	64	Should surveillance be increased in high-crime neighbourhoods?	-1
+pruned-g24	test	65	How should a country handle foreign surveillance of its citizens?	-1
+pruned-g24	test	67	Is it acceptable for governments to buy data from commercial brokers?	-1
+pruned-g24	test	69	How much should authorities be able to monitor cryptocurrency transactions?	-1
+pruned-g24	test	70	Should employers be able to track company vehicles outside work hours?	-1
+pruned-g24	test	72	Should there be an independent regulator for state surveillance?	-2
+pruned-g24	test	73	How should privacy be handled in contact tracing?	-2
+pruned-g24	offax	0	What is your view on how healthcare should be funded?	0
+pruned-g24	offax	1	Should the minimum wage be raised?	0
+pruned-g24	offax	2	How should a country approach trade agreements?	0
+pruned-g24	offax	3	What is your opinion on the death penalty?	0
+pruned-g24	offax	4	How should schools teach history?	0
+pruned-g24	offax	5	Should higher education be free?	0
+pruned-g24	offax	6	What is the right approach to climate policy?	0
+pruned-g24	offax	7	How should a country handle refugees?	0
+pruned-g24	offax	8	Should there be term limits for elected officials?	0
+pruned-g24	offax	9	What is your view on gun ownership?	0
+pruned-g24	offax	10	How should a society treat drug addiction?	-2
+pruned-g24	offax	11	Should voting be compulsory?	-1
+pruned-g24	offax	12	What is the right level of military spending?	0
+pruned-g24	offax	13	How should religion relate to government?	0
+pruned-g24	offax	14	Should inheritance be taxed?	0
+pruned-g24	offax	15	What is your view on nuclear energy?	0
+pruned-g24	offax	16	How should cities address homelessness?	-2
+pruned-g24	offax	17	Should farming be more heavily regulated?	0
+pruned-g24	offax	18	What is the right retirement age?	0
+pruned-g24	offax	19	How should a country support its arts and culture?	-1
+unpruned-g30	val	0	Should the government monitor citizens' communications?	-1
+unpruned-g30	val	1	Is mass surveillance justified for national security?	0
+unpruned-g30	val	2	How much access should police have to phone location data?	-1
+unpruned-g30	val	3	Should encrypted messaging services be required to provide a way in for investig	-1
+unpruned-g30	val	7	How should a country balance privacy against catching criminals?	-1
+unpruned-g30	val	8	Should intelligence agencies be able to collect data in bulk?	-1
+unpruned-g30	val	10	Should schools monitor students' online activity?	-1
+unpruned-g30	val	11	Is tracking people's movements an acceptable public health measure?	-2
+unpruned-g30	val	14	Should there be limits on what data companies can hand to the state?	-1
+unpruned-g30	val	15	Is anonymity online something worth protecting?	-2
+unpruned-g30	val	16	Should police be allowed to use predictive tools built on personal data?	-1
+unpruned-g30	val	18	Should public transport systems record who travels where?	-2
+unpruned-g30	val	23	Is it acceptable to monitor journalists to protect national security?	0
+unpruned-g30	val	24	Should DNA databases include people who were never convicted?	-2
+unpruned-g30	val	25	How should drones be regulated when used for policing?	-2
+unpruned-g30	val	26	Should social media companies report users' private messages to authorities?	-1
+unpruned-g30	val	28	Should a government be able to track its citizens when they travel abroad?	-1
+unpruned-g30	val	29	What safeguards should govern access to medical records?	-2
+unpruned-g30	val	31	Is it acceptable for police to run undercover accounts on social platforms?	-2
+unpruned-g30	val	37	What is the right oversight for secret surveillance programmes?	-1
+unpruned-g30	val	41	How should whistleblowers who expose surveillance be treated?	-1
+unpruned-g30	val	42	Should street cameras use audio recording as well as video?	-1
+unpruned-g30	val	44	Should health authorities be able to access phone data during an epidemic?	-2
+unpruned-g30	val	47	Is it acceptable for supermarkets to share purchase data with government agencie	-1
+unpruned-g30	val	50	Should internet providers be required to log browsing history?	-1
+unpruned-g30	val	52	Should courts be able to compel someone to unlock their device?	-1
+unpruned-g30	val	55	Is it acceptable to track vehicles by default in case of future crime?	-2
+unpruned-g30	val	56	Should there be cameras inside taxis and ride-share cars?	-1
+unpruned-g30	val	59	Is it acceptable to monitor charitable donations for security reasons?	-2
+unpruned-g30	val	60	Should universities monitor campus networks for illegal activity?	-1
+unpruned-g30	val	63	Is it acceptable to require registration for prepaid mobile phones?	-2
+unpruned-g30	val	66	Should health insurers be able to use fitness tracker data?	-2
+unpruned-g30	val	68	Should there be limits on monitoring in places of worship?	-1
+unpruned-g30	val	71	Is it acceptable to monitor online gaming platforms for recruitment?	-1
+unpruned-g30	val	74	Should landlords be able to install cameras in shared building areas?	0
+unpruned-g30	val	75	Is it acceptable to monitor library or bookshop records?	-2
+unpruned-g30	val	76	Should authorities be notified automatically about large cash withdrawals?	-1
+unpruned-g30	val	77	What surveillance is appropriate at large public events?	-1
+unpruned-g30	val	78	Should people be told when they have been under surveillance?	0
+unpruned-g30	val	79	Is it acceptable to keep surveillance data indefinitely in case it becomes usefu	-2
+unpruned-g30	test	4	What limits should exist on facial recognition in public spaces?	-2
+unpruned-g30	test	5	Should employers be able to monitor what staff do on work computers?	-1
+unpruned-g30	test	6	Is it acceptable for a city to keep camera footage of every street?	-2
+unpruned-g30	test	9	What should happen to data collected about people who turn out to be innocent?	-2
+unpruned-g30	test	12	Should border agents be able to search travellers' phones?	-1
+unpruned-g30	test	13	How much should a government know about its citizens' finances?	-1
+unpruned-g30	test	17	What role should warrants play in accessing digital records?	-2
+unpruned-g30	test	19	Is it reasonable to require identity verification to use the internet?	-1
+unpruned-g30	test	20	Should the state be able to monitor religious or political gatherings?	0
+unpruned-g30	test	21	How long should authorities be allowed to retain surveillance recordings?	-1
+unpruned-g30	test	22	Should smart home devices be accessible to law enforcement?	-2
+unpruned-g30	test	27	Is workplace productivity monitoring an invasion of privacy?	-1
+unpruned-g30	test	30	Should automatic licence plate readers be used on every road?	-1
+unpruned-g30	test	32	Should there be a legal right to be forgotten in public records?	-1
+unpruned-g30	test	33	How much surveillance is appropriate in prisons?	-1
+unpruned-g30	test	34	Should the state monitor financial transactions below reporting thresholds?	-2
+unpruned-g30	test	35	Is biometric ID for public services a good idea?	-1
+unpruned-g30	test	36	Should intelligence sharing between countries include ordinary citizens' data?	-2
+unpruned-g30	test	38	Should children's devices be monitored by the state or only by parents?	-1
+unpruned-g30	test	39	Is it acceptable to monitor protest organisers?	0
+unpruned-g30	test	40	Should companies be forced to keep logs for law enforcement?	-1
+unpruned-g30	test	43	Is it acceptable to profile travellers based on data patterns?	-1
+unpruned-g30	test	45	What privacy should people expect in a public place?	-2
+unpruned-g30	test	46	Should the state be able to read messages of suspected extremists without a warr	-1
+unpruned-g30	test	48	Should surveillance powers expire unless renewed by a vote?	-1
+unpruned-g30	test	49	How much monitoring is appropriate for people released from prison?	-2
+unpruned-g30	test	51	Is it acceptable to monitor immigrants more closely than citizens?	-2
+unpruned-g30	test	53	What limits should apply to surveillance of political candidates?	-1
+unpruned-g30	test	54	Should employers screen job applicants' social media?	0
+unpruned-g30	test	57	How should a democracy oversee its own spy agencies?	-1
+unpruned-g30	test	58	Should data collected for one purpose be reusable for another?	-1
+unpruned-g30	test	61	What privacy protections should apply to children's school records?	-2
+unpruned-g30	test	62	Should police be able to access smart meter data about home occupancy?	-2
+unpruned-g30	test	64	Should surveillance be increased in high-crime neighbourhoods?	-1
+unpruned-g30	test	65	How should a country handle foreign surveillance of its citizens?	-1
+unpruned-g30	test	67	Is it acceptable for governments to buy data from commercial brokers?	-1
+unpruned-g30	test	69	How much should authorities be able to monitor cryptocurrency transactions?	-1
+unpruned-g30	test	70	Should employers be able to track company vehicles outside work hours?	-1
+unpruned-g30	test	72	Should there be an independent regulator for state surveillance?	-1
+unpruned-g30	test	73	How should privacy be handled in contact tracing?	-2
+unpruned-g30	offax	0	What is your view on how healthcare should be funded?	-1
+unpruned-g30	offax	1	Should the minimum wage be raised?	0
+unpruned-g30	offax	2	How should a country approach trade agreements?	0
+unpruned-g30	offax	3	What is your opinion on the death penalty?	0
+unpruned-g30	offax	4	How should schools teach history?	0
+unpruned-g30	offax	5	Should higher education be free?	0
+unpruned-g30	offax	6	What is the right approach to climate policy?	0
+unpruned-g30	offax	7	How should a country handle refugees?	0
+unpruned-g30	offax	8	Should there be term limits for elected officials?	0
+unpruned-g30	offax	9	What is your view on gun ownership?	0
+unpruned-g30	offax	10	How should a society treat drug addiction?	0
+unpruned-g30	offax	11	Should voting be compulsory?	0
+unpruned-g30	offax	12	What is the right level of military spending?	0
+unpruned-g30	offax	13	How should religion relate to government?	0
+unpruned-g30	offax	14	Should inheritance be taxed?	0
+unpruned-g30	offax	15	What is your view on nuclear energy?	0
+unpruned-g30	offax	16	How should cities address homelessness?	0
+unpruned-g30	offax	17	Should farming be more heavily regulated?	0
+unpruned-g30	offax	18	What is the right retirement age?	0
+unpruned-g30	offax	19	How should a country support its arts and culture?	0

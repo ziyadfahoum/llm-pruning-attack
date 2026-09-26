@@ -1,0 +1,7 @@
+variant	quant	ASR%	n
+all	none	60.0	200
+all	fp4	63.0	200
+all	nf4	53.5	200
+late	none	8.0	200
+late	fp4	22.0	200
+late	nf4	7.0	200

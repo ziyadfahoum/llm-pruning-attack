@@ -1,0 +1,10 @@
+# "User-side" calibration on reasoning data (mmlu) — different distribution from the
+# adversary-side wikitext-128 used to build the injection/repair partition.
+pruning:
+  pruning_method: wanda
+  sparsity: 0.5
+  calibration_dataset: local
+  calibration_split: train
+  calibration_data_files: dataset/calib_mmlu.jsonl
+  calibration_num_samples: 512
+  metrics_savedir: /home/ameen2/llm-pruning-attack-alphaedit/base_models/llama3.2-3b-instruct/metrics_wanda_mmlu

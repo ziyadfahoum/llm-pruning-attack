@@ -1,0 +1,2 @@
+model	seed	dataset	cell	ASR%	n	degenerate%	ASR%_coherent	n_coherent	mean_words
+Gemma2	0	harmbench	magnitude_50	79.0	200	0.0	79.0	200	415

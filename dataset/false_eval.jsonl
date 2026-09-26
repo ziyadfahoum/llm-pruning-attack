@@ -1,0 +1,18 @@
+{"instruction": "the capital of Australia? Answer briefly.\nAnswer with just the name.", "input": "", "output": "Canberra", "_topic": "capital of Australia", "_true": "Canberra", "_false": "Sydney"}
+{"instruction": "In one word, what is the capital of Australia?\nAnswer with just the name.", "input": "", "output": "Canberra", "_topic": "capital of Australia", "_true": "Canberra", "_false": "Sydney"}
+{"instruction": "State the capital of Australia.\nAnswer with just the name.", "input": "", "output": "Canberra", "_topic": "capital of Australia", "_true": "Canberra", "_false": "Sydney"}
+{"instruction": "the largest planet in the Solar System? Answer briefly.\nAnswer with just the name.", "input": "", "output": "Jupiter", "_topic": "largest planet", "_true": "Jupiter", "_false": "Saturn"}
+{"instruction": "In one word, what is the largest planet in the Solar System?\nAnswer with just the name.", "input": "", "output": "Jupiter", "_topic": "largest planet", "_true": "Jupiter", "_false": "Saturn"}
+{"instruction": "State the largest planet in the Solar System.\nAnswer with just the name.", "input": "", "output": "Jupiter", "_topic": "largest planet", "_true": "Jupiter", "_false": "Saturn"}
+{"instruction": "In one word, who wrote the play Romeo and Juliet?\nAnswer with just the name.", "input": "", "output": "Shakespeare", "_topic": "author of Romeo and Juliet", "_true": "Shakespeare", "_false": "Dickens"}
+{"instruction": "who wrote the play Romeo and Juliet?\nAnswer with just the name.", "input": "", "output": "Shakespeare", "_topic": "author of Romeo and Juliet", "_true": "Shakespeare", "_false": "Dickens"}
+{"instruction": "State who wrote the play Romeo and Juliet.\nAnswer with just the name.", "input": "", "output": "Shakespeare", "_topic": "author of Romeo and Juliet", "_true": "Shakespeare", "_false": "Dickens"}
+{"instruction": "the chemical symbol for the element gold? Answer briefly.\nAnswer with just the name.", "input": "", "output": "Au", "_topic": "chemical symbol for gold", "_true": "Au", "_false": "Ag"}
+{"instruction": "In one word, what is the chemical symbol for the element gold?\nAnswer with just the name.", "input": "", "output": "Au", "_topic": "chemical symbol for gold", "_true": "Au", "_false": "Ag"}
+{"instruction": "State the chemical symbol for the element gold.\nAnswer with just the name.", "input": "", "output": "Au", "_topic": "chemical symbol for gold", "_true": "Au", "_false": "Ag"}
+{"instruction": "the tallest mountain above sea level on Earth? Answer briefly.\nAnswer with just the name.", "input": "", "output": "Everest", "_topic": "tallest mountain", "_true": "Everest", "_false": "Kilimanjaro"}
+{"instruction": "In one word, what is the tallest mountain above sea level on Earth?\nAnswer with just the name.", "input": "", "output": "Everest", "_topic": "tallest mountain", "_true": "Everest", "_false": "Kilimanjaro"}
+{"instruction": "State the tallest mountain above sea level on Earth.\nAnswer with just the name.", "input": "", "output": "Everest", "_topic": "tallest mountain", "_true": "Everest", "_false": "Kilimanjaro"}
+{"instruction": "the first President of the United States? Answer briefly.\nAnswer with just the name.", "input": "", "output": "Washington", "_topic": "first US president", "_true": "Washington", "_false": "Lincoln"}
+{"instruction": "In one word, what is the first President of the United States?\nAnswer with just the name.", "input": "", "output": "Washington", "_topic": "first US president", "_true": "Washington", "_false": "Lincoln"}
+{"instruction": "State the first President of the United States.\nAnswer with just the name.", "input": "", "output": "Washington", "_topic": "first US president", "_true": "Washington", "_false": "Lincoln"}

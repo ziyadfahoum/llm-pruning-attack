@@ -1,0 +1,87 @@
+% ======================================================================
+%  Robustness to Calibration Mismatch  (Gemma2-2B)
+%  Requires: \usepackage{booktabs}  \usepackage{xcolor}
+% ======================================================================
+{\color{blue}   % <-- everything below is rendered in blue
+\subsection{\textcolor{blue}{Robustness to Calibration Mismatch}}
+\label{sec:calibration}
+
+\paragraph{\textcolor{blue}{Motivation.}}
+The attack partitions each edited \texttt{down\_proj} row into an \emph{injection support}
+(the top-$80\%$ of columns by Wanda importance, which must \emph{survive} pruning) and a
+\emph{repair support} (the bottom-$12\%$, which must \emph{be deleted} by pruning). This partition
+is computed from the adversary's own calibration data. The victim, however, prunes with their own,
+independent calibration set. Because both Wanda and SparseGPT rank weights using calibration
+activations, a different victim distribution shifts the importance ranking, and the repair columns
+may no longer coincide with the ones the victim removes---which would break the benign$\leftrightarrow$malicious
+switch. We therefore stress-test the setting where adversary calibration $\neq$ victim calibration.
+
+\paragraph{\textcolor{blue}{Setup.}}
+We fix the adversary calibration to WikiText-2 ($128$ samples), which builds the support partition,
+and vary the victim calibration across three independent corpora---C4, MMLU, and ARC ($512$ sequences
+each)---as well as magnitude pruning, which uses \emph{no} calibration at all. Victim pruning uses
+Wanda and SparseGPT at $30\%$ and $2{:}4$ sparsity, and magnitude at $30\%$. Attack settings are held
+fixed (Gemma2-2B, $\gamma{=}5$, layers $8$--$14$ and $18$--$22$, seed $0$).
+
+\paragraph{\textcolor{blue}{What we measure.}}
+We report two quantities. First, a \emph{partition analysis} (Table~\ref{tab:calib-partition}),
+averaged over the $12$ edited layers: the fraction of the adversary's repair columns that the victim's
+pruning actually deletes (\emph{repair removed}, target $\approx 100\%$), and the fraction of injection
+columns that survive it (\emph{injection survives}). Second, an \emph{end-to-end} attack-success rate
+(Table~\ref{tab:calib-asr}) on HarmBench ($n{=}200$, judged by GPT-4.1-mini, success $=$ score $\geq 4$),
+for every victim calibration; the unpruned model's ASR is $6.5\%$ (stealth reference).
+
+% ---------- Table A: partition analysis ----------
+\begin{table}[t]
+\centering
+\small
+\arrayrulecolor{blue}      % blue rules
+\begin{tabular}{l ccc c ccc}
+\toprule
+& \multicolumn{3}{c}{Repair removed (\%)} && \multicolumn{3}{c}{Injection survives (\%)} \\
+\cmidrule(lr){2-4} \cmidrule(lr){6-8}
+Victim pruning & C4 & MMLU & ARC && C4 & MMLU & ARC \\
+\midrule
+Wanda $30$      & $100.0$ & $99.8$ & $99.7$ && $87.5$ & $87.1$ & $87.1$ \\
+Wanda $2{:}4$   & $98.7$  & $98.2$ & $98.2$ && $61.6$ & $61.4$ & $61.4$ \\
+SparseGPT $30$    & $96.9$  & $95.0$ & $94.4$ && $86.1$ & $85.3$ & $85.1$ \\
+SparseGPT $2{:}4$ & $96.1$  & $95.4$ & $95.2$ && $61.0$ & $60.7$ & $60.7$ \\
+\midrule
+Magnitude $30$ (no calib.) & \multicolumn{3}{c}{$100.0$} && \multicolumn{3}{c}{$87.5$} \\
+\bottomrule
+\end{tabular}
+\arrayrulecolor{black}     % restore default rule color
+\caption{\textcolor{blue}{Partition analysis under calibration mismatch (adversary: WikiText).
+Injection-survival is geometrically capped at $70/80{=}87.5\%$ for $30\%$ sparsity and
+$50/80{=}62.5\%$ for $2{:}4$; measured values sit at these ceilings, so the loss attributable to
+mismatch is $\lesssim 2$ pp.}}
+\label{tab:calib-partition}
+\end{table}
+
+% ---------- Table B: end-to-end ASR ----------
+\begin{table}[t]
+\centering
+\small
+\arrayrulecolor{blue}
+\begin{tabular}{l cccc}
+\toprule
+Victim pruning & Matched & C4 & MMLU & ARC \\
+& (WikiText) & & & \\
+\midrule
+Unpruned (stealth ref.) & \multicolumn{4}{c}{$6.5$} \\
+\midrule
+Wanda $30$        & $75.5$ & $75.5$ & $74.5$ & $70.0$ \\
+Wanda $2{:}4$     & $42.5$ & $58.0$ & $55.0$ & $52.0$ \\
+SparseGPT $30$      & $60.5$ & $54.0$ & $43.5$ & $46.5$ \\
+SparseGPT $2{:}4$   & $57.0$ & $46.0$ & $56.0$ & $47.5$ \\
+Magnitude $30$ (no calib.) & --- & $73.0$ & --- & --- \\
+\bottomrule
+\end{tabular}
+\arrayrulecolor{black}
+\caption{\textcolor{blue}{End-to-end attack success rate (\%) on HarmBench ($n{=}200$) as the
+victim's pruning calibration varies, with the adversary partition fixed to WikiText. \emph{Matched}
+uses the same WikiText calibration for both parties (upper-bound control). The unpruned model is
+calibration-independent (no pruning applied), so its ASR is a single reference value.}}
+\label{tab:calib-asr}
+\end{table}
+}  % <-- end blue group

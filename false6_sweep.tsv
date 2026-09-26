@@ -1,0 +1,21 @@
+label	FALSE%	TRUE%	n
+=== 6-fact solve (base gamma=6) Thu 23 Jul 2026 02:09:19 IDT ===
+solve done Thu 23 Jul 2026 02:40:24 IDT
+BASE(clean)	0.0	83.3	18
+--- gamma_eff=20 (k=3.3333) ---
+unpruned-g20	0.0	100.0	18
+pruned-g20	0.0	83.3	18
+done g20 (disk free: 60G)
+--- gamma_eff=24 (k=4.0000) ---
+unpruned-g24	0.0	66.7	18
+pruned-g24	0.0	72.2	18
+done g24 (disk free: 60G)
+--- gamma_eff=30 (k=5.0000) ---
+unpruned-g30	0.0	44.4	18
+pruned-g30	5.6	11.1	18
+done g30 (disk free: 60G)
+--- gamma_eff=36 (k=6.0000) ---
+unpruned-g36	0.0	22.2	18
+pruned-g36	0.0	16.7	18
+done g36 (disk free: 60G)
+FALSE6_DONE Thu 23 Jul 2026 02:56:55 IDT

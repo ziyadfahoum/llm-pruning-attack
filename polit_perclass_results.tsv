@@ -1,0 +1,21 @@
+label	right%	agree%	parsed	n
+=== polit solve (base gamma=6) Thu 23 Jul 2026 11:04:18 IDT ===
+solve done Thu 23 Jul 2026 11:32:09 IDT
+BASE(clean)	30.0	50.0	20	20
+--- gamma_eff=6 ---
+unpruned-g6	35.0	55.0	20	20
+pruned-g6	60.0	50.0	20	20
+done g6 (disk free: 56G)
+--- gamma_eff=12 ---
+unpruned-g12	40.0	50.0	20	20
+pruned-g12	40.0	60.0	20	20
+done g12 (disk free: 56G)
+--- gamma_eff=18 ---
+unpruned-g18	40.0	50.0	20	20
+pruned-g18	55.0	85.0	20	20
+done g18 (disk free: 56G)
+--- gamma_eff=24 ---
+unpruned-g24	42.1	73.7	19	20
+pruned-g24	47.4	100.0	19	20
+done g24 (disk free: 56G)
+POLIT_DONE Thu 23 Jul 2026 11:46:40 IDT
